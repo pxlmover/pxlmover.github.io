@@ -266,6 +266,102 @@
 .carousel-btn:hover {
   background: #333;
 }
+        /* Grid gallery styles */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin: 0 auto 30px auto;
+  max-width: 1200px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px #0005;
+  cursor: zoom-in;
+  transition: box-shadow 0.2s, transform 0.2s;
+  background: #222;
+}
+
+.gallery-grid img:hover,
+.gallery-grid img:focus {
+  box-shadow: 0 4px 24px #64b5f6cc, 0 2px 12px #0005;
+  outline: 2px solid #64b5f6;
+  transform: scale(1.03);
+  z-index: 2;
+}
+
+/* Lightbox overlay */
+#lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.92);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#lightbox.active {
+  display: flex;
+}
+
+#lightbox-img-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#lightbox-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 4px 32px #000a;
+  background: #222;
+  transition: transform 0.2s;
+}
+
+#lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  font-size: 2.5em;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0 10px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+#lightbox-close:hover { color: #64b5f6; }
+
+#zoom-controls {
+  margin-top: 18px;
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+}
+#zoom-controls button {
+  font-size: 1.5em;
+  background: #222;
+  color: #81c784;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+#zoom-controls button:hover { background: #333; color: #64b5f6; }
+
         /* Responsive */
         @media (max-width: 600px) {
             h1 { font-size: 2em; }
@@ -340,26 +436,22 @@
             </p>
         </section>
 <!-- Example: Place after the Summary section -->
-<section class="carousel-section">
+<section class="gallery-section">
   <h2 class="gallery-heading">AudioReactive Blueprint Screenshots</h2>
-  <div class="carousel">
-    <button class="carousel-btn prev">&#8592;</button>
-    <div class="carousel-images">
-      <img src="images/blueprint1.png" alt="Blueprint 1">
-      <img src="images/blueprint2.png" alt="Blueprint 2">
-      <img src="images/blueprint3.png" alt="Blueprint 3">
-      <img src="images/blueprint4.png" alt="Blueprint 4">
-      <img src="images/blueprint5.png" alt="Blueprint 5">
-      <img src="images/blueprint6.png" alt="Blueprint 6">
-      <img src="images/blueprint7.png" alt="Blueprint 7">
-      <img src="images/blueprint8.png" alt="Blueprint 8">
-      <img src="images/blueprint9.png" alt="Blueprint 9">
-      <img src="images/blueprint10.png" alt="Blueprint 10">
-      <img src="images/blueprint11.png" alt="Blueprint 11">
-      <img src="images/blueprint12.png" alt="Blueprint 12">
-      <!-- Add more images as needed -->
-    </div>
-    <button class="carousel-btn next">&#8594;</button>
+  <div class="gallery-grid">
+    <img src="images/blueprint1.png" alt="Blueprint 1">
+    <img src="images/blueprint2.png" alt="Blueprint 2">
+    <img src="images/blueprint3.png" alt="Blueprint 3">
+    <img src="images/blueprint4.png" alt="Blueprint 4">
+    <img src="images/blueprint5.png" alt="Blueprint 5">
+    <img src="images/blueprint6.png" alt="Blueprint 6">
+    <img src="images/blueprint7.png" alt="Blueprint 7">
+    <img src="images/blueprint8.png" alt="Blueprint 8">
+    <img src="images/blueprint9.png" alt="Blueprint 9">
+    <img src="images/blueprint10.png" alt="Blueprint 10">
+    <img src="images/blueprint11.png" alt="Blueprint 11">
+    <img src="images/blueprint12.png" alt="Blueprint 12">
+    <!-- Add more images as needed -->
   </div>
 </section>
 
@@ -460,8 +552,73 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 });
 </script>
-<div id="lightbox" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
-  <img id="lightbox-img" src="" alt="Expanded Blueprint" style="max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 4px 32px #000a;">
+<div id="lightbox"
+  <div id="lightbox-img-container">
+    <button id="lightbox-close" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="Expanded Blueprint" style="max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 4px 32px #000a;">
+    <div id="zoom-controls">
+      <button id="zoom-in" aria-label="Zoom in">+</button>
+      <button id="zoom-out" aria-label="Zoom out">−</button>
+      <button id="zoom-reset" aria-label="Reset zoom">&#128472;</button>
+    </div>
+  </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Grid gallery lightbox
+  const galleryImages = document.querySelectorAll('.gallery-grid img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.getElementById('lightbox-close');
+  const zoomIn = document.getElementById('zoom-in');
+  const zoomOut = document.getElementById('zoom-out');
+  const zoomReset = document.getElementById('zoom-reset');
+  let zoom = 1;
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    zoom = 1;
+    lightboxImg.style.transform = 'scale(1)';
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+  }
+  galleryImages.forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+    img.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') openLightbox(img.src, img.alt);
+    });
+  });
+  closeBtn.onclick = closeLightbox;
+  lightbox.onclick = function(e) {
+    if (e.target === lightbox) closeLightbox();
+  };
+  document.addEventListener('keydown', function(e) {
+    if (lightbox.classList.contains('active') && (e.key === 'Escape' || e.key === 'Esc')) closeLightbox();
+  });
+
+  // Zoom controls
+  zoomIn.onclick = function(e) {
+    e.stopPropagation();
+    zoom = Math.min(zoom + 0.2, 3);
+    lightboxImg.style.transform = `scale(${zoom})`;
+  };
+  zoomOut.onclick = function(e) {
+    e.stopPropagation();
+    zoom = Math.max(zoom - 0.2, 0.5);
+    lightboxImg.style.transform = `scale(${zoom})`;
+  };
+  zoomReset.onclick = function(e) {
+    e.stopPropagation();
+    zoom = 1;
+    lightboxImg.style.transform = 'scale(1)';
+  };
+});
+</script>
 </body>
 </html>
