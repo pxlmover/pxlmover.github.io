@@ -235,8 +235,8 @@
   gap: 10px;
 }
 .carousel-images {
-  width: 400px;
-  height: 225px;
+  width: 540px;
+  height: 304px;
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 2px 12px #0005;
@@ -303,6 +303,19 @@
                 -webkit-text-fill-color: black !important;
             }
         }
+
+.gallery-heading {
+  text-align: center;
+  color: #64b5f6; /* blue hue */
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  font-weight: 600;
+  display: block;
+}
+
+.gallery-heading::before {
+  content: none; /* removes the swish */
+}
     </style>
 </head>
 <body>
@@ -328,7 +341,7 @@
         </section>
 <!-- Example: Place after the Summary section -->
 <section class="carousel-section">
-  <h2>AudioReactive Blueprint Screenshots</h2>
+  <h2 class="gallery-heading">AudioReactive Blueprint Screenshots</h2>
   <div class="carousel">
     <button class="carousel-btn prev">&#8592;</button>
     <div class="carousel-images">
