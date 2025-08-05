@@ -222,6 +222,49 @@
             color: #81c784;
         }
         
+        /* Carousel styles */
+        .carousel-section {
+  margin-bottom: 50px;
+  text-align: center;
+}
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.carousel-images {
+  width: 400px;
+  height: 225px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px #0005;
+  position: relative;
+}
+.carousel-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: none;
+  position: absolute;
+  left: 0; top: 0;
+}
+.carousel-images img.active {
+  display: block;
+}
+.carousel-btn {
+  background: #222;
+  color: #81c784;
+  border: none;
+  font-size: 2em;
+  padding: 0 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.carousel-btn:hover {
+  background: #333;
+}
         /* Responsive */
         @media (max-width: 600px) {
             h1 { font-size: 2em; }
@@ -229,6 +272,7 @@
             section { padding: 20px; }
             .cta { padding: 20px; }
             .skills-grid { gap: 10px; }
+  .carousel-images { width: 95vw; height: 50vw; max-width: 100%; }
         }
         
         /* Print styles */
@@ -269,7 +313,26 @@
                 I adapt quickly to any project or pipeline, bringing both technical and creative solutions to the table.<br>I'm Currently building AudioReactive, a tool that makes anything move to music.<br>
             </p>
         </section>
-
+<!-- Example: Place after the Summary section -->
+<section class="carousel-section">
+  <h2>AudioReactive Blueprint Screenshots</h2>
+  <div class="carousel">
+    <button class="carousel-btn prev">&#8592;</button>
+    <div class="carousel-images">
+      <img src="images/blueprint1.png" alt="Blueprint 1">
+      <img src="images/blueprint2.png" alt="Blueprint 2">
+      <img src="images/blueprint3.png" alt="Blueprint 3">
+      <img src="images/blueprint4.png" alt="Blueprint 4">
+      <img src="images/blueprint5.png" alt="Blueprint 5">
+      <img src="images/blueprint6.png" alt="Blueprint 6">
+      <img src="images/blueprint7.png" alt="Blueprint 7">
+      <img src="images/blueprint8.png" alt="Blueprint 8">
+      <img src="images/blueprint9.png" alt="Blueprint 9">
+      <!-- Add more images as needed -->
+    </div>
+    <button class="carousel-btn next">&#8594;</button>
+  </div>
+</section>
         <section class="experience">
             <h2>Experience</h2>
             
@@ -351,5 +414,39 @@
     <p>Check out <a href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">AudioReactive on Fab</a> or watch <a href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Demo Videos on YouTube</a></p>
             </div>
     </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const images = document.querySelectorAll('.carousel-images img');
+  const prev = document.querySelector('.carousel-btn.prev');
+  const next = document.querySelector('.carousel-btn.next');
+  let idx = 0;
+  function show(idxNew) {
+    images[idx].classList.remove('active');
+    idx = (idxNew + images.length) % images.length;
+    images[idx].classList.add('active');
+  }
+  images[0].classList.add('active');
+  prev.onclick = () => show(idx - 1);
+  next.onclick = () => show(idx + 1);
+
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  images.forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.onclick = () => {
+      lightboxImg.src = img.src;
+      lightbox.style.display = 'flex';
+    };
+  });
+  lightbox.onclick = () => {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+  };
+});
+</script>
+<div id="lightbox" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
+  <img id="lightbox-img" src="" alt="Expanded Blueprint" style="max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 4px 32px #000a;">
+</div>
 </body>
 </html>
