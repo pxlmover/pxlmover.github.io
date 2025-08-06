@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Jensen - Senior VFX Artist & Unreal Blueprint Developer</title>
     <meta name="description" content="Daniel Jensen - Senior VFX Artist & Unreal Blueprint Developer. Portfolio, experience, and contact information.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,7 +14,7 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #e0e0e0;
             background: #0a0a0a;
@@ -316,6 +317,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  z-index: 2; /* Make sure it's above the image */
+}
+
+#zoom-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2; /* Make sure it's above the image */
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  background: rgba(20, 20, 20, 0.6); /* Optional: add a subtle background for contrast */
+  border-radius: 12px;
+  padding: 6px 12px;
 }
 
 #lightbox-img {
