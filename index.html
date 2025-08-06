@@ -55,6 +55,39 @@
             position: relative;
         }
         
+        .name-headshot {
+  position: relative;
+  display: inline-block;
+}
+
+.name-headshot h1 {
+  transition: opacity 2s cubic-bezier(.4,2,.6,1);
+  position: relative;
+  z-index: 2;
+}
+
+.name-headshot .headshot {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px; /* Adjust as needed */
+  height: 90px; /* Adjust as needed */
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 2s cubic-bezier(.4,2,.6,1);
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: 0 4px 32px #000a;
+}
+
+.name-headshot:hover h1 {
+  opacity: 0;
+}
+
+.name-headshot:hover .headshot {
+  opacity: 1;
+}
+        
         h1 {
             font-size: 3em;
             font-weight: 700;
@@ -384,6 +417,61 @@
 }
 #zoom-controls button:hover { background: #333; color: #64b5f6; }
 
+        /* Base bubble style for all main sections */
+section, .cta {
+  transition: 
+    box-shadow 0.4s cubic-bezier(.4,2,.6,1),
+    background 0.3s,
+    border-color 0.3s,
+    transform 0.25s cubic-bezier(.4,2,.6,1),
+    filter 0.3s;
+}
+
+/* Summary bubble glow (blue) */
+.summary:hover {
+  box-shadow: 0 0 32px 0 #64b5f655, 0 2px 12px #0005;
+  background: rgba(100, 181, 246, 0.08);
+  border-color: #64b5f6;
+  filter: blur(0.2px) brightness(1.04);
+  transform: scale(1.012);
+}
+
+/* Experience bubble glow (green) */
+.experience:hover {
+  box-shadow: 0 0 32px 0 #81c78455, 0 2px 12px #0005;
+  background: rgba(129, 199, 132, 0.08);
+  border-color: #81c784;
+  filter: blur(0.2px) brightness(1.04);
+  transform: scale(1.012);
+}
+
+/* CTA bubble glow (yellow) */
+.cta:hover {
+  box-shadow: 0 0 32px 0 #fff17655, 0 2px 12px #0005;
+  background: rgba(255, 241, 118, 0.07);
+  border-color: #fff176;
+  filter: blur(0.2px) brightness(1.04);
+  transform: scale(1.012);
+}
+
+/* Skills bubble glow (teal) */
+.skills:hover {
+  box-shadow: 0 0 32px 0 #4db6ac55, 0 2px 12px #0005;
+  background: rgba(77, 182, 172, 0.08);
+  border-color: #4db6ac;
+  filter: blur(0.2px) brightness(1.04);
+  transform: scale(1.012);
+}
+
+/* Education bubble glow (purple) */
+.education:hover {
+  box-shadow: 0 0 32px 0 #a084e855, 0 2px 12px #0005;
+  background: rgba(160, 132, 232, 0.08);
+  border-color: #a084e8;
+  filter: blur(0.2px) brightness(1.04);
+  transform: scale(1.012);
+}
+        
         /* Responsive */
         @media (max-width: 600px) {
             h1 { font-size: 2em; }
@@ -443,7 +531,11 @@
 <body>
     <div class="container">
         <header>
-            <h1>Daniel Jensen</h1>
+            <div class="name-headshot">
+                <h1>Daniel Jensen</h1>
+                <br>
+                <img src="images/headshot.png" alt="Daniel Jensen Headshot" class="headshot">
+            </div>
             <p class="tagline">Senior VFX Artist & Unreal Blueprint Developer</p>
             <p class="contact">
               <a href="mailto:Daniel.Jensen01@gmail.com" style="color: #64b5f6; text-decoration: none; font-weight: 500;">Daniel.Jensen01@gmail.com</a><br>
