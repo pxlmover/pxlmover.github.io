@@ -20,9 +20,14 @@
       background: radial-gradient(ellipse at 60% 40%, #1a1e3a 0%, #0a0a1a 80%) no-repeat;
       color: #e0e6ff;
       text-align: center;
-      padding: 60px 20px 40px 20px;
+      padding: 0 20px;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 380px; /* or try height: 60vh; for more responsiveness */
     }
     .hero h1 {
       font-size: 2.8em;
@@ -421,17 +426,28 @@
       display: flex;
       justify-content: center;
     }
+
+    .hero-btn-row {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <section class="hero">
     <h1>AudioReactive for Unreal Engine</h1>
     <p>
-      Instantly make meshes, materials, particles, lights, and DMX fixtures react to music or sound. <br>
-      <b>Bring your scenes to life—no code required.</b>
+      Instantly make meshes, materials, particles, lights, and DMX fixtures react to music or sound. <br><br>
+      <b>Bring your scenes to life!<br>NO code required.</b>
     </p>
-    <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
-    <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
+    <div class="hero-btn-row">
+      <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
+      <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
+    </div>
   </section>
 
   <section class="features">
