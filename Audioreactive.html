@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AudioReactive for Unreal Engine – Make Anything Move to Music</title>
+  <meta name="description" content="AudioReactive for Unreal Engine – Instantly make meshes, materials, particles, lights, and more react to music or sound. Available on Fab Marketplace.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(120deg, #181a2a 0%, #1a0a2a 100%);
+      color: #e0e0e0;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .hero {
+      background: radial-gradient(ellipse at 60% 40%, #1a1e3a 0%, #0a0a1a 80%) no-repeat;
+      color: #e0e6ff;
+      text-align: center;
+      padding: 60px 20px 40px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero h1 {
+      font-size: 2.8em;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+      background: linear-gradient(90deg, #00eaff 10%, #6f6fff 40%, #b36fff 70%, #00eaff 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: hero-gradient 7s ease-in-out infinite;
+      filter: drop-shadow(0 0 18px #00eaff88);
+    }
+    @keyframes hero-gradient {
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .hero p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      color: #e0e6ff;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: 0 2px 12px #0a0a1a, 0 0px 8px #00eaff33;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: #181a2a;
+      color: #00eaff;
+      font-weight: 700;
+      font-size: 1.2em;
+      padding: 16px 36px;
+      border-radius: 32px;
+      text-decoration: none;
+      box-shadow: 0 4px 32px #00eaff33;
+      border: 2px solid #00eaff;
+      transition: background 0.2s, color 0.2s, transform 0.2s, border 0.2s;
+      margin: 0 10px;
+    }
+    .cta-btn:hover {
+      background: #00eaff;
+      color: #181a2a;
+      border: 2px solid #fff;
+      transform: scale(1.05);
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      margin: 60px auto 40px auto;
+      max-width: 1100px;
+      padding: 0 20px;
+      background: none !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+    .feature-card {
+      background: rgba(30,40,60,0.7);
+      border: 1px solid #64b5f633;
+      border-radius: 18px;
+      box-shadow: 0 4px 32px #0005;
+      padding: 32px 24px;
+      flex: 1 1 320px;
+      min-width: 260px;
+      max-width: 350px;
+      text-align: left;
+      transition: box-shadow 0.3s, border-color 0.3s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card:hover {
+      box-shadow: 0 8px 48px #64b5f6cc, 0 2px 12px #0005;
+      border-color: #81c784;
+      transform: translateY(-4px) scale(1.03);
+    }
+    .feature-card h3 {
+      color: #81c784;
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.3em;
+      font-weight: 700;
+    }
+    .feature-card p {
+      color: #e0e0e0;
+      font-size: 1.05em;
+      margin-bottom: 0;
+    }
+    .demo-section {
+      text-align: center;
+      margin: 60px 0 40px 0;
+    }
+    .demo-section h2 {
+      color: #64b5f6;
+      font-size: 2em;
+      margin-bottom: 18px;
+    }
+    .video-galleries {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .video-gallery {
+      flex: 1 1 340px;
+      min-width: 260px;
+      max-width: 420px;
+      background: rgba(30,40,60,0.5);
+      border-radius: 16px;
+      padding: 10px 10px 18px 10px;
+      box-shadow: 0 2px 16px #0005;
+      margin-bottom: 0;
+    }
+    .video-gallery h3 {
+      color: #fff176;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      text-align: left;
+      letter-spacing: 0.03em;
+      font-weight: 700;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-height: 400px;
+      overflow-y: auto;
+      overflow-x: hidden; /* Prevents horizontal scrollbar on hover */
+    }
+    .shorts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .video-thumb, .short-thumb {
+      position: relative;
+      cursor: pointer;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px #0008;
+      transition: transform 0.18s, box-shadow 0.18s;
+      background: #181818;
+      min-height: 0;
+    }
+    .video-thumb:hover, .short-thumb:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #64b5f6cc;
+    }
+    .video-thumb img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: #222;
+    }
+    .short-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 9/16;
+      display: block;
+      border-radius: 10px;
+      transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+    }
+    .play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2em;
+      color: #fff176;
+      text-shadow: 0 2px 12px #000a;
+      pointer-events: none;
+      opacity: 0.92;
+    }
+    .tutorials-gallery {
+      margin: 40px auto 0 auto;
+      max-width: 700px;
+      background: rgba(30,40,60,0.5);
+      border-radius: 16px;
+      padding: 10px 10px 18px 10px; /* Reduced top padding for better vertical centering */
+      box-shadow: 0 2px 16px #0005;
+    }
+    .tutorials-heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 2.97em; /* Match other headings */
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      margin-top: 0;         /* Remove any top margin */
+      margin-bottom: 18px;   /* Space from thumbnails */
+      background: linear-gradient(90deg, #fff176, #64b5f6, #81c784, #fff176 80%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: tutorials-hue-move 5s ease-in-out infinite;
+      filter: drop-shadow(0 2px 12px #222a);
+    }
+    @keyframes tutorials-hue-move {
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    @media (max-width: 1100px) {
+      .video-galleries {
+        flex-direction: column;
+        gap: 18px;
+        align-items: stretch;
+      }
+      .video-gallery {
+        max-width: 100%;
+        margin-bottom: 18px;
+      }
+    }
+    @media (max-width: 800px) {
+      .features {
+        flex-direction: column;
+        gap: 18px;
+      }
+      .feature-card {
+        max-width: 100%;
+      }
+      .video-thumb {
+        max-width: calc(50% - 16px);
+      }
+    }
+    @media (max-width: 700px) {
+      .video-grid, .shorts-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2em; }
+      .features { padding: 0 4px; }
+      .feature-card { padding: 18px 8px; }
+      .demo-video { max-width: 100vw; }
+      .video-thumb {
+        max-width: 100%;
+      }
+      #video-lightbox-content {
+        width: 98vw;
+        max-width: 98vw;
+      }
+    }
+
+    /* Lightbox styles */
+    #video-lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(10,20,40,0.92);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+    }
+    #video-lightbox.active {
+      display: flex;
+    }
+    #video-lightbox-content {
+      position: relative;
+      width: 90vw;
+      max-width: 800px;
+      aspect-ratio: 16/9;
+      background: #111;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px #000a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #video-lightbox-iframe {
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+    }
+    #video-lightbox-close {
+      position: absolute;
+      top: -48px;
+      right: 0;
+      font-size: 2.5em;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      padding: 0 10px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    #video-lightbox-close:hover { color: #64b5f6; }
+
+    .shorts-strip {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 12px 0 18px 0;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: #64b5f6 #222;
+      background: rgba(30,40,60,0.25);
+      border-radius: 12px;
+    }
+    .shorts-strip::-webkit-scrollbar {
+      height: 10px;
+      background: #222;
+      border-radius: 8px;
+    }
+    .shorts-strip::-webkit-scrollbar-thumb {
+      background: #64b5f6;
+      border-radius: 8px;
+    }
+    .short-thumb {
+      flex: 0 0 110px;
+      height: 196px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #181818;
+      box-shadow: 0 2px 12px #0008;
+      position: relative;
+      cursor: pointer;
+      scroll-snap-align: center;
+      transition: transform 0.18s, box-shadow 0.18s;
+      will-change: transform;
+    }
+    .short-thumb:hover, .short-thumb:focus {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 8px 32px #64b5f6cc;
+      z-index: 2;
+    }
+    .short-thumb:active img {
+      transform: scale(0.97);
+    }
+    .shorts-heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 2.97em; /* 2.2em * 1.35 = 2.97em */
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      margin-top: 0;         /* Remove any top margin */
+      margin-bottom: 18px;   /* Keep bottom margin for spacing from thumbnails */
+      background: linear-gradient(90deg, #64b5f6, #fff176, #81c784, #64b5f6 80%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shorts-hue-move 5s ease-in-out infinite;
+      filter: drop-shadow(0 2px 12px #222a);
+    }
+    @keyframes shorts-hue-move {
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .showcase-heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 2.97em;
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      margin-top: 0;         /* Remove any top margin */
+      margin-bottom: 18px;   /* Keep bottom margin for spacing from thumbnails */
+      background: linear-gradient(90deg, #81c784, #64b5f6, #fff176, #81c784 80%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: showcase-hue-move 5s ease-in-out infinite;
+      filter: drop-shadow(0 2px 12px #222a);
+    }
+    @keyframes showcase-hue-move {
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .video-gallery, .features {
+      box-shadow: 0 4px 32px #00eaff22, 0 2px 12px #b36fff22;
+    }
+
+    .shorts-gallery-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <h1>AudioReactive for Unreal Engine</h1>
+    <p>
+      Instantly make meshes, materials, particles, lights, and DMX fixtures react to music or sound. <br>
+      <b>Bring your scenes to life—no code required.</b>
+    </p>
+    <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
+    <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <h3>Blueprint-Only, No Plugins</h3>
+      <p>Works out-of-the-box in any Unreal Engine project. No C++ or third-party plugins required—just drag, drop, and connect.</p>
+    </div>
+    <div class="feature-card">
+      <h3>MetaSound & Multi-Track Support</h3>
+      <p>Drive animation, FX, and lighting from MetaSound frequency bands or multi-track arrays for stems and effects.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Everything Reacts</h3>
+      <p>Animate meshes, actors, materials, particles, lights, and even DMX fixtures. From subtle ambience to extravagant performances.</p>
+    </div>
+    <div class="feature-card">
+      <h3>VR & Sequencer Ready</h3>
+      <p>Fully compatible with VR and Unreal Sequencer for real-time and cinematic workflows.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Easy to Use</h3>
+      <p>Intuitive controls and clear documentation. Designed for artists, not just programmers.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Fab Marketplace Support</h3>
+      <p>Actively maintained and supported. Join a growing community of creators using AudioReactive in their projects.</p>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h2>See AudioReactive in Action</h2>
+    <div class="video-galleries">
+      <!-- Main 16:9 Gallery -->
+      <div class="video-gallery main-gallery" style="margin: 0 auto; max-width: 700px;">
+        <h3 class="showcase-heading">Full Length Examples</h3>
+        <div class="video-grid" style="max-height: 400px; overflow-y: auto;">
+          <div class="video-thumb" data-video="tDN36A4GY0A">
+            <img src="https://img.youtube.com/vi/tDN36A4GY0A/hqdefault.jpg" alt="Demo 1">
+            <span class="play-btn">&#9658;</span>
+          </div>
+          <div class="video-thumb" data-video="RIAoybR0RqA">
+            <img src="https://img.youtube.com/vi/RIAoybR0RqA/hqdefault.jpg" alt="Demo 2">
+            <span class="play-btn">&#9658;</span>
+          </div>
+          <div class="video-thumb" data-video="DYHG-BUa6eM">
+            <img src="https://img.youtube.com/vi/DYHG-BUa6eM/hqdefault.jpg" alt="Demo 3">
+            <span class="play-btn">&#9658;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Shorts Gallery: now on its own line, full width -->
+    <div class="shorts-gallery-container">
+      <div class="video-gallery shorts-gallery" style="max-width: 700px; margin: 32px auto 0 auto;">
+        <h3 class="shorts-heading">Vertical Shorts</h3>
+        <div class="shorts-strip">
+          <div class="short-thumb" data-video="AxnpEaIT6xs">
+            <img src="https://img.youtube.com/vi/AxnpEaIT6xs/hqdefault.jpg" alt="Short 1">
+            <span class="play-btn">&#9658;</span>
+          </div>
+          <div class="short-thumb" data-video="CLkXr9hu5BI">
+            <img src="https://img.youtube.com/vi/CLkXr9hu5BI/hqdefault.jpg" alt="Short 2">
+            <span class="play-btn">&#9658;</span>
+          </div>
+          <div class="short-thumb" data-video="nCNGJAkmGyM">
+            <img src="https://img.youtube.com/vi/nCNGJAkmGyM/hqdefault.jpg" alt="Short 3">
+            <span class="play-btn">&#9658;</span>
+          </div>
+          <div class="short-thumb" data-video="WxYo4iG0-uY">
+            <img src="https://img.youtube.com/vi/WxYo4iG0-uY/hqdefault.jpg" alt="Short 4">
+            <span class="play-btn">&#9658;</span>
+          </div>
+          <div class="short-thumb" data-video="jF8R8y4vDTM">
+            <img src="https://img.youtube.com/vi/jF8R8y4vDTM/hqdefault.jpg" alt="Short 5">
+            <span class="play-btn">&#9658;</span>
+          </div>
+          <div class="short-thumb" data-video="HpbQLFqLbqc">
+            <img src="https://img.youtube.com/vi/HpbQLFqLbqc/hqdefault.jpg" alt="Short 6">
+            <span class="play-btn">&#9658;</span>
+          </div>
+          <div class="short-thumb" data-video="SHORT_VIDEO_ID_7">
+            <img src="https://img.youtube.com/vi/SHORT_VIDEO_ID_7/hqdefault.jpg" alt="Short 7">
+            <span class="play-btn">&#9658;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Tutorials Gallery -->
+    <div class="video-gallery tutorials-gallery" style="margin: 40px auto 0 auto; max-width: 700px;">
+      <h3 class="tutorials-heading">Tutorials</h3>
+      <div class="video-grid">
+        <div class="video-thumb" data-video="TUTORIAL_VIDEO_ID_1">
+          <img src="https://img.youtube.com/vi/TUTORIAL_VIDEO_ID_1/hqdefault.jpg" alt="Tutorial 1">
+          <span class="play-btn">&#9658;</span>
+        </div>
+        <!-- Add more tutorial video-thumb blocks here -->
+      </div>
+    </div>
+    <div class="links">
+      <a href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Fab Listing</a>
+      <a href="https://www.youtube.com/@AudioReactive_UE" target="_blank">YouTube Channel</a>
+      <a href="mailto:Daniel.Jensen01@gmail.com">Contact the Creator</a>
+    </div>
+  </section>
+
+  <!-- Lightbox for video playback -->
+  <div id="video-lightbox">
+    <div id="video-lightbox-content">
+      <button id="video-lightbox-close" aria-label="Close">&times;</button>
+      <iframe id="video-lightbox-iframe" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Lightbox video playback
+    document.querySelectorAll('.video-thumb').forEach(thumb => {
+      thumb.addEventListener('click', function() {
+        const vid = this.getAttribute('data-video');
+        const lightbox = document.getElementById('video-lightbox');
+        const iframe = document.getElementById('video-lightbox-iframe');
+        iframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1`;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    document.getElementById('video-lightbox-close').onclick = function() {
+      const lightbox = document.getElementById('video-lightbox');
+      const iframe = document.getElementById('video-lightbox-iframe');
+      lightbox.classList.remove('active');
+      iframe.src = '';
+      document.body.style.overflow = '';
+    };
+    document.getElementById('video-lightbox').onclick = function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+        document.getElementById('video-lightbox-iframe').src = '';
+        document.body.style.overflow = '';
+      }
+    };
+
+    // Scroll handling for shorts strip
+    const shortsStrip = document.querySelector('.shorts-strip');
+    if (shortsStrip) {
+      shortsStrip.addEventListener('wheel', function(e) {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          shortsStrip.scrollLeft += e.deltaY;
+        }
+      }, { passive: false });
+    }
+  </script>
+</body>
+</html>
