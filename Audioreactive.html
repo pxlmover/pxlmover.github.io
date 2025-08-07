@@ -133,7 +133,7 @@
       gap: 32px;
       justify-content: center;
       align-items: flex-start;
-      margin-bottom: 40px;
+      margin-bottom: 16px; /* Was 40px, now matches other section gaps */
       flex-wrap: wrap;
     }
     .video-gallery {
@@ -144,7 +144,9 @@
       border-radius: 16px;
       padding: 10px 10px 18px 10px;
       box-shadow: 0 2px 16px #0005;
-      margin-bottom: 0;
+      margin-bottom: 0; /* Prevents stacking extra margin */
+      padding-bottom: 28px; /* Add extra space for hover scaling */
+      min-height: 270px;    /* Ensure enough height for 16:9 thumbs + hover */
     }
     .video-gallery h3 {
       color: #fff176;
@@ -161,6 +163,8 @@
       max-height: 400px;
       overflow-y: auto;
       overflow-x: hidden; /* Prevents horizontal scrollbar on hover */
+      overflow: visible !important; /* Allow hover scaling to overflow */
+      padding-bottom: 12px;         /* Extra space for hover effect */
     }
     .shorts-grid {
       display: grid;
@@ -220,7 +224,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      font-size: 2.97em; /* Match other headings */
+      font-size: 4.01em; /* Match other headings */
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -446,14 +450,6 @@
     }
 
     /* Soundwave SVG animation */
-    .hero-soundwave {
-      max-width: 90vw;
-      width: 320px;
-      height: 32px;
-      margin: 24px auto 0 auto;
-      display: block;
-      filter: drop-shadow(0 0 12px #00eaff88);
-    }
     @keyframes wave-move {
       0%   { stroke-dashoffset: 0; }
       100% { stroke-dashoffset: -320; }
@@ -462,6 +458,20 @@
       stroke-dasharray: 320;
       stroke-dashoffset: 0;
       animation: wave-move 4s linear infinite;
+    }
+
+    /* Animate the SVG turbulence for a subtle, endless shimmer */
+    @keyframes turb-anim {
+      0%   { filter: url(#wave-distort); }
+      100% { filter: url(#wave-distort); }
+    }
+    .hero-soundwave {
+      max-width: 90vw;
+      width: 320px;
+      height: 32px;
+      margin: 24px auto 0 auto;
+      display: block;
+      filter: drop-shadow(0 0 12px #00eaff88);
     }
 
     .highlights-list {
@@ -560,7 +570,14 @@
     <!-- Place this right after <h1> in your .hero section -->
     <!-- Replace your current SVG with this for a seamless loop -->
     <svg class="hero-soundwave" width="320" height="32" viewBox="0 0 320 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polyline id="wave" 
+      <defs>
+        <filter id="wave-distort" x="-20%" y="-50%" width="140%" height="200%">
+          <feTurbulence id="turb" baseFrequency="0.03 0.15" numOctaves="2" seed="2" type="fractalNoise" result="turb"/>
+          <feDisplacementMap in2="turb" in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+      <polyline
+        filter="url(#wave-distort)"
         points="0,16 8,10 16,22 24,8 32,24 40,12 48,20 56,14 64,18 72,12 80,22 88,10 96,24 104,8 112,20 120,14 128,18 136,12 144,22 152,10 160,24 168,8 176,20 184,14 192,18 200,12 208,22 216,10 224,24 232,8 240,20 248,14 256,18 264,12 272,22 280,10 288,24 296,8 304,20 312,14 320,16"
         stroke="#00eaff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.85"/>
     </svg>
@@ -623,10 +640,6 @@
             <img src="https://img.youtube.com/vi/HpbQLFqLbqc/hqdefault.jpg" alt="Short 6">
             <span class="play-btn">&#9658;</span>
           </div>
-          <div class="short-thumb" data-video="SHORT_VIDEO_ID_7">
-            <img src="https://img.youtube.com/vi/SHORT_VIDEO_ID_7/hqdefault.jpg" alt="Short 7">
-            <span class="play-btn">&#9658;</span>
-          </div>
         </div>
       </div>
     </div>
@@ -659,7 +672,7 @@
   </section>
 
   <section class="highlights-section">
-    <h2>Why Choose AudioReactive?</h2>
+    <!--<h2>Why Choose AudioReactive?</h2>-->
     <ul class="highlights-list">
       <li>
         <span class="highlight-title">Blueprint-Only Simplicity</span>
@@ -733,6 +746,16 @@
         }
       }, { passive: false });
     }
+
+    // Animate the seed of the turbulence for a truly endless shimmer
+    const turb = document.querySelector('#turb');
+    let t = 0;
+    function animateTurb() {
+      t += 0.2; // Adjust for speed; higher = faster shimmer
+      if (turb) turb.setAttribute('seed', (2 + t % 10000));
+      requestAnimationFrame(animateTurb);
+    }
+    animateTurb();
   </script>
 </body>
 </html>
