@@ -17,7 +17,8 @@
       overflow-x: hidden;
     }
     .hero {
-      background: radial-gradient(ellipse at 60% 40%, #1a1e3a 0%, #0a0a1a 80%) no-repeat;
+      /* background: radial-gradient(ellipse at 60% 40%, #1a1e3a 0%, #0a0a1a 80%) no-repeat; */
+      background: none;
       color: #e0e6ff;
       text-align: center;
       padding: 0 20px;
@@ -76,35 +77,35 @@
       transform: scale(1.05);
     }
     .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 32px;
-      margin: 60px auto 40px auto;
-      max-width: 1100px;
-      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin: 40px auto 24px auto;
+      max-width: 700px;         /* Reduce width */
+      padding: 0 8px;
       background: none !important;
       box-shadow: none !important;
       border: none !important;
+      justify-items: center;
     }
     .feature-card {
       background: rgba(30,40,60,0.7);
       border: 1px solid #64b5f633;
       border-radius: 18px;
       box-shadow: 0 4px 32px #0005;
-      padding: 32px 24px;
-      flex: 1 1 320px;
-      min-width: 260px;
-      max-width: 350px;
+      padding: 20px 14px;
+      min-width: 0;
+      max-width: 320px;
       text-align: left;
-      transition: box-shadow 0.3s, border-color 0.3s, transform 0.2s;
+      transition: box-shadow 0.3s, border-color 0.3s, transform 0.18s;
       position: relative;
       overflow: hidden;
+      will-change: transform;
     }
     .feature-card:hover {
       box-shadow: 0 8px 48px #64b5f6cc, 0 2px 12px #0005;
       border-color: #81c784;
-      transform: translateY(-4px) scale(1.03);
+      transform: scale(1.045) translateY(-2px);
     }
     .feature-card h3 {
       color: #81c784;
@@ -429,17 +430,51 @@
 
     .hero-btn-row {
       display: flex;
-      gap: 20px;
+      flex-direction: column;      /* Stack vertically */
+      gap: 12px;                   /* Space between buttons */
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
       margin-top: 10px;
+    }
+    .cta-btn {
+      font-size: 0.72em;           /* 40% smaller */
+      padding: 10px 22px;          /* Scaled padding */
+      border-radius: 24px;
+      margin: 0;
+      min-width: 180px;
+      box-sizing: border-box;
+    }
+
+    /* Soundwave SVG animation */
+    .hero-soundwave {
+      max-width: 90vw;
+      width: 320px;
+      height: 32px;
+      margin: 24px auto 0 auto;
+      display: block;
+      filter: drop-shadow(0 0 12px #00eaff88);
+    }
+    @keyframes wave-move {
+      0%   { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -320; }
+    }
+    .hero-soundwave #wave {
+      stroke-dasharray: 320;
+      stroke-dashoffset: 0;
+      animation: wave-move 4s linear infinite;
     }
   </style>
 </head>
 <body>
   <section class="hero">
-    <h1>AudioReactive for Unreal Engine</h1>
+    <h1>AudioReactive<br>for<br>Unreal Engine 5</h1>
+    <!-- Place this right after <h1> in your .hero section -->
+    <!-- Replace your current SVG with this for a seamless loop -->
+    <svg class="hero-soundwave" width="320" height="32" viewBox="0 0 320 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polyline id="wave" 
+        points="0,16 8,10 16,22 24,8 32,24 40,12 48,20 56,14 64,18 72,12 80,22 88,10 96,24 104,8 112,20 120,14 128,18 136,12 144,22 152,10 160,24 168,8 176,20 184,14 192,18 200,12 208,22 216,10 224,24 232,8 240,20 248,14 256,18 264,12 272,22 280,10 288,24 296,8 304,20 312,14 320,16"
+        stroke="#00eaff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.85"/>
+    </svg>
     <p>
       Instantly make meshes, materials, particles, lights, and DMX fixtures react to music or sound. <br><br>
       <b>Bring your scenes to life!<br>NO code required.</b>
@@ -539,8 +574,16 @@
     <div class="video-gallery tutorials-gallery" style="margin: 40px auto 0 auto; max-width: 700px;">
       <h3 class="tutorials-heading">Tutorials</h3>
       <div class="video-grid">
-        <div class="video-thumb" data-video="TUTORIAL_VIDEO_ID_1">
-          <img src="https://img.youtube.com/vi/TUTORIAL_VIDEO_ID_1/hqdefault.jpg" alt="Tutorial 1">
+        <div class="video-thumb" data-video="DrsU8OB6Q0Y">
+          <img src="https://img.youtube.com/vi/DrsU8OB6Q0Y/hqdefault.jpg" alt="Tutorial 1">
+          <span class="play-btn">&#9658;</span>
+        </div>
+        <div class="video-thumb" data-video="gNOzQNSr2cw">
+          <img src="https://img.youtube.com/vi/gNOzQNSr2cw/hqdefault.jpg" alt="Tutorial 2">
+          <span class="play-btn">&#9658;</span>
+        </div>
+        <div class="video-thumb" data-video="JdZOO1pQEtc">
+          <img src="https://img.youtube.com/vi/JdZOO1pQEtc/hqdefault.jpg" alt="Tutorial 3">
           <span class="play-btn">&#9658;</span>
         </div>
         <!-- Add more tutorial video-thumb blocks here -->
