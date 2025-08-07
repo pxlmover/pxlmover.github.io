@@ -463,6 +463,95 @@
       stroke-dashoffset: 0;
       animation: wave-move 4s linear infinite;
     }
+
+    .highlights-list {
+      list-style: none;
+      padding: 0;
+      margin: 36px auto 36px auto;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .highlights-list li {
+      background: rgba(30,40,60,0.55);
+      border: 1.5px solid #64b5f655;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px #0003;
+      padding: 18px 22px 14px 22px;
+      position: relative;
+      text-align: left;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .highlights-list li:hover {
+      border-color: #81c784cc;
+      box-shadow: 0 6px 32px #64b5f633;
+    }
+    .highlight-title {
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-size: 1.18em;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      margin-bottom: 4px;
+      background: linear-gradient(90deg, #81c784, #64b5f6, #fff176, #81c784 80%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: showcase-hue-move 5s ease-in-out infinite;
+      filter: drop-shadow(0 2px 8px #222a);
+      display: inline-block;
+    }
+    .highlight-desc {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1em;
+      font-weight: 400;
+      color: #e0e0e0;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .highlights-section {
+      text-align: center;
+      margin: 40px 0;
+      padding: 0 20px;
+    }
+    .highlights-section h2 {
+      color: #64b5f6;
+      font-size: 2em;
+      margin-bottom: 18px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .highlights-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 0 auto;
+      padding: 0;
+      max-width: 800px;
+      list-style: none;
+    }
+
+    .section-spaced {
+      margin-top: 48px;
+      margin-bottom: 48px;
+    }
+    .demo-section,
+    .shorts-gallery-container,
+    .tutorials-gallery,
+    .highlights-section {
+      margin-top: 48px !important;
+      margin-bottom: 0 !important;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .highlights-section {
+      margin-bottom: 48px !important;
+    }
   </style>
 </head>
 <body>
@@ -483,35 +572,6 @@
       <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
       <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
     </div>
-  </section>
-
-  <section class="features">
-    <div class="feature-card">
-      <h3>Blueprint-Only, No Plugins</h3>
-      <p>Works out-of-the-box in any Unreal Engine project. No C++ or third-party plugins required—just drag, drop, and connect.</p>
-    </div>
-    <div class="feature-card">
-      <h3>MetaSound & Multi-Track Support</h3>
-      <p>Drive animation, FX, and lighting from MetaSound frequency bands or multi-track arrays for stems and effects.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Everything Reacts</h3>
-      <p>Animate meshes, actors, materials, particles, lights, and even DMX fixtures. From subtle ambience to extravagant performances.</p>
-    </div>
-    <div class="feature-card">
-      <h3>VR & Sequencer Ready</h3>
-      <p>Fully compatible with VR and Unreal Sequencer for real-time and cinematic workflows.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Easy to Use</h3>
-      <p>Intuitive controls and clear documentation. Designed for artists, not just programmers.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Fab Marketplace Support</h3>
-      <p>Actively maintained and supported. Join a growing community of creators using AudioReactive in their projects.</p>
-    </div>
-  </section>
-
   <section class="demo-section">
     <h2>See AudioReactive in Action</h2>
     <div class="video-galleries">
@@ -589,11 +649,43 @@
         <!-- Add more tutorial video-thumb blocks here -->
       </div>
     </div>
+    <!--
     <div class="links">
       <a href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Fab Listing</a>
       <a href="https://www.youtube.com/@AudioReactive_UE" target="_blank">YouTube Channel</a>
       <a href="mailto:Daniel.Jensen01@gmail.com">Contact the Creator</a>
     </div>
+    -->
+  </section>
+
+  <section class="highlights-section">
+    <h2>Why Choose AudioReactive?</h2>
+    <ul class="highlights-list">
+      <li>
+        <span class="highlight-title">Blueprint-Only Simplicity</span>
+        <span class="highlight-desc">No C++ required—just drag, drop, and create.</span>
+      </li>
+      <li>
+        <span class="highlight-title">MetaSound & Multi-Track Ready</span>
+        <span class="highlight-desc">Animate with frequency bands or multiple audio stems.</span>
+      </li>
+      <li>
+        <span class="highlight-title">Everything Reacts</span>
+        <span class="highlight-desc">Drive meshes, materials, lights, particles, and DMX.</span>
+      </li>
+      <li>
+        <span class="highlight-title">VR & Sequencer Compatible</span>
+        <span class="highlight-desc">Works in real-time, VR, and cinematic workflows.</span>
+      </li>
+      <li>
+        <span class="highlight-title">Artist-Friendly Controls</span>
+        <span class="highlight-desc">Intuitive setup, clear docs—built for creators.</span>
+      </li>
+      <li>
+        <span class="highlight-title">Actively Supported</span>
+        <span class="highlight-desc">Regular updates and a growing creative community.</span>
+      </li>
+    </ul>
   </section>
 
   <!-- Lightbox for video playback -->
