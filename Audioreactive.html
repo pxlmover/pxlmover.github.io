@@ -269,46 +269,43 @@
       .video-gallery,
       .tutorials-gallery,
       .shorts-gallery {
-        max-width: 420px !important;
-        width: 98vw;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 6px 2vw 16px 2vw;
-        border-radius: 10px;
-      }
-      .video-grid,
-      .shorts-grid {
-        grid-template-columns: 1fr !important;
-        gap: 8px;
-        max-height: none;
-        padding-bottom: 0;
-      }
-      .video-thumb,
-      .short-thumb {
-        max-width: 100%;
-        min-width: 0;
-        height: auto;
-        border-radius: 8px;
-      }
-      .video-thumb img,
-      .short-thumb img {
-        border-radius: 8px;
-      }
-      .showcase-heading,
-      .shorts-heading,
-      .tutorials-heading {
-        font-size: 1.5em !important;
-        margin-bottom: 10px;
+        max-width: 98vw !important;
+        width: 98vw !important;
+        min-width: 0 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 6px 2vw 16px 2vw !important;
+        border-radius: 10px !important;
       }
       .shorts-strip {
-        gap: 8px;
-        padding: 8px 0 12px 0;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+        overflow-x: visible !important;
+        padding: 8px 0 12px 0 !important;
+        background: none !important;
+        border-radius: 0 !important;
+        scrollbar-width: none !important;
       }
-      .shorts-gallery-container {
-        margin: 0 auto;
-        padding: 0 4px;
-        width: calc(100% - 8px);
-        max-width: 100%;
+      .short-thumb {
+        flex: unset !important;
+        width: 100% !important;
+        height: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        border-radius: 8px !important;
+        margin: 0 !important;
+      }
+      .highlights-list {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        max-width: 98vw !important;
+        padding: 0 2vw !important;
+      }
+      .highlights-list li {
+        padding: 12px 10px 10px 10px !important;
+        font-size: 1em !important;
       }
     }
     @media (max-width: 600px) {
