@@ -612,6 +612,58 @@
     .highlights-section {
       margin-bottom: 48px !important;
     }
+
+    /* Responsive gallery grid for screenshots */
+    .gallery-section {
+      margin: 48px auto;
+      text-align: center;
+    }
+    .gallery-heading {
+      color: #64b5f6;
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin: 0 auto 30px auto;
+      max-width: 1200px;
+      padding: 0 8px;
+    }
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px #0005;
+      cursor: zoom-in;
+      transition: box-shadow 0.2s, transform 0.2s;
+      background: #222;
+    }
+    .gallery-grid img:hover,
+    .gallery-grid img:focus {
+      box-shadow: 0 4px 24px #64b5f6cc, 0 2px 12px #0005;
+      outline: 2px solid #64b5f6;
+      transform: scale(1.03);
+      z-index: 2;
+    }
+
+    /* On small screens, stack images in a single column */
+    @media (max-width: 700px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        max-width: 98vw;
+        padding: 0 2vw;
+      }
+      .gallery-grid img {
+        aspect-ratio: 16/9;
+        min-width: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -750,7 +802,24 @@
       </li>
     </ul>
   </section>
-
+  <section class="gallery-section">
+    <h2 class="showcase-heading">AudioReactive Blueprint Screenshots</h2>
+    <div class="gallery-grid">
+      <img src="images/blueprint1.png" alt="Blueprint 1">
+      <img src="images/blueprint2.png" alt="Blueprint 2">
+      <img src="images/blueprint3.png" alt="Blueprint 3">
+      <img src="images/blueprint4.png" alt="Blueprint 4">
+      <img src="images/blueprint5.png" alt="Blueprint 5">
+      <img src="images/blueprint6.png" alt="Blueprint 6">
+      <img src="images/blueprint7.png" alt="Blueprint 7">
+      <img src="images/blueprint8.png" alt="Blueprint 8">
+      <img src="images/blueprint9.png" alt="Blueprint 9">
+      <img src="images/blueprint10.png" alt="Blueprint 10">
+      <img src="images/blueprint11.png" alt="Blueprint 11">
+      <img src="images/blueprint12.png" alt="Blueprint 12">
+      <!-- Add more images as needed -->
+    </div>
+  </section>
   <!-- Lightbox for video playback -->
   <div id="video-lightbox">
     <div id="video-lightbox-content">
