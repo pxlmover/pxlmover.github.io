@@ -296,16 +296,21 @@
         border-radius: 8px !important;
         margin: 0 !important;
       }
-      .highlights-list {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 12px !important;
-        max-width: 98vw !important;
-        padding: 0 2vw !important;
+      .short-thumb {
+        height: 160px !important;
+        max-height: 38vw !important;
       }
-      .highlights-list li {
-        padding: 12px 10px 10px 10px !important;
-        font-size: 1em !important;
+      .short-thumb img {
+        height: 100% !important;
+        object-fit: cover !important;
+      }
+      .main-gallery {
+        padding-bottom: 8px !important;
+        min-height: unset !important;
+      }
+      .main-gallery .video-grid {
+        max-height: none !important;
+        padding-bottom: 0 !important;
       }
     }
     @media (max-width: 600px) {
