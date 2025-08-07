@@ -224,7 +224,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      font-size: 4.01em; /* Match other headings */
+      font-size: 3.5em; /* Match other headings */
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -711,7 +711,7 @@
 
   <script>
     // Lightbox video playback
-    document.querySelectorAll('.video-thumb').forEach(thumb => {
+    document.querySelectorAll('.video-thumb, .short-thumb').forEach(thumb => {
       thumb.addEventListener('click', function() {
         const vid = this.getAttribute('data-video');
         const lightbox = document.getElementById('video-lightbox');
