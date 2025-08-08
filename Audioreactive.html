@@ -16,6 +16,21 @@
       padding: 0;
       overflow-x: hidden;
     }
+    body.audio-reactive-bg {
+      transition: background 0.2s, filter 0.2s;
+      /* The gradient will be updated by JS */
+      background-blend-mode: lighten, normal;
+    }
+    body.audio-reactive-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.10;
+  background: url('https://www.transparenttextures.com/patterns/noise.png');
+  mix-blend-mode: multiply;
+}
     .hero {
       /* background: radial-gradient(ellipse at 60% 40%, #1a1e3a 0%, #0a0a1a 80%) no-repeat; */
       background: none;
@@ -724,6 +739,8 @@
       <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
       <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
     </div>
+    <!-- Place this somewhere in your hero section if you want a button -->
+    <button id="start-audio-reactive" style="display:none;">Enable Audio-Reactive Background</button>
   <section class="demo-section">
     <h2>See AudioReactive in Action</h2>
     <div class="video-galleries">
@@ -868,6 +885,55 @@
   </div>
 
   <script>
+    // Audio-Reactive Background using mic input
+/*
+async function startAudioReactiveBG() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    window.audioContext = audioContext; // <-- Add this
+    const analyser = audioContext.createAnalyser();
+    const source = audioContext.createMediaStreamSource(stream);
+    source.connect(analyser);
+    analyser.fftSize = 256;
+    const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+    document.body.classList.add('audio-reactive-bg');
+
+    function animateBG() {
+      analyser.getByteFrequencyData(dataArray);
+      // Get average volume
+      let sum = 0;
+      for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+      const avg = sum / dataArray.length;
+      // Map avg to a brightness/gradient intensity
+      const base = '#181a2a';
+      const accent = '#00eaff';
+      const intensity = Math.min(100, Math.max(20, avg / 2));
+      const alpha = Math.max(0.08, Math.min(0.22, intensity / 400)); // 0.08 to 0.22
+      document.body.style.background = `
+        linear-gradient(120deg, ${base} 0%, ${accent}${Math.floor(alpha * 255).toString(16).padStart(2, '0')} 100%),
+        ${base}
+      `;
+      document.body.style.filter = `brightness(${1 + alpha * 0.6})`;
+      requestAnimationFrame(animateBG);
+    }
+    animateBG();
+  } catch (e) {
+    alert('Microphone access denied or not available.');
+  }
+}
+
+// Resume audio context if tab regains focus
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    if (window.audioContext && window.audioContext.state === 'suspended') {
+      window.audioContext.resume();
+    }
+  }
+});
+*/
+
     // Lightbox video playback
     document.querySelectorAll('.video-thumb, .short-thumb').forEach(thumb => {
       thumb.addEventListener('click', function() {
@@ -937,6 +1003,15 @@
       requestAnimationFrame(animateTurb);
     }
     animateTurb();
+
+    document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    // Try to resume the audio context if suspended
+    if (window.audioContext && window.audioContext.state === 'suspended') {
+      window.audioContext.resume();
+    }
+  }
+});
   </script>
 </body>
 </html>
