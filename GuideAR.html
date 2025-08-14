@@ -7,13 +7,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(120deg, #181a2a 0%, #1a0a2a 100%);
+      background: linear-gradient(120deg, #181a2a 0%, #6a5cff 20%, #64b5f6 40%, #a259f7 65%, #ff4e8e 100%);
       color: #e0e0e0;
       font-family: 'Inter', Arial, sans-serif;
       margin: 0;
       padding: 0;
       min-height: 100vh;
+      transition: background 0.6s;
     }
+    body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: #181a2acc;
+  z-index: -1; /* <-- This ensures it's behind everything */
+}
     .header {
       text-align: center;
       padding: 54px 10px 38px 10px; /* Increased bottom padding */
@@ -38,14 +47,24 @@
     }
     .header-sub {
       text-align: center;
-      font-family: 'Inter', Arial, sans-serif;
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
       font-size: 1.35em;
-      font-weight: 500;
-      color: #e0e0e0;
-      margin-top: 24px;      /* Increased top margin */
+      font-weight: 700;
+      color: #fff;
+      margin-top: 24px;
       margin-bottom: 18px;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 12px #6a5cff44;
       user-select: none;
+    }
+    .main-container {
+      max-width: 620px;
+      margin: 36px auto 48px auto;
+      padding: 32px 32px 48px 32px;
+      background: rgba(24,26,42,0.85);
+      border-radius: 32px;
+      box-shadow: 0 8px 48px #181a2a44;
+      border: 1.5px solid #64b5f633;
     }
     .search-bar {
       display: flex;
@@ -68,18 +87,37 @@
       border: 2px solid #81c784;
     }
     .categories {
-      max-width: 820px;
+      max-width: 500px; /* Reduced from 820px */
       margin: 0 auto;
       padding: 0 12px 40px 12px;
     }
     .category {
-      background: rgba(30,40,60,0.7);
+      width: 100%;
+      max-width: 500px; /* Ensures bubbles don't stretch wider than container */
+      margin-left: auto;
+      margin-right: auto;
+      background: rgba(60,80,120,0.18);
       border-radius: 18px;
       margin-bottom: 24px;
       box-shadow: 0 4px 32px #0005;
       border: 1.5px solid #64b5f633;
       overflow: hidden;
       transition: box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+    }
+    .category::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      pointer-events: none;
+      background: linear-gradient(120deg, #fff2 0%, #fff0 100%);
+      opacity: 0.25; /* Subtle light sheen */
+      z-index: 0;
+    }
+    .category > * {
+      position: relative;
+      z-index: 1;
     }
     .category-header {
       display: flex;
@@ -141,11 +179,32 @@
     }
     @media (max-width: 700px) {
       .header { font-size: 1.3em; padding: 22px 4px 12px 4px; }
+      .main-container {
+    max-width: 99vw;
+    padding: 8vw 2vw 18vw 2vw;
+    border-radius: 18px;
+  }
       .categories { max-width: 99vw; padding: 0 2vw 24px 2vw; }
       .category-header { font-size: 1em; padding: 12px 12px; }
       .category-content { padding: 12px 12px 12px 28px; }
     }
   </style>
+  <!-- Security & CSP -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' https: data:;
+    frame-src https://www.youtube.com;
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta property="og:title" content="AudioReactive for Unreal Engine Documentation">
+<meta property="og:description" content="Interactive docs and guides for AudioReactive UE5.">
+<meta property="og:image" content="https://pxlmover.github.io/images/your-og-image.png">
+<meta property="og:url" content="https://pxlmover.github.io/GuideAR.html">
 </head>
 <body>
   <div class="header">
@@ -154,301 +213,303 @@
   <div class="header-sub">
     Guide & Documentation
   </div>
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="🔍 Ask the mighty search wizard">
-  </div>
-  <div class="categories" id="categories">
-    <!-- Category A -->
-    <div class="category">
-      <div class="category-header"><span class="icon">🎯</span> A - Core Controls</div>
-      <div class="category-content">
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Playback & Timing"
-               data-desc="How to set up playback, timing, and sync for your audio-reactive elements."
-               data-img="images/playback_timing.png">
-            Playback & Timing
+  <div class="main-container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="🔍 Ask the mighty search wizard">
+    </div>
+    <div class="categories" id="categories">
+      <!-- Category A -->
+      <div class="category">
+        <div class="category-header"><span class="icon">🎯</span> A - Core Controls</div>
+        <div class="category-content">
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Playback & Timing"
+                 data-desc="How to set up playback, timing, and sync for your audio-reactive elements."
+                 data-img="images/playback_timing.png">
+              Playback & Timing
+            </div>
+            <div class="child-list">How to set up playback, timing, and sync for your audio-reactive elements.</div>
           </div>
-          <div class="child-list">How to set up playback, timing, and sync for your audio-reactive elements.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Refresh Rate Settings"
-               data-desc="Adjust refresh rates for optimal performance and responsiveness."
-               data-img="">
-            Refresh Rate Settings
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Refresh Rate Settings"
+                 data-desc="Adjust refresh rates for optimal performance and responsiveness."
+                 data-img="">
+              Refresh Rate Settings
+            </div>
+            <div class="child-list">Adjust refresh rates for optimal performance and responsiveness.</div>
           </div>
-          <div class="child-list">Adjust refresh rates for optimal performance and responsiveness.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Niagara Overrides"
-               data-desc="Override Niagara particle settings for advanced control."
-               data-img="">
-            Niagara Overrides
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Niagara Overrides"
+                 data-desc="Override Niagara particle settings for advanced control."
+                 data-img="">
+              Niagara Overrides
+            </div>
+            <div class="child-list">Override Niagara particle settings for advanced control.</div>
           </div>
-          <div class="child-list">Override Niagara particle settings for advanced control.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Trigger Types (Sequencer/Collision)"
-               data-desc="Choose between sequencer or collision triggers for events."
-               data-img="">
-            Trigger Types (Sequencer/Collision)
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Trigger Types (Sequencer/Collision)"
+                 data-desc="Choose between sequencer or collision triggers for events."
+                 data-img="">
+              Trigger Types (Sequencer/Collision)
+            </div>
+            <div class="child-list">Choose between sequencer or collision triggers for events.</div>
           </div>
-          <div class="child-list">Choose between sequencer or collision triggers for events.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Rapid Fire System"
-               data-desc="Configure rapid fire for high-frequency reactions."
-               data-img="">
-            Rapid Fire System
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Rapid Fire System"
+                 data-desc="Configure rapid fire for high-frequency reactions."
+                 data-img="">
+              Rapid Fire System
+            </div>
+            <div class="child-list">Configure rapid fire for high-frequency reactions.</div>
           </div>
-          <div class="child-list">Configure rapid fire for high-frequency reactions.</div>
         </div>
       </div>
-    </div>
-    <!-- Category B -->
-    <div class="category">
-      <div class="category-header"><span class="icon">🎵</span> B - Audio</div>
-      <div class="category-content">
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Audio Track Management"
-               data-desc="Organize and manage multiple audio tracks."
-               data-img="">
-            Audio Track Management
+      <!-- Category B -->
+      <div class="category">
+        <div class="category-header"><span class="icon">🎵</span> B - Audio</div>
+        <div class="category-content">
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Audio Track Management"
+                 data-desc="Organize and manage multiple audio tracks."
+                 data-img="">
+              Audio Track Management
+            </div>
+            <div class="child-list">Organize and manage multiple audio tracks.</div>
           </div>
-          <div class="child-list">Organize and manage multiple audio tracks.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Peak Visualization Tools"
-               data-desc="Visualize audio peaks for better feedback."
-               data-img="">
-            Peak Visualization Tools
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Peak Visualization Tools"
+                 data-desc="Visualize audio peaks for better feedback."
+                 data-img="">
+              Peak Visualization Tools
+            </div>
+            <div class="child-list">Visualize audio peaks for better feedback.</div>
           </div>
-          <div class="child-list">Visualize audio peaks for better feedback.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Band Splitting (Beta)"
-               data-desc="Split audio into frequency bands for advanced effects."
-               data-img="">
-            Band Splitting (Beta)
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Band Splitting (Beta)"
+                 data-desc="Split audio into frequency bands for advanced effects."
+                 data-img="">
+              Band Splitting (Beta)
+            </div>
+            <div class="child-list">Split audio into frequency bands for advanced effects.</div>
           </div>
-          <div class="child-list">Split audio into frequency bands for advanced effects.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Smoothing Parameters"
-               data-desc="Fine-tune smoothing for more natural reactions."
-               data-img="">
-            Smoothing Parameters
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Smoothing Parameters"
+                 data-desc="Fine-tune smoothing for more natural reactions."
+                 data-img="">
+              Smoothing Parameters
+            </div>
+            <div class="child-list">Fine-tune smoothing for more natural reactions.</div>
           </div>
-          <div class="child-list">Fine-tune smoothing for more natural reactions.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Live Mode (Beta)"
-               data-desc="Enable live mode for real-time audio input."
-               data-img="">
-            Live Mode (Beta)
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Live Mode (Beta)"
+                 data-desc="Enable live mode for real-time audio input."
+                 data-img="">
+              Live Mode (Beta)
+            </div>
+            <div class="child-list">Enable live mode for real-time audio input.</div>
           </div>
-          <div class="child-list">Enable live mode for real-time audio input.</div>
-        </div>
-      </div>
-    </div>
-    <!-- Category C -->
-    <div class="category">
-      <div class="category-header"><span class="icon">🎮</span> C - Mesh Reaction</div>
-      <div class="category-content">
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Static Mesh Control"
-               data-desc="Control static mesh parameters with audio."
-               data-img="">
-            Static Mesh Control
-          </div>
-          <div class="child-list">Control static mesh parameters with audio.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Actor Transforms (Scale/Translate/Rotate)"
-               data-desc="Animate actors with scale, translation, and rotation."
-               data-img="">
-            Actor Transforms (Scale/Translate/Rotate)
-          </div>
-          <div class="child-list">Animate actors with scale, translation, and rotation.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Per-Axis Control"
-               data-desc="Apply reactions to specific axes for precision."
-               data-img="">
-            Per-Axis Control
-          </div>
-          <div class="child-list">Apply reactions to specific axes for precision.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Multiplier Settings"
-               data-desc="Adjust multipliers for intensity and range."
-               data-img="">
-            Multiplier Settings
-          </div>
-          <div class="child-list">Adjust multipliers for intensity and range.</div>
         </div>
       </div>
-    </div>
-    <!-- Category D -->
-    <div class="category">
-      <div class="category-header"><span class="icon">💡</span> D - Light Reaction</div>
-      <div class="category-content">
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Standard Light Control"
-               data-desc="Control standard light types with audio."
-               data-img="">
-            Standard Light Control
+      <!-- Category C -->
+      <div class="category">
+        <div class="category-header"><span class="icon">🎮</span> C - Mesh Reaction</div>
+        <div class="category-content">
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Static Mesh Control"
+                 data-desc="Control static mesh parameters with audio."
+                 data-img="">
+              Static Mesh Control
+            </div>
+            <div class="child-list">Control static mesh parameters with audio.</div>
           </div>
-          <div class="child-list">Control standard light types with audio.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Color Range System"
-               data-desc="Set up color ranges for dynamic lighting."
-               data-img="">
-            Color Range System
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Actor Transforms (Scale/Translate/Rotate)"
+                 data-desc="Animate actors with scale, translation, and rotation."
+                 data-img="">
+              Actor Transforms (Scale/Translate/Rotate)
+            </div>
+            <div class="child-list">Animate actors with scale, translation, and rotation.</div>
           </div>
-          <div class="child-list">Set up color ranges for dynamic lighting.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Intensity Management"
-               data-desc="Manage light intensity for smooth transitions."
-               data-img="">
-            Intensity Management
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Per-Axis Control"
+                 data-desc="Apply reactions to specific axes for precision."
+                 data-img="">
+              Per-Axis Control
+            </div>
+            <div class="child-list">Apply reactions to specific axes for precision.</div>
           </div>
-          <div class="child-list">Manage light intensity for smooth transitions.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Solid Color Override"
-               data-desc="Override colors for specific lighting effects."
-               data-img="">
-            Solid Color Override
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Multiplier Settings"
+                 data-desc="Adjust multipliers for intensity and range."
+                 data-img="">
+              Multiplier Settings
+            </div>
+            <div class="child-list">Adjust multipliers for intensity and range.</div>
           </div>
-          <div class="child-list">Override colors for specific lighting effects.</div>
-        </div>
-      </div>
-    </div>
-    <!-- Category E -->
-    <div class="category">
-      <div class="category-header"><span class="icon">🎭</span> E - DMX</div>
-      <div class="category-content">
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Fixture Groups"
-               data-desc="Organize DMX fixtures into groups for control."
-               data-img="">
-            Fixture Groups
-          </div>
-          <div class="child-list">Organize DMX fixtures into groups for control.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Moving Head Control"
-               data-desc="Control moving head fixtures for dynamic shows."
-               data-img="">
-            Moving Head Control
-          </div>
-          <div class="child-list">Control moving head fixtures for dynamic shows.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Static/Strobe/Wash"
-               data-desc="Configure static, strobe, and wash effects."
-               data-img="">
-            Static/Strobe/Wash
-          </div>
-          <div class="child-list">Configure static, strobe, and wash effects.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Laser Groups (with beam parameters!)"
-               data-desc="Set up laser groups and beam parameters."
-               data-img="">
-            Laser Groups (with beam parameters!)
-          </div>
-          <div class="child-list">Set up laser groups and beam parameters.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Add Functions (Dimmer, etc.)"
-               data-desc="Add extra functions like dimmer and more."
-               data-img="">
-            Add Functions (Dimmer, etc.)
-          </div>
-          <div class="child-list">Add extra functions like dimmer and more.</div>
         </div>
       </div>
-    </div>
-    <!-- Category F -->
-    <div class="category">
-      <div class="category-header"><span class="icon">🎨</span> F - Mesh & Light Editor Tags</div>
-      <div class="category-content">
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Face Camera"
-               data-desc="Make meshes or lights always face the camera."
-               data-img="">
-            Face Camera
+      <!-- Category D -->
+      <div class="category">
+        <div class="category-header"><span class="icon">💡</span> D - Light Reaction</div>
+        <div class="category-content">
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Standard Light Control"
+                 data-desc="Control standard light types with audio."
+                 data-img="">
+              Standard Light Control
+            </div>
+            <div class="child-list">Control standard light types with audio.</div>
           </div>
-          <div class="child-list">Make meshes or lights always face the camera.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Scale Controls"
-               data-desc="Control scale parameters for meshes/lights."
-               data-img="">
-            Scale Controls
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Color Range System"
+                 data-desc="Set up color ranges for dynamic lighting."
+                 data-img="">
+              Color Range System
+            </div>
+            <div class="child-list">Set up color ranges for dynamic lighting.</div>
           </div>
-          <div class="child-list">Control scale parameters for meshes/lights.</div>
-        </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Vertical Offset"
-               data-desc="Adjust vertical offset for placement."
-               data-img="">
-            Vertical Offset
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Intensity Management"
+                 data-desc="Manage light intensity for smooth transitions."
+                 data-img="">
+              Intensity Management
+            </div>
+            <div class="child-list">Manage light intensity for smooth transitions.</div>
           </div>
-          <div class="child-list">Adjust vertical offset for placement.</div>
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Solid Color Override"
+                 data-desc="Override colors for specific lighting effects."
+                 data-img="">
+              Solid Color Override
+            </div>
+            <div class="child-list">Override colors for specific lighting effects.</div>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- Category G -->
-    <div class="category">
-      <div class="category-header"><span class="icon">🎛️</span> G - Master Faders</div>
-      <div class="category-content">
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Global Gain Controls"
-               data-desc="Master gain controls for all reactions."
-               data-img="">
-            Global Gain Controls
+      <!-- Category E -->
+      <div class="category">
+        <div class="category-header"><span class="icon">🎭</span> E - DMX</div>
+        <div class="category-content">
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Fixture Groups"
+                 data-desc="Organize DMX fixtures into groups for control."
+                 data-img="">
+              Fixture Groups
+            </div>
+            <div class="child-list">Organize DMX fixtures into groups for control.</div>
           </div>
-          <div class="child-list">Master gain controls for all reactions.</div>
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Moving Head Control"
+                 data-desc="Control moving head fixtures for dynamic shows."
+                 data-img="">
+              Moving Head Control
+            </div>
+            <div class="child-list">Control moving head fixtures for dynamic shows.</div>
+          </div>
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Static/Strobe/Wash"
+                 data-desc="Configure static, strobe, and wash effects."
+                 data-img="">
+              Static/Strobe/Wash
+            </div>
+            <div class="child-list">Configure static, strobe, and wash effects.</div>
+          </div>
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Laser Groups (with beam parameters!)"
+                 data-desc="Set up laser groups and beam parameters."
+                 data-img="">
+              Laser Groups (with beam parameters!)
+            </div>
+            <div class="child-list">Set up laser groups and beam parameters.</div>
+          </div>
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Add Functions (Dimmer, etc.)"
+                 data-desc="Add extra functions like dimmer and more."
+                 data-img="">
+              Add Functions (Dimmer, etc.)
+            </div>
+            <div class="child-list">Add extra functions like dimmer and more.</div>
+          </div>
         </div>
-        <div class="subcategory">
-          <div class="subcategory-title"
-               data-title="Master Light/Object/Global"
-               data-desc="Control master faders for lights, objects, and global settings."
-               data-img="">
-            Master Light/Object/Global
+      </div>
+      <!-- Category F -->
+      <div class="category">
+        <div class="category-header"><span class="icon">🎨</span> F - Mesh & Light Editor Tags</div>
+        <div class="category-content">
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Face Camera"
+                 data-desc="Make meshes or lights always face the camera."
+                 data-img="">
+              Face Camera
+            </div>
+            <div class="child-list">Make meshes or lights always face the camera.</div>
           </div>
-          <div class="child-list">Control master faders for lights, objects, and global settings.</div>
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Scale Controls"
+                 data-desc="Control scale parameters for meshes/lights."
+                 data-img="">
+              Scale Controls
+            </div>
+            <div class="child-list">Control scale parameters for meshes/lights.</div>
+          </div>
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Vertical Offset"
+                 data-desc="Adjust vertical offset for placement."
+                 data-img="">
+              Vertical Offset
+            </div>
+            <div class="child-list">Adjust vertical offset for placement.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Category G -->
+      <div class="category">
+        <div class="category-header"><span class="icon">🎛️</span> G - Master Faders</div>
+        <div class="category-content">
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Global Gain Controls"
+                 data-desc="Master gain controls for all reactions."
+                 data-img="">
+              Global Gain Controls
+            </div>
+            <div class="child-list">Master gain controls for all reactions.</div>
+          </div>
+          <div class="subcategory">
+            <div class="subcategory-title"
+                 data-title="Master Light/Object/Global"
+                 data-desc="Control master faders for lights, objects, and global settings."
+                 data-img="">
+              Master Light/Object/Global
+            </div>
+            <div class="child-list">Control master faders for lights, objects, and global settings.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -550,6 +611,12 @@
         document.body.style.overflow = '';
       }
     };
+
+    function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
   </script>
 </body>
 </html>
