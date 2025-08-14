@@ -463,37 +463,63 @@
   </div>
 
   <script>
-    // Expand/collapse categories
-    document.querySelectorAll('.category-header').forEach(header => {
-      header.addEventListener('click', function() {
-        const parent = this.parentElement;
-        parent.classList.toggle('open');
-      });
-    });
+  // Track user-expanded categories
+  let userExpandedCategories = new Set();
 
-    // Live search filter (show only matching subcategories, auto-expand matching categories)
-    document.getElementById('searchInput').addEventListener('input', function() {
-      const query = this.value.toLowerCase();
-      document.querySelectorAll('.category').forEach(cat => {
-        let subMatchCount = 0;
-        cat.querySelectorAll('.subcategory').forEach(sub => {
-          const subText = sub.textContent.toLowerCase();
-          if (subText.includes(query)) {
-            sub.style.display = '';
-            subMatchCount++;
-          } else {
-            sub.style.display = 'none';
-          }
-        });
-        if (subMatchCount > 0) {
-          cat.style.display = '';
-          cat.classList.add('open'); // Auto-expand if matches
+  // Expand/collapse categories and track user action
+  document.querySelectorAll('.category-header').forEach((header, idx) => {
+    header.addEventListener('click', function() {
+      const parent = this.parentElement;
+      parent.classList.toggle('open');
+      if (parent.classList.contains('open')) {
+        userExpandedCategories.add(idx);
+      } else {
+        userExpandedCategories.delete(idx);
+      }
+    });
+  });
+
+  // Simple fuzzy match: returns true if all query words are found in the text (in any order)
+  function fuzzyMatch(text, query) {
+    const words = query.split(/\s+/).filter(Boolean);
+    return words.every(word => text.includes(word));
+  }
+
+  // Live search filter (show only matching subcategories, auto-expand matching categories)
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const query = this.value.trim().toLowerCase();
+    document.querySelectorAll('.category').forEach((cat, idx) => {
+      let subMatchCount = 0;
+      cat.querySelectorAll('.subcategory').forEach(sub => {
+        const subText = sub.textContent.toLowerCase();
+        if (query === "" || fuzzyMatch(subText, query)) {
+          sub.style.display = '';
+          subMatchCount++;
         } else {
-          cat.style.display = 'none';
-          cat.classList.remove('open'); // Collapse if no matches
+          sub.style.display = 'none';
         }
       });
+      if (query) {
+        if (subMatchCount > 0) {
+          cat.style.display = '';
+          cat.classList.add('open');
+        } else {
+          cat.style.display = 'none';
+          cat.classList.remove('open');
+        }
+      } else {
+        cat.style.display = '';
+        if (userExpandedCategories.has(idx)) {
+          cat.classList.add('open');
+        } else {
+          cat.classList.remove('open');
+        }
+        cat.querySelectorAll('.subcategory').forEach(sub => {
+          sub.style.display = '';
+        });
+      }
     });
+  });
 
     // Info card modal logic
     document.querySelectorAll('.subcategory-title').forEach(title => {
