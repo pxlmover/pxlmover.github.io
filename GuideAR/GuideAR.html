@@ -50,12 +50,21 @@
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
       font-size: 1.35em;
       font-weight: 700;
-      color: #fff;
       margin-top: 24px;
       margin-bottom: 18px;
       letter-spacing: 0.04em;
-      text-shadow: 0 2px 12px #6a5cff44;
       user-select: none;
+      background: linear-gradient(90deg, #ff4e8e, #a259f7 40%, #64b5f6 70%, #fff176 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: header-sub-sheen 7s ease-in-out infinite;
+      text-shadow: 0 2px 12px #6a5cff44;
+    }
+    @keyframes header-sub-sheen {
+      0%,100% { background-position: 100% 50%; }
+      50% { background-position: 0% 50%; }
     }
     .main-container {
       max-width: 620px;
@@ -123,8 +132,8 @@
       display: flex;
       align-items: center;
       cursor: pointer;
-      padding: 18px 24px;
-      font-size: 1.25em;
+      padding: 18px 18px 18px 24px; /* Less left padding, keep right comfortable */
+      font-size: 1.5em;
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
       font-weight: 800;
       background: linear-gradient(90deg, #81c784, #64b5f6, #fff176, #81c784 80%);
@@ -137,6 +146,7 @@
       letter-spacing: 0.03em;
       border-bottom: 1px solid #2226;
       user-select: none;
+      justify-content: flex-start; /* Ensures content is left-aligned within the flex container */
     }
     .category-header .icon {
       font-size: 1.3em;
@@ -274,12 +284,11 @@
         <div class="category-header"><span class="icon">🎵</span> B - Audio</div>
         <div class="category-content">
           <div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Audio Track Management"
-                 data-desc="Organize and manage multiple audio tracks."
-                 data-img="">
+            <a class="subcategory-title"
+               href="DOCS/B/TrackManagement.html"
+               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
               Audio Track Management
-            </div>
+            </a>
             <div class="child-list">Organize and manage multiple audio tracks.</div>
           </div>
           <div class="subcategory">
@@ -537,6 +546,8 @@
       } else {
         userExpandedCategories.delete(idx);
       }
+      // Save to localStorage
+      localStorage.setItem('arExpandedCats', JSON.stringify(Array.from(userExpandedCategories)));
     });
   });
 
@@ -617,6 +628,21 @@
   div.textContent = text;
   return div.innerHTML;
 }
+
+  // Restore expanded categories from localStorage on page load
+  window.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('arExpandedCats');
+    if (saved) {
+      userExpandedCategories = new Set(JSON.parse(saved));
+      document.querySelectorAll('.category').forEach((cat, idx) => {
+        if (userExpandedCategories.has(idx)) {
+          cat.classList.add('open');
+        } else {
+          cat.classList.remove('open');
+        }
+      });
+    }
+  });
   </script>
 </body>
 </html>
