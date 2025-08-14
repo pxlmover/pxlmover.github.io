@@ -16,15 +16,36 @@
     }
     .header {
       text-align: center;
-      padding: 38px 10px 18px 10px;
-      background: linear-gradient(90deg, #64b5f6, #81c784 80%);
+      padding: 54px 10px 38px 10px; /* Increased bottom padding */
+      background: linear-gradient(90deg, #6a5cff, #64b5f6 40%, #a259f7 70%, #81c784 100%);
       color: #181a2a;
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-      font-size: 2.2em;
+      font-size: 3em;
       font-weight: 900;
-      letter-spacing: 0.04em;
-      filter: drop-shadow(0 2px 12px #222a);
+      letter-spacing: 0.06em;
+      filter: drop-shadow(0 2px 18px #222a);
       border-bottom: 2px solid #fff176;
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: header-sheen 6s ease-in-out infinite;
+      user-select: none;
+    }
+    @keyframes header-sheen {
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .header-sub {
+      text-align: center;
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1.35em;
+      font-weight: 500;
+      color: #e0e0e0;
+      margin-top: 24px;      /* Increased top margin */
+      margin-bottom: 18px;
+      letter-spacing: 0.02em;
+      user-select: none;
     }
     .search-bar {
       display: flex;
@@ -128,7 +149,10 @@
 </head>
 <body>
   <div class="header">
-    AudioReactive UE5 – Interactive Documentation
+    AudioReactive
+  </div>
+  <div class="header-sub">
+    Guide & Documentation
   </div>
   <div class="search-bar">
     <input type="text" id="searchInput" placeholder="🔍 Ask the mighty search wizard">
