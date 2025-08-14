@@ -131,7 +131,7 @@
     AudioReactive UE5 – Interactive Documentation
   </div>
   <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="🔍 Looking">
+    <input type="text" id="searchInput" placeholder="🔍 Ask the mighty search wizard">
   </div>
   <div class="categories" id="categories">
     <!-- Category A -->
@@ -447,13 +447,12 @@
       });
     });
 
-    // Live search filter (show only matching subcategories, hide non-matching ones)
+    // Live search filter (show only matching subcategories, auto-expand matching categories)
     document.getElementById('searchInput').addEventListener('input', function() {
       const query = this.value.toLowerCase();
       document.querySelectorAll('.category').forEach(cat => {
         let subMatchCount = 0;
         cat.querySelectorAll('.subcategory').forEach(sub => {
-          // Check if subcategory title or child-list matches
           const subText = sub.textContent.toLowerCase();
           if (subText.includes(query)) {
             sub.style.display = '';
@@ -462,8 +461,13 @@
             sub.style.display = 'none';
           }
         });
-        // Show category only if at least one subcategory matches
-        cat.style.display = subMatchCount > 0 ? '' : 'none';
+        if (subMatchCount > 0) {
+          cat.style.display = '';
+          cat.classList.add('open'); // Auto-expand if matches
+        } else {
+          cat.style.display = 'none';
+          cat.classList.remove('open'); // Collapse if no matches
+        }
       });
     });
 
