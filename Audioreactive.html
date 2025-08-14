@@ -505,7 +505,21 @@
       min-width: 180px;
       box-sizing: border-box;
     }
-
+    .hero-desc {
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-size: 1.18em;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      background: linear-gradient(90deg, #64b5f6, #fff176, #81c784, #64b5f6 80%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: showcase-hue-move 5s ease-in-out infinite;
+      filter: drop-shadow(0 2px 8px #222a);
+      margin-bottom: 18px;
+      text-align: center;
+    }
     /* Soundwave SVG animation */
     @keyframes wave-move {
       0%   { stroke-dashoffset: 0; }
@@ -728,6 +742,22 @@
       z-index: 1000;
       position: relative;
     }
+
+    .hero-highlight {
+  display: inline-block;
+  font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+  font-size: 1.35em;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: linear-gradient(90deg, #64b5f6, #fff176, #81c784, #64b5f6 80%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: showcase-hue-move 5s ease-in-out infinite;
+  filter: drop-shadow(0 2px 12px #222a);
+  margin-top: 12px;
+}
   </style>
 </head>
 <body>
@@ -750,10 +780,11 @@
         points="0,16 8,10 16,22 24,8 32,24 40,12 48,20 56,14 64,18 72,12 80,22 88,10 96,24 104,8 112,20 120,14 128,18 136,12 144,22 152,10 160,24 168,8 176,20 184,14 192,18 200,12 208,22 216,10 224,24 232,8 240,20 248,14 256,18 264,12 272,22 280,10 288,24 296,8 304,20 312,14 320,16"
         stroke="#00eaff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.85"/>
     </svg>
-    <p>
-      Instantly make meshes, materials, particles, lights, and DMX fixtures react to music or sound. <br><br>
-      <b>Bring your scenes to life!<br>NO code required.</b>
+    <p class="hero-desc">
+      Instantly make meshes, materials, particles, lights, and DMX fixtures react to music or sound.
     </p>
+    <span class="hero-highlight">Bring your scenes to life!<br>NO code required.</span>
+    <br><br>
     <div class="hero-btn-row">
       <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
       <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
