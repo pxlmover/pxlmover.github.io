@@ -47,65 +47,10 @@
       </div>
     </div>
   </div>
-  <div id="gallery-modal" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100vw; height:100vh; background:rgba(24,26,42,0.96); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
-    <div id="gallery-modal-content" style="background:#232a3add; border-radius:24px; box-shadow:0 8px 64px #a259f7cc; max-width:95vw; max-height:90vh; overflow:auto; padding:48px 32px; color:#e0e0e0; position:relative;">
-      <span id="gallery-modal-close" style="position:absolute;top:18px;right:28px;font-size:2.5em;color:#fff;cursor:pointer;z-index:10;">&times;</span>
-      <div id="gallery-modal-body"></div>
-    </div>
-  </div>
   <script>
 document.querySelector('.back-link').addEventListener('click', function(e) {
   localStorage.setItem('guideARScroll', window.scrollY);
 });
-document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
-  el.style.cursor = 'pointer';
-  el.addEventListener('click', function() {
-    const item = el.closest('.gallery-item');
-    const img = item.querySelector('img');
-    const caption = item.querySelector('.gallery-desc');
-    const modal = document.getElementById('gallery-modal');
-    const body = document.getElementById('gallery-modal-body');
-    let html = `
-      <div style="text-align:center; margin-bottom:18px;">
-        <button id="zoom-in" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#6a5cff; color:#fff; cursor:pointer;">+</button>
-        <button id="zoom-out" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#a259f7; color:#fff; cursor:pointer;">−</button>
-      </div>
-      <img src="${img.src}" alt="${img.alt}" style="max-width:90vw; max-height:80vh; width:auto; height:auto; box-shadow:none; display:block; margin:0 auto 32px auto; border-radius:0;">
-      <div style="font-size:1.15em; text-align:left; white-space:pre-line; word-break:break-word; margin:0 auto; max-width:540px;">
-        ${caption.innerHTML}
-      </div>
-    `;
-    body.innerHTML = html;
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-
-    // Zoom functionality
-    let scale = 1;
-    const modalContent = document.getElementById('gallery-modal-content');
-    document.getElementById('zoom-in').onclick = function() {
-      scale = Math.min(scale + 0.2, 3);
-      modalContent.style.transform = `scale(${scale})`;
-      modalContent.style.transformOrigin = 'center center';
-    };
-    document.getElementById('zoom-out').onclick = function() {
-      scale = Math.max(scale - 0.2, 0.5);
-      modalContent.style.transform = `scale(${scale})`;
-      modalContent.style.transformOrigin = 'center center';
-    };
-  });
-});
-document.getElementById('gallery-modal-close').onclick = function() {
-  document.getElementById('gallery-modal').style.display = 'none';
-  document.body.style.overflow = '';
-  document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
-};
-document.getElementById('gallery-modal').onclick = function(e) {
-  if (e.target === this) {
-    this.style.display = 'none';
-    document.body.style.overflow = '';
-    document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
-  }
-};
   </script>
 </body>
 </html>
