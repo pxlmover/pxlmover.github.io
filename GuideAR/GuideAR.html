@@ -586,22 +586,25 @@
 
     // Info card modal logic
     document.querySelectorAll('.subcategory-title').forEach(title => {
-      title.style.cursor = 'pointer';
-      title.addEventListener('click', function(e) {
-        const modal = document.getElementById('info-modal');
-        const body = document.getElementById('info-modal-body');
-        const titleText = this.getAttribute('data-title') || this.textContent;
-        const descText = this.getAttribute('data-desc') || '';
-        const imgSrc = this.getAttribute('data-img');
-        let html = `<h2 style="font-family:'Orbitron','Inter',Arial,sans-serif;font-size:1.4em;color:#64b5f6;margin-bottom:12px;">${titleText}</h2>`;
-        html += `<div style="font-size:1.1em;margin-bottom:18px;">${descText}</div>`;
-        if (imgSrc) {
-          html += `<img src="${imgSrc}" alt="${titleText}" style="max-width:92vw;max-height:60vh;border-radius:12px;box-shadow:0 4px 24px #64b5f6cc;margin-bottom:12px;">`;
-        }
-        body.innerHTML = html;
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-      });
+      // Only attach modal logic if it's NOT a link
+      if (!title.hasAttribute('href')) {
+        title.style.cursor = 'pointer';
+        title.addEventListener('click', function(e) {
+          const modal = document.getElementById('info-modal');
+          const body = document.getElementById('info-modal-body');
+          const titleText = this.getAttribute('data-title') || this.textContent;
+          const descText = this.getAttribute('data-desc') || '';
+          const imgSrc = this.getAttribute('data-img');
+          let html = `<h2 style="font-family:'Orbitron','Inter',Arial,sans-serif;font-size:1.4em;color:#64b5f6;margin-bottom:12px;">${titleText}</h2>`;
+          html += `<div style="font-size:1.1em;margin-bottom:18px;">${descText}</div>`;
+          if (imgSrc) {
+            html += `<img src="${imgSrc}" alt="${titleText}" style="max-width:92vw;max-height:60vh;border-radius:12px;box-shadow:0 4px 24px #64b5f6cc;margin-bottom:12px;">`;
+          }
+          body.innerHTML = html;
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        });
+      }
     });
     document.getElementById('info-modal-close').onclick = function() {
       document.getElementById('info-modal').style.display = 'none';
