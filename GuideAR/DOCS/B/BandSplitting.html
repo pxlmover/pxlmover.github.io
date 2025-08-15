@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Peak Visualization – AudioReactive Docs</title>
+  <title>Band Splitting (Beta) – AudioReactive Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <style>
     body {
@@ -25,7 +25,7 @@
     }
     .header {
       text-align: center;
-      padding: 28px 10px 28px 10px;
+      padding: 28px 10px 28px 10px;  /* Reduced top/bottom padding */
       background: linear-gradient(90deg, #6a5cff, #64b5f6 40%, #a259f7 70%, #81c784 100%);
       color: #181a2a;
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
@@ -89,7 +89,7 @@
       background: rgba(40,48,80,0.22);
       border-radius: 48px;
       box-shadow: 0 0 0 8px #a259f7, 0 0 48px 0 #6a5cff99, 0 0 96px 0 #ff4e8e44;
-      border: 2px solid transparent;
+      border: 2px solid transparent; /* Transparent border to preserve radius */
       position: relative;
       animation: neon-hue 6s linear infinite;
     }
@@ -112,6 +112,59 @@
       margin-bottom: 18px;
       letter-spacing: 0.03em;
       text-align: center;
+    }
+    .image-block {
+      margin-bottom: 38px;
+      background: rgba(60,80,120,0.13);
+      border-radius: 18px;
+      box-shadow: 0 2px 18px #181a2a22;
+      padding: 18px 18px 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .image-block img {
+      max-width: 96%;
+      max-height: 320px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px #64b5f6cc;
+      margin-bottom: 16px;
+      background: #181a2a;
+      object-fit: contain;
+    }
+    .image-desc {
+      font-size: 1.08em;
+      color: #e0e0e0;
+      text-align: center;
+      margin-bottom: 4px;
+      font-family: 'Inter', Arial, sans-serif;
+      line-height: 1.5;
+    }
+    @media (max-width: 700px) {
+      .header { font-size: 1.3em; padding: 22px 4px 12px 4px; }
+      .main-container { max-width: 99vw; padding: 8vw 2vw 18vw 2vw; border-radius: 18px; }
+      .image-block img { max-width: 99vw; max-height: 38vw; }
+      .gallery-item img {
+        width: 98vw;
+        min-width: 0;
+        max-width: 99vw;
+        max-height: 38vw;
+      }
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 24px;
+      font-size: 1em;
+      color: #64b5f6;
+      text-decoration: none;
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #fff176;
+      text-decoration: underline;
     }
     .gallery-grid {
       display: grid;
@@ -166,30 +219,94 @@
     .gallery-item:hover img {
       box-shadow: 0 0 48px 0 #a259f7ee, 0 8px 32px #ff4e8e99;
     }
-    @media (max-width: 700px) {
-      .header { font-size: 1.3em; padding: 22px 4px 12px 4px; }
-      .main-container { max-width: 99vw; padding: 8vw 2vw 18vw 2vw; border-radius: 18px; }
-      .gallery-item img {
-        width: 98vw;
-        min-width: 0;
-        max-width: 99vw;
-        max-height: 38vw;
-      }
+    .carousel-container {
+      position: relative;
+      max-width: 700px;
+      min-height: 440px; /* Ensures enough vertical space for centering */
+      margin: 40px auto 48px auto;
+      background: rgba(40,48,80,0.22);
+      border-radius: 32px;
+      box-shadow: 0 8px 48px #181a2a44;
+      overflow: hidden;
+      display: flex;
+      align-items: center; /* Vertically center carousel */
+      justify-content: center; /* Horizontally center carousel */
+      padding: 32px 0; /* Add vertical breathing room */
     }
-    .back-link {
-      display: inline-block;
-      margin-bottom: 24px;
-      font-size: 1em;
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(.77,0,.18,1);
+      will-change: transform;
+      align-items: center; /* Vertically center slides */
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Vertically center content */
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 90%;
+      max-width: 520px;
+      max-height: 340px;
+      border-radius: 1px;
+      box-shadow: 0 0 16px 0 #a259f7cc, 0 4px 8px #6a5cff99;
+      object-fit: contain;
+      margin-bottom: 18px;
+      background: #181a2a;
+    }
+
+    .carousel-caption {
+      background: linear-gradient(90deg, #232a3a 60%, #181a2a 100%);
+      color: #fff;
+      font-size: 1.08em;
+      font-family: 'Inter', Arial, sans-serif;
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 18px #181a2a22;
+      text-align: center;
+      max-width: 90%;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #181a2aee;
       color: #64b5f6;
-      text-decoration: none;
-      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      transition: color 0.2s;
+      border: none;
+      border-radius: 50%;
+      width: 32px;      /* Smaller button */
+      height: 32px;     /* Smaller button */
+      font-size: 1.2em; /* Smaller arrow */
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 2px 12px #64b5f6aa;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .back-link:hover {
-      color: #fff176;
-      text-decoration: underline;
+    .carousel-btn:hover {
+      background: #64b5f6;
+      color: #181a2a;
+    }
+    .carousel-btn.prev { left: 18px; }
+    .carousel-btn.next { right: 18px; }
+
+    @media (max-width: 700px) {
+      .carousel-container { max-width: 99vw; border-radius: 18px; min-height: 260px; padding: 12px 0; }
+      .carousel-slide img { max-width: 99vw; max-height: 38vw; }
+      .carousel-slide { padding: 0; }
+      .carousel-btn { width: 28px; height: 28px; font-size: 1em; }
     }
     #gallery-modal {
       display:none;
@@ -235,31 +352,31 @@
       AudioReactive
     </div>
     <div class="header-sub">
-      Peak Visualization
+      Band Splitting (Beta)
     </div>
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
       <div class="section-title"></div>
       <div class="gallery-grid">
         <div class="gallery-item">
-          <img src="../images/B-Details.png" alt="Peak Visualization Overview">
+          <img src="../images/B-Details.png" alt="Band Splitting Overview">
           <div class="gallery-desc">
-            <b>Peak Visualization Overview:</b><br>
-            This screenshot shows the main interface for visualizing audio peaks. Use this panel to monitor and analyze peak levels in real time.
+            <b>Band Splitting Overview:</b><br>
+            This screenshot shows the main interface for splitting audio into frequency bands.
           </div>
         </div>
         <div class="gallery-item">
-          <img src="../images/B-Details2.png" alt="Peak Properties">
+          <img src="../images/B-Details2.png" alt="Band Properties">
           <div class="gallery-desc">
-            <b>Peak Properties:</b><br>
-            Here you can adjust visualization properties, such as sensitivity, color, and display mode. Click on a peak to reveal its settings.
+            <b>Band Properties:</b><br>
+            Adjust individual band properties, such as frequency range, gain, and smoothing.
           </div>
         </div>
         <div class="gallery-item">
-          <img src="../images/B-Details3.png" alt="Advanced Peak Features">
+          <img src="../images/B-Details3.png" alt="Advanced Band Features">
           <div class="gallery-desc">
             <b>Advanced Features:</b><br>
-            Access advanced features like peak hold, smoothing, and threshold settings. These tools help you fine-tune your visualization for complex audio signals.
+            Access dynamic band allocation, visualization, and automation for advanced audio processing.
           </div>
         </div>
       </div>
@@ -276,6 +393,77 @@ document.querySelector('.back-link').addEventListener('click', function(e) {
   // Save scroll position before navigating
   localStorage.setItem('guideARScroll', window.scrollY);
 });
+const carousel = document.querySelector('.carousel');
+const slides = document.querySelectorAll('.carousel-slide');
+let currentSlide = 0;
+
+function showSlide(idx) {
+  carousel.style.transform = `translateX(-${idx * 100}%)`;
+}
+document.querySelector('.carousel-btn.prev').onclick = function() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+};
+document.querySelector('.carousel-btn.next').onclick = function() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+};
+// Optional: swipe support for mobile
+let startX = null;
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+carousel.addEventListener('touchend', e => {
+  if (startX === null) return;
+  let endX = e.changedTouches[0].clientX;
+  if (endX - startX > 50) document.querySelector('.carousel-btn.prev').click();
+  else if (startX - endX > 50) document.querySelector('.carousel-btn.next').click();
+  startX = null;
+});
+showSlide(currentSlide);
+document.querySelectorAll('.carousel-slide img, .carousel-caption').forEach((el, idx) => {
+  el.style.cursor = 'pointer';
+  el.addEventListener('click', function() {
+    const slide = el.closest('.carousel-slide');
+    const img = slide.querySelector('img');
+    const caption = slide.querySelector('.carousel-caption');
+    const modal = document.getElementById('gallery-modal');
+    const body = document.getElementById('gallery-modal-body');
+    let html = `
+      <div style="text-align:center; margin-bottom:18px;">
+        <button id="zoom-in" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#6a5cff; color:#fff; cursor:pointer;">+</button>
+        <button id="zoom-out" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#a259f7; color:#fff; cursor:pointer;">−</button>
+      </div>
+      <img src="${img.src}" alt="${img.alt}" style="max-width:90vw; max-height:80vh; width:auto; height:auto; box-shadow:none; display:block; margin:0 auto 32px auto; border-radius:0;">
+      <div style="font-size:1.15em; text-align:left; white-space:pre-line; word-break:break-word; margin:0 auto; max-width:540px;">${caption.innerHTML}</div>
+    `;
+    body.innerHTML = html;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Zoom functionality
+    let scale = 1;
+    const modalContent = document.getElementById('gallery-modal-content');
+    document.getElementById('zoom-in').onclick = function() {
+      scale = Math.min(scale + 0.2, 3);
+      modalContent.style.transform = `scale(${scale})`;
+      modalContent.style.transformOrigin = 'center center';
+    };
+    document.getElementById('zoom-out').onclick = function() {
+      scale = Math.max(scale - 0.2, 0.5);
+      modalContent.style.transform = `scale(${scale})`;
+      modalContent.style.transformOrigin = 'center center';
+    };
+  });
+});
+document.getElementById('gallery-modal-close').onclick = function() {
+  document.getElementById('gallery-modal').style.display = 'none';
+  document.body.style.overflow = '';
+};
+document.getElementById('gallery-modal').onclick = function(e) {
+  if (e.target === this) {
+    this.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+};
 document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
   el.style.cursor = 'pointer';
   el.addEventListener('click', function() {
@@ -313,11 +501,13 @@ document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forE
     };
   });
 });
+
 document.getElementById('gallery-modal-close').onclick = function() {
   document.getElementById('gallery-modal').style.display = 'none';
   document.body.style.overflow = '';
   document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
 };
+
 document.getElementById('gallery-modal').onclick = function(e) {
   if (e.target === this) {
     this.style.display = 'none';

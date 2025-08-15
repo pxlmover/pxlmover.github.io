@@ -25,7 +25,7 @@
     }
     .header {
       text-align: center;
-      padding: 54px 10px 38px 10px;
+      padding: 28px 10px 28px 10px;
       background: linear-gradient(90deg, #6a5cff, #64b5f6 40%, #a259f7 70%, #81c784 100%);
       color: #181a2a;
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
@@ -84,19 +84,24 @@
     }
     .super-container {
       max-width: 1100px;
-      margin: 48px auto 48px auto;
-      padding: 36px 36px 48px 36px;
+      margin: 16px auto 48px auto;
+      padding: 24px 36px 48px 36px;
       background: rgba(40,48,80,0.22);
       border-radius: 48px;
-      box-shadow: 0 12px 64px #181a2a55;
-      border: 2px solid #64b5f655;
+      box-shadow: 0 0 0 8px #a259f7, 0 0 48px 0 #6a5cff99, 0 0 96px 0 #ff4e8e44;
+      border: 2px solid transparent;
       position: relative;
+      animation: neon-hue 6s linear infinite;
     }
-    @media (max-width: 900px) {
-      .super-container {
-        max-width: 99vw;
-        padding: 4vw 2vw 8vw 2vw;
-        border-radius: 24px;
+    @keyframes neon-hue {
+      0% {
+        box-shadow: 0 0 0 8px #a259f7, 0 0 48px 0 #6a5cff99, 0 0 96px 0 #ff4e8e44;
+      }
+      50% {
+        box-shadow: 0 0 0 8px #ff4e8e, 0 0 48px 0 #a259f7cc, 0 0 96px 0 #64b5f688;
+      }
+      100% {
+        box-shadow: 0 0 0 8px #a259f7, 0 0 48px 0 #6a5cff99, 0 0 96px 0 #ff4e8e44;
       }
     }
     .section-title {
@@ -108,37 +113,62 @@
       letter-spacing: 0.03em;
       text-align: center;
     }
-    .image-block {
-      margin-bottom: 38px;
-      background: rgba(60,80,120,0.13);
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      margin-bottom: 32px;
+      margin-top: 18px;
+    }
+    .gallery-item {
+      background: linear-gradient(120deg, #232a3a 60%, #181a2a 100%);
       border-radius: 18px;
-      box-shadow: 0 2px 18px #181a2a22;
+      box-shadow: 0 4px 32px #a259f7cc, 0 0 0 2px #6a5cff55;
+      border: 1.5px solid #a259f7cc;
       padding: 18px 18px 24px 18px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
     }
-    .image-block img {
-      max-width: 96%;
-      max-height: 320px;
-      border-radius: 12px;
-      box-shadow: 0 4px 24px #64b5f6cc;
+    .gallery-item img {
+      width: 100%;
+      min-width: 260px;
+      max-width: 540px;
+      max-height: 380px;
+      border-radius: 0;
+      box-shadow: 0 0 32px 0 #a259f7cc, 0 4px 24px #6a5cff99;
+      object-fit: contain;
       margin-bottom: 16px;
       background: #181a2a;
-      object-fit: contain;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .image-desc {
+    .gallery-desc {
       font-size: 1.08em;
       color: #e0e0e0;
-      text-align: center;
+      text-align: left;
       margin-bottom: 4px;
       font-family: 'Inter', Arial, sans-serif;
       line-height: 1.5;
+      width: 100%;
+    }
+    .gallery-item:hover {
+      box-shadow: 0 8px 48px #a259f7cc, 0 0 0 3px #ff4e8e99;
+      border-color: #ff4e8e;
+      transform: translateY(-4px) scale(1.03);
+    }
+    .gallery-item:hover img {
+      box-shadow: 0 0 48px 0 #a259f7ee, 0 8px 32px #ff4e8e99;
     }
     @media (max-width: 700px) {
       .header { font-size: 1.3em; padding: 22px 4px 12px 4px; }
       .main-container { max-width: 99vw; padding: 8vw 2vw 18vw 2vw; border-radius: 18px; }
-      .image-block img { max-width: 99vw; max-height: 38vw; }
       .gallery-item img {
         width: 98vw;
         min-width: 0;
@@ -161,56 +191,41 @@
       color: #fff176;
       text-decoration: underline;
     }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Wider columns */
-      gap: 40px;
-      margin-bottom: 32px;
-      margin-top: 18px;
+    #gallery-modal {
+      display:none;
+      position:fixed;
+      z-index:99999;
+      top:0;
+      left:0;
+      width:100vw;
+      height:100vh;
+      background:rgba(24,26,42,0.96);
+      backdrop-filter:blur(8px);
+      align-items:center;
+      justify-content:center;
     }
-    .gallery-item {
-      background: linear-gradient(120deg, #232a3a 60%, #181a2a 100%);
-      border-radius: 18px;
-      box-shadow: 0 4px 32px #64b5f655, 0 0 0 2px #6a5cff55;
-      border: 1.5px solid #64b5f6cc;
-      padding: 18px 18px 24px 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
-      position: relative;
-      overflow: hidden;
+    #gallery-modal-content {
+      background:#232a3add;
+      border-radius:24px;
+      box-shadow:0 8px 64px #a259f7cc;
+      max-width:95vw;
+      max-height:90vh;
+      overflow:auto;
+      padding:48px 32px;
+      color:#e0e0e0;
+      position:relative;
     }
-    .gallery-item:hover {
-      box-shadow: 0 8px 48px #a259f7cc, 0 0 0 3px #ff4e8e99;
-      border-color: #ff4e8e;
-      transform: translateY(-4px) scale(1.03);
+    #gallery-modal-close {
+      position:absolute;
+      top:18px;
+      right:28px;
+      font-size:2.5em;
+      color:#fff;
+      cursor:pointer;
+      z-index:10;
     }
-    .gallery-item img {
-      width: 100%;              /* Use full width of the gallery item */
-      min-width: 260px;         /* Match the grid min column size */
-      max-width: 540px;         /* Allow larger images */
-      max-height: 380px;        /* Slightly taller */
-      border-radius: 12px;
-      box-shadow: 0 4px 24px #64b5f6cc;
-      margin-bottom: 16px;
-      background: #181a2a;
-      object-fit: contain;
-      transition: box-shadow 0.2s;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .gallery-item:hover img {
-      box-shadow: 0 8px 32px #ff4e8e99;
-    }
-    .gallery-desc {
-      font-size: 1.08em;
-      color: #e0e0e0;
-      text-align: center;
-      margin-bottom: 4px;
-      font-family: 'Inter', Arial, sans-serif;
-      line-height: 1.5;
+    #gallery-modal-body {
+      /* Additional styles for modal body if needed */
     }
   </style>
 </head>
@@ -225,7 +240,6 @@
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
       <div class="section-title"></div>
-
       <div class="gallery-grid">
         <div class="gallery-item">
           <img src="../images/B-Details.png" alt="Track Management Overview">
@@ -251,5 +265,65 @@
       </div>
     </div>
   </div>
+  <div id="gallery-modal" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100vw; height:100vh; background:rgba(24,26,42,0.96); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
+    <div id="gallery-modal-content" style="background:#232a3add; border-radius:24px; box-shadow:0 8px 64px #a259f7cc; max-width:95vw; max-height:90vh; overflow:auto; padding:48px 32px; color:#e0e0e0; position:relative;">
+      <span id="gallery-modal-close" style="position:absolute;top:18px;right:28px;font-size:2.5em;color:#fff;cursor:pointer;z-index:10;">&times;</span>
+      <div id="gallery-modal-body"></div>
+    </div>
+  </div>
+  <script>
+document.querySelector('.back-link').addEventListener('click', function(e) {
+  localStorage.setItem('guideARScroll', window.scrollY);
+});
+document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
+  el.style.cursor = 'pointer';
+  el.addEventListener('click', function() {
+    const item = el.closest('.gallery-item');
+    const img = item.querySelector('img');
+    const caption = item.querySelector('.gallery-desc');
+    const modal = document.getElementById('gallery-modal');
+    const body = document.getElementById('gallery-modal-body');
+    let html = `
+      <div style="text-align:center; margin-bottom:18px;">
+        <button id="zoom-in" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#6a5cff; color:#fff; cursor:pointer;">+</button>
+        <button id="zoom-out" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#a259f7; color:#fff; cursor:pointer;">−</button>
+      </div>
+      <img src="${img.src}" alt="${img.alt}" style="max-width:90vw; max-height:80vh; width:auto; height:auto; box-shadow:none; display:block; margin:0 auto 32px auto; border-radius:0;">
+      <div style="font-size:1.15em; text-align:left; white-space:pre-line; word-break:break-word; margin:0 auto; max-width:540px;">
+        ${caption.innerHTML}
+      </div>
+    `;
+    body.innerHTML = html;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Zoom functionality
+    let scale = 1;
+    const modalContent = document.getElementById('gallery-modal-content');
+    document.getElementById('zoom-in').onclick = function() {
+      scale = Math.min(scale + 0.2, 3);
+      modalContent.style.transform = `scale(${scale})`;
+      modalContent.style.transformOrigin = 'center center';
+    };
+    document.getElementById('zoom-out').onclick = function() {
+      scale = Math.max(scale - 0.2, 0.5);
+      modalContent.style.transform = `scale(${scale})`;
+      modalContent.style.transformOrigin = 'center center';
+    };
+  });
+});
+document.getElementById('gallery-modal-close').onclick = function() {
+  document.getElementById('gallery-modal').style.display = 'none';
+  document.body.style.overflow = '';
+  document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
+};
+document.getElementById('gallery-modal').onclick = function(e) {
+  if (e.target === this) {
+    this.style.display = 'none';
+    document.body.style.overflow = '';
+    document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
+  }
+};
+  </script>
 </body>
 </html>

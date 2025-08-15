@@ -310,14 +310,13 @@
           <div class="child-list">Visualize audio peaks for better feedback.</div>
         </div>
           <div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Band Splitting (Beta)"
-                 data-desc="Split audio into frequency bands in Metasounds for advanced effects."
-                 data-img="">
-              Band Splitting (Beta)
-            </div>
-            <div class="child-list">Split audio into frequency bands in Metasounds for advanced effects.</div>
-          </div>
+            <a class="subcategory-title"
+              href="DOCS/B/BandSplitting.html"
+              style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
+            Band Splitting (Beta)
+          </a>
+          <div class="child-list">Use Frequency Bands to control reactions.</div>
+      </div>
           <div class="subcategory">
             <div class="subcategory-title"
                  data-title="Smoothing Parameters (Beta)"
@@ -637,6 +636,13 @@
       });
     }
   });
+  window.addEventListener('DOMContentLoaded', function() {
+  const scrollY = localStorage.getItem('guideARScroll');
+  if (scrollY) {
+    window.scrollTo(0, parseInt(scrollY, 10));
+    localStorage.removeItem('guideARScroll');
+  }
+});
   </script>
 </body>
 </html>
