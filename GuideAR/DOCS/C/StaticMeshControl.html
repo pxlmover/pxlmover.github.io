@@ -29,7 +29,7 @@
       background: linear-gradient(90deg, #6a5cff, #64b5f6 40%, #a259f7 70%, #81c784 100%);
       color: #181a2a;
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-      font-size: 3em;
+      font-size: 2.4em;
       font-weight: 900;
       letter-spacing: 0.06em;
       filter: drop-shadow(0 2px 18px #222a);
@@ -48,23 +48,14 @@
     .header-sub {
       text-align: center;
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-      font-size: 1.35em;
+      font-size: 1.25em;
       font-weight: 700;
+      color: #fff;
       margin-top: 24px;
       margin-bottom: 18px;
       letter-spacing: 0.04em;
-      user-select: none;
-      background: linear-gradient(90deg, #ff4e8e, #a259f7 40%, #64b5f6 70%, #fff176 100%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: header-sub-sheen 7s ease-in-out infinite;
       text-shadow: 0 2px 12px #6a5cff44;
-    }
-    @keyframes header-sub-sheen {
-      0%,100% { background-position: 100% 50%; }
-      50% { background-position: 0% 50%; }
+      user-select: none;
     }
     .main-container {
       max-width: 900px;
@@ -80,23 +71,6 @@
         max-width: 99vw;
         padding: 6vw 2vw 12vw 2vw;
         border-radius: 18px;
-      }
-    }
-    .super-container {
-      max-width: 1100px;
-      margin: 48px auto 48px auto;
-      padding: 36px 36px 48px 36px;
-      background: rgba(40,48,80,0.22);
-      border-radius: 48px;
-      box-shadow: 0 12px 64px #181a2a55;
-      border: 2px solid #64b5f655;
-      position: relative;
-    }
-    @media (max-width: 900px) {
-      .super-container {
-        max-width: 99vw;
-        padding: 4vw 2vw 8vw 2vw;
-        border-radius: 24px;
       }
     }
     .section-title {
@@ -215,38 +189,36 @@
   </style>
 </head>
 <body>
-  <div class="super-container">
-    <div class="header">
-      AudioReactive
-    </div>
-    <div class="header-sub">
-      Audio Track Management
-    </div>
-    <div class="main-container">
-      <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
-      <div class="section-title"></div>
+  <div class="header">
+    AudioReactive
+  </div>
+  <div class="header-sub">
+    Audio Track Management
+  </div>
+  <div class="main-container">
+    <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
+    <div class="section-title">Track Management Details</div>
 
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="../images/B-Details.png" alt="Track Management Overview">
-          <div class="gallery-desc">
-            <b>Track Management Overview:</b><br>
-            This screenshot shows the main interface for managing multiple audio tracks. Use this panel to add, remove, and organize tracks for your project.
-          </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="../images/B-Details.png" alt="Track Management Overview">
+        <div class="gallery-desc">
+          <b>Track Management Overview:</b><br>
+          This screenshot shows the main interface for managing multiple audio tracks. Use this panel to add, remove, and organize tracks for your project.
         </div>
-        <div class="gallery-item">
-          <img src="../images/B-Details2.png" alt="Track Properties">
-          <div class="gallery-desc">
-            <b>Track Properties:</b><br>
-            Here you can adjust individual track properties, such as volume, mute, solo, and routing options. Click on a track to reveal its settings.
-          </div>
+      </div>
+      <div class="gallery-item">
+        <img src="../images/B-Details2.png" alt="Track Properties">
+        <div class="gallery-desc">
+          <b>Track Properties:</b><br>
+          Here you can adjust individual track properties, such as volume, mute, solo, and routing options. Click on a track to reveal its settings.
         </div>
-        <div class="gallery-item">
-          <img src="../images/B-Details3.png" alt="Advanced Track Features">
-          <div class="gallery-desc">
-            <b>Advanced Features:</b><br>
-            Access advanced features like automation, effects, and grouping. These tools help you fine-tune your audio workflow for complex scenes.
-          </div>
+      </div>
+      <div class="gallery-item">
+        <img src="../images/B-Details3.png" alt="Advanced Track Features">
+        <div class="gallery-desc">
+          <b>Advanced Features:</b><br>
+          Access advanced features like automation, effects, and grouping. These tools help you fine-tune your audio workflow for complex scenes.
         </div>
       </div>
     </div>

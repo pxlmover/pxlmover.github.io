@@ -133,7 +133,7 @@
       align-items: center;
       cursor: pointer;
       padding: 18px 18px 18px 24px; /* Less left padding, keep right comfortable */
-      font-size: 1.5em;
+      font-size: 1.3em;
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
       font-weight: 800;
       background: linear-gradient(90deg, #81c784, #64b5f6, #fff176, #81c784 80%);
@@ -198,6 +198,23 @@
       .category-header { font-size: 1em; padding: 12px 12px; }
       .category-content { padding: 12px 12px 12px 28px; }
     }
+    .super-container {
+  max-width: 1100px;
+  margin: 48px auto 48px auto;
+  padding: 36px 36px 48px 36px;
+  background: rgba(40,48,80,0.22);
+  border-radius: 48px;
+  box-shadow: 0 12px 64px #181a2a55;
+  border: 2px solid #64b5f655;
+  position: relative;
+}
+@media (max-width: 900px) {
+  .super-container {
+    max-width: 99vw;
+    padding: 4vw 2vw 8vw 2vw;
+    border-radius: 24px;
+  }
+}
   </style>
   <!-- Security & CSP -->
   <meta http-equiv="Content-Security-Policy" content="
@@ -217,6 +234,7 @@
 <meta property="og:url" content="https://pxlmover.github.io/GuideAR.html">
 </head>
 <body>
+  <div class="super-container">
   <div class="header">
     AudioReactive
   </div>
@@ -252,15 +270,6 @@
           </div>
           <div class="subcategory">
             <div class="subcategory-title"
-                 data-title="Niagara Overrides"
-                 data-desc="Override Niagara particle settings for advanced control."
-                 data-img="">
-              Niagara Overrides
-            </div>
-            <div class="child-list">Override Niagara particle settings for advanced control.</div>
-          </div>
-          <div class="subcategory">
-            <div class="subcategory-title"
                  data-title="Trigger Types (Sequencer/Collision)"
                  data-desc="Choose between sequencer or collision triggers for events."
                  data-img="">
@@ -270,12 +279,12 @@
           </div>
           <div class="subcategory">
             <div class="subcategory-title"
-                 data-title="Rapid Fire System"
-                 data-desc="Configure rapid fire for high-frequency reactions."
+                 data-title="Rapid Fire System (Beta)"
+                 data-desc="Configure rapid fire for repeated reactions."
                  data-img="">
-              Rapid Fire System
+              Rapid Fire System (Beta)
             </div>
-            <div class="child-list">Configure rapid fire for high-frequency reactions.</div>
+            <div class="child-list">Configure rapid fire for repeated reactions.</div>
           </div>
         </div>
       </div>
@@ -291,30 +300,30 @@
             </a>
             <div class="child-list">Organize and manage multiple audio tracks.</div>
           </div>
-          <div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Peak Visualization Tools"
-                 data-desc="Visualize audio peaks for better feedback."
-                 data-img="">
-              Peak Visualization Tools
-            </div>
-            <div class="child-list">Visualize audio peaks for better feedback.</div>
-          </div>
+                  <!-- Replace the Peak Visualization Tools subcategory block with this: -->
+        <div class="subcategory">
+          <a class="subcategory-title"
+            href="DOCS/B/PeakVisualization.html"
+            style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
+            Peak Visualization Tools
+          </a>
+          <div class="child-list">Visualize audio peaks for better feedback.</div>
+        </div>
           <div class="subcategory">
             <div class="subcategory-title"
                  data-title="Band Splitting (Beta)"
-                 data-desc="Split audio into frequency bands for advanced effects."
+                 data-desc="Split audio into frequency bands in Metasounds for advanced effects."
                  data-img="">
               Band Splitting (Beta)
             </div>
-            <div class="child-list">Split audio into frequency bands for advanced effects.</div>
+            <div class="child-list">Split audio into frequency bands in Metasounds for advanced effects.</div>
           </div>
           <div class="subcategory">
             <div class="subcategory-title"
-                 data-title="Smoothing Parameters"
+                 data-title="Smoothing Parameters (Beta)"
                  data-desc="Fine-tune smoothing for more natural reactions."
                  data-img="">
-              Smoothing Parameters
+              Smoothing Parameters (Beta)
             </div>
             <div class="child-list">Fine-tune smoothing for more natural reactions.</div>
           </div>
@@ -344,30 +353,12 @@
           </div>
           <div class="subcategory">
             <div class="subcategory-title"
-                 data-title="Actor Transforms (Scale/Translate/Rotate)"
+                 data-title="Actors with Mesh Components Control"
                  data-desc="Animate actors with scale, translation, and rotation."
                  data-img="">
-              Actor Transforms (Scale/Translate/Rotate)
+              Actors with Mesh Components Control
             </div>
             <div class="child-list">Animate actors with scale, translation, and rotation.</div>
-          </div>
-          <div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Per-Axis Control"
-                 data-desc="Apply reactions to specific axes for precision."
-                 data-img="">
-              Per-Axis Control
-            </div>
-            <div class="child-list">Apply reactions to specific axes for precision.</div>
-          </div>
-          <div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Multiplier Settings"
-                 data-desc="Adjust multipliers for intensity and range."
-                 data-img="">
-              Multiplier Settings
-            </div>
-            <div class="child-list">Adjust multipliers for intensity and range.</div>
           </div>
         </div>
       </div>
@@ -377,12 +368,12 @@
         <div class="category-content">
           <div class="subcategory">
             <div class="subcategory-title"
-                 data-title="Standard Light Control"
+                 data-title="Reactive Lights"
                  data-desc="Control standard light types with audio."
                  data-img="">
-              Standard Light Control
+              Reactive Lights
             </div>
-            <div class="child-list">Control standard light types with audio.</div>
+            <div class="child-list">Point, Spot, Directional, and Rect lights.</div>
           </div>
           <div class="subcategory">
             <div class="subcategory-title"
@@ -464,7 +455,7 @@
           </div>
         </div>
       </div>
-      <!-- Category F -->
+      <!-- Category F 
       <div class="category">
         <div class="category-header"><span class="icon">🎨</span> F - Mesh & Light Editor Tags</div>
         <div class="category-content">
@@ -496,8 +487,8 @@
             <div class="child-list">Adjust vertical offset for placement.</div>
           </div>
         </div>
-      </div>
-      <!-- Category G -->
+      </div> -->
+      <!-- Category G 
       <div class="category">
         <div class="category-header"><span class="icon">🎛️</span> G - Master Faders</div>
         <div class="category-content">
@@ -517,7 +508,7 @@
                  data-img="">
               Master Light/Object/Global
             </div>
-            <div class="child-list">Control master faders for lights, objects, and global settings.</div>
+            <div class="child-list">Control master faders for lights, objects, and global settings.</div>-->
           </div>
         </div>
       </div>
