@@ -151,6 +151,7 @@ body::before {
   letter-spacing: 0.01em;
   line-height: 1.6;
   opacity: 0.96;
+  white-space: pre-line; /* Preserve line breaks and spacing */
 }
 /* Commented out: hover effect for gallery-item and gallery-item img */
 /*
@@ -245,13 +246,15 @@ body::before {
     border-radius: 12px;
   }
   .gallery-item img {
-    width: 96vw;
-    min-width: 0;
-    max-width: 98vw;
-    max-height: 38vw;
+    width: 100vw;
+    max-width: 100vw;
+    height: auto;
+    max-height: 60vw; /* Increase max-height for taller images */
+    object-fit: contain; /* Prevent cropping */
     margin-left: auto;
     margin-right: auto;
     border-radius: 0;
+    display: block;
   }
   #gallery-modal-content {
     max-width: 98vw;
