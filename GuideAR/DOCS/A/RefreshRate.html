@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Refresh Rate – AudioReactive Docs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <div class="super-container">
+    <div class="header">
+      AudioReactive
+    </div>
+    <div class="header-sub">
+      Refresh Rate
+    </div>
+    <div class="main-container">
+      <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
+      <div class="section-title"></div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <div class="gallery-title">
+            Set the refresh rate for audio-reactive updates.
+          </div>
+          <img src="../../DOCS/gifs/A/RefreshRate.apng" alt="Refresh Rate Overview">
+          <div class="gallery-desc gallery-instruction">
+            The 'Refresh Rate' determines how often the system updates audio-reactive elements.
+            <br>Lower values (e.g., 0.01) provide smoother, more frequent updates but may use more CPU.
+            <br>Higher values (e.g., 0.1) reduce update frequency and can improve performance on slower systems.
+            <br>Adjust this setting to balance responsiveness and system load for your project.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+document.querySelector('.back-link').addEventListener('click', function(e) {
+  localStorage.setItem('guideARScroll', window.scrollY);
+});
+document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
+  el.style.cursor = 'pointer';
+});
+  </script>

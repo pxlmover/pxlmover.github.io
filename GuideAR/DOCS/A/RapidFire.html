@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rapid Fire – AudioReactive Docs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <div class="super-container">
+    <div class="header">
+      AudioReactive
+    </div>
+    <div class="header-sub">
+      Rapid Fire
+    </div>
+    <div class="main-container">
+      <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
+      <div class="section-title"></div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <div class="gallery-title">
+            Rapid Fire Overview:
+          </div>
+          <img src="../../DOCS/gifs/A/RapidFire.apng" alt="Rapid Fire Overview">
+          <div class="gallery-desc gallery-instruction">
+            The Rapid Fire feature lets you trigger AudioReactive multiple times in quick succession.
+            <br>Combine Rapid Fire with the Collision Trigger to create effects that respond to projectiles or fast-moving objects.
+            <br>Adjust the Rapid Fire Reset setting to tell AudioReactive how long to wait before allowing another trigger. Values are in seconds.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+document.querySelector('.back-link').addEventListener('click', function(e) {
+  localStorage.setItem('guideARScroll', window.scrollY);
+});
+document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
+  el.style.cursor = 'pointer';
