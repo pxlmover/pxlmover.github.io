@@ -104,8 +104,8 @@ body::before {
 
 /* Gallery styles */
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 40px;
   margin-bottom: 32px;
   margin-top: 18px;
@@ -150,10 +150,9 @@ body::before {
 }
 .gallery-item:hover {
   box-shadow:
-    0 0 0 6px #64b5f6cc,   /* Neon blue glow around the bubble */
-    0 8px 48px #a259f7cc,
-    0 0 0 3px #ff4e8e99;
-  border-color: #64b5f6;    /* Optional: blue border for extra pop */
+    0 0 0 8px #f73100aa,   /* Neon purple, half as thick, feathered */
+    0 4px 24px #a259f799;
+  border-color: #a259f7;
   transform: translateY(-4px) scale(1.03);
 }
 .gallery-item:hover img {
@@ -226,12 +225,12 @@ body::before {
     max-width: 100vw;
   }
   .super-container {
-    max-width: 100vw;
-    width: 100vw;
+    max-width: 96vw;
+    width: 96vw;
     box-sizing: border-box;
-    padding: 8vw 2vw 8vw 2vw;      /* More top padding for headspace */
+    padding: 8vw 2vw 8vw 2vw;      /* Add horizontal padding */
     border-radius: 18px;
-    margin: 24px 0 24px 0;         /* More top margin for headspace */
+    margin: 24px auto 24px auto;    /* Center horizontally */
     overflow-x: hidden;
   }
   .main-container {
@@ -291,8 +290,8 @@ body::before {
 }
 .main-glow {
   box-shadow:
-    0 0 0 12px #64b5f6cc,   /* Neon blue glow */
-    0 8px 48px #a259f7cc;
-  border-color: #64b5f6;
+    0 0 0 6px #a259f7aa,   /* Neon purple, half as thick, feathered */
+    0 4px 24px #a259f799;
+  border-color: #a259f7;
   transition: box-shadow 0.2s, border-color 0.2s;
 }
