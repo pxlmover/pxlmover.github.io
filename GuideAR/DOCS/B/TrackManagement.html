@@ -51,6 +51,14 @@
 document.querySelector('.back-link').addEventListener('click', function(e) {
   localStorage.setItem('guideARScroll', window.scrollY);
 });
+document.querySelectorAll('.gallery-item').forEach(item => {
+  item.addEventListener('mouseenter', function() {
+    document.querySelector('.main-container').classList.add('main-glow');
+  });
+  item.addEventListener('mouseleave', function() {
+    document.querySelector('.main-container').classList.remove('main-glow');
+  });
+});
   </script>
 </body>
 </html>

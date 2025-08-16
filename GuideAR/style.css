@@ -149,8 +149,11 @@ body::before {
   width: 100%;
 }
 .gallery-item:hover {
-  box-shadow: 0 8px 48px #a259f7cc, 0 0 0 3px #ff4e8e99;
-  border-color: #ff4e8e;
+  box-shadow:
+    0 0 0 6px #64b5f6cc,   /* Neon blue glow around the bubble */
+    0 8px 48px #a259f7cc,
+    0 0 0 3px #ff4e8e99;
+  border-color: #64b5f6;    /* Optional: blue border for extra pop */
   transform: translateY(-4px) scale(1.03);
 }
 .gallery-item:hover img {
@@ -285,4 +288,11 @@ body::before {
 .back-link:hover {
   color: #fff176;
   text-decoration: underline;
+}
+.main-glow {
+  box-shadow:
+    0 0 0 12px #64b5f6cc,   /* Neon blue glow */
+    0 8px 48px #a259f7cc;
+  border-color: #64b5f6;
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
