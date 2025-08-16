@@ -21,11 +21,33 @@
       <div class="gallery-grid">
         <div class="gallery-item">
           <div class="gallery-title">
-            Band Splitting Overview:
+            Plug In Your Sound - Set Smoothing Levels:
           </div>
-          <img src="../images/B-Details.png" alt="Band Splitting Overview">
+          <img src="../../DOCS/gifs/B/EnableBands.apng" alt="Band Splitting Overview">
           <div class="gallery-desc gallery-instruction">
-            This screenshot shows the main interface for splitting audio into frequency bands.
+            Enabling 'Band Mode' will disable the 'Audio Track' system and switch to a Metasound frequency splitting system.<br>
+            <br>Smoothing Distance - Larger Values = Smoother Response.<br>Small Change Smoothing - How much smoothing to apply to small frequency changes.<br>Large Change Smoothing - How much smoothing to apply to large frequency changes.
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-title">
+            Locate the MetaSound_AR asset:
+          </div>
+          <img src="../../DOCS/gifs/B/MetaSoundContent.apng" alt="Band Splitting Overview">
+          <div class="gallery-desc gallery-instruction">
+            You'll find the MetaSound_AR file in the Audioreactive/MetaSound folder.
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-title">
+            Explore the MetaSound Graph:
+          </div>
+          <img src="../../DOCS/gifs/B/MetaSoundOverview.apng" alt="Band Splitting Overview">
+          <div class="gallery-desc gallery-instruction">
+            Once in the Metasound graph, you'll notice it goes through high/low pass filters, through a band splitter, and each band gets fine controls over the sound.<br>
+            <br>To trigger the track manually within MetaSounds, disconnect the 'Wave Player' nodes 'Wave Asset' blue pipe and set the track you wish to process.<br>
+            <br>The pink wire zig-zags are fun little visualizers that will light up based on the strength of the band signal, allowing you to see the result of the 'In Range B' knob on each bands Map Range node.<br>
+            <br>The In Range B controls the master values that get passed from MetaSounds into your reactive elements.
           </div>
         </div>
       </div>

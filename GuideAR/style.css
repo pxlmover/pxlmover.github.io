@@ -139,35 +139,9 @@ body::before {
   margin-left: auto;
   margin-right: auto;
 }
-.gallery-desc {
-  font-size: 1.08em;
-  color: #e0e0e0;
-  text-align: left;
-  margin-bottom: 4px;
-  font-family: 'Inter', Arial, sans-serif;
-  line-height: 1.5;
-  width: 100%;
-}
-.gallery-item:hover {
-  box-shadow:
-    0 0 0 8px #f73100aa,   /* Neon purple, half as thick, feathered */
-    0 4px 24px #a259f799;
-  border-color: #a259f7;
-  transform: translateY(-4px) scale(1.03);
-}
-.gallery-item:hover img {
-  box-shadow: none; /* Remove glow/shadow on hover */
-}
-.gallery-title {
-  text-align: center;
-  font-size: 1.18em;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: #fff;
-  font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-}
+.gallery-desc,
 .gallery-instruction {
-  text-align: center;
+  text-align: left !important;
   font-size: 1.08em;
   color: #e0e0e0;
   font-family: 'Inter', 'Orbitron', Arial, sans-serif;
@@ -177,6 +151,27 @@ body::before {
   letter-spacing: 0.01em;
   line-height: 1.6;
   opacity: 0.96;
+}
+/* Commented out: hover effect for gallery-item and gallery-item img */
+/*
+.gallery-item:hover {
+  box-shadow:
+    0 0 0 8px #f73100aa,
+    0 4px 24px #a259f799;
+  border-color: #a259f7;
+  transform: translateY(-4px) scale(1.03);
+}
+.gallery-item:hover img {
+  box-shadow: none;
+}
+*/
+.gallery-title {
+  text-align: center;
+  font-size: 1.18em;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #fff;
+  font-family: 'Orbitron', 'Inter', Arial, sans-serif;
 }
 
 /* Modal styles */
@@ -287,11 +282,4 @@ body::before {
 .back-link:hover {
   color: #fff176;
   text-decoration: underline;
-}
-.main-glow {
-  box-shadow:
-    0 0 0 6px #a259f7aa,   /* Neon purple, half as thick, feathered */
-    0 4px 24px #a259f799;
-  border-color: #a259f7;
-  transition: box-shadow 0.2s, border-color 0.2s;
 }
