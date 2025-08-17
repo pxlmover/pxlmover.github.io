@@ -256,7 +256,7 @@
                style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
               Playback & Timing
             </a>
-            <div class="child-list">How to set up playback, timing, and sync for your audio-reactive elements.</div>
+            <div class="child-list">Set Track Playback Start Time (seek ahead), or set the reaction to start after a specific delay (After Trigger Delay).</div>
           </div>
           <div class="subcategory">
             <a class="subcategory-title"
@@ -264,7 +264,7 @@
                style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
               Refresh Rate Settings
             </a>
-            <div class="child-list">Adjust refresh rates for optimal performance and responsiveness.</div>
+            <div class="child-list">Adjust the master refresh rate of the AudioReactive engine. Lower values (0.01) yield buttery smooth reactions, while higher values (0.1+) give a choppy / stop motion feel.</div>
           </div>
           <div class="subcategory">
             <a class="subcategory-title"
@@ -272,7 +272,8 @@
                style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
               Trigger Types (Sequencer/Collision)
             </a>
-            <div class="child-list">Choose between sequencer or collision triggers for events.</div>
+            <div class="child-list">The BeginPlay Trigger is enabled by default. Enabling Sequencer or Collision Trigger will disable BeginPlay activation.<br>
+              <br>Sequencer uses an Event Trigger to start AudioReactive using Custom Event - SEQTRACKTRIGGER</div>
           </div>
           <div class="subcategory">
             <a class="subcategory-title"
@@ -280,7 +281,8 @@
                style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
               Rapid Fire System (Beta)
             </a>
-            <div class="child-list">Configure rapid fire for repeated reactions.</div>
+            <div class="child-list">Enable Rapid Fire for repeated reactions. This feature works best with short burst audio tracks of any combination and quantity. Perfect for projectile hits, impacts, and other one-shot effects.<br>
+              <br>This allows AudioReactive to be re-triggered using the 'Rapid Fire Reset' Parameter, allowing you to set a cooldown in seconds.</div>
           </div>
         </div>
       </div>
@@ -294,7 +296,7 @@
                style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
               Audio Track Management
             </a>
-            <div class="child-list">Organize and manage multiple audio tracks.</div>
+            <div class="child-list">Add your audio tracks. There is no limit to the number of tracks you can add. Sound Effects, Song Stems, etc.</div>
           </div>
                   <!-- Replace the Peak Visualization Tools subcategory block with this: -->
         <div class="subcategory">
@@ -303,7 +305,7 @@
             style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
             Peak Visualization Tools
           </a>
-          <div class="child-list">Visualize audio peaks for better feedback.</div>
+          <div class="child-list">Visualize audio peaks for accurate audio normalization. Each Audio Track has it's own 'peak' parameter at default 0.36. The lower the value, the louder the reaction from that specific track.</div>
         </div>
           <div class="subcategory">
             <a class="subcategory-title"
@@ -311,7 +313,7 @@
               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
             Band Splitting (Beta)
           </a>
-          <div class="child-list">Use Frequency Bands to control reactions.</div>
+          <div class="child-list">Split a track into frequency bands (0-3) and assign them as you would Audio Track numbers (0-3). Enabling Band Mode will disable the Audio Track system.</div>
       </div>
           <div class="subcategory">
             <a class="subcategory-title"
@@ -319,7 +321,7 @@
                style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
               Smoothing Parameters (Beta)
             </a>
-            <div class="child-list">Fine-tune smoothing for more natural reactions.</div>
+            <div class="child-list">Fine-tune smoothing for more natural reactions. Control smoothing window, and how much small and large jumps in frequency are independently smoothed out.</div>
           </div>
             <!-- Replace the Live Mode (Beta) subcategory block with this: -->
             <div class="subcategory">
@@ -328,7 +330,8 @@
                 style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
                 Live Mode (Beta)
               </a>
-              <div class="child-list">Enable live mode for real-time audio input.</div>
+              <div class="child-list">Enable live mode for real-time audio input. This feature is very new, super cool, and might still have a bug or two. You know how it is.<br>
+              <br>Uses an identical Metasound graph as the Band Mode but with a custom input to bring in live PC audio</div>
             </div>
         </div>
       </div>
@@ -364,7 +367,7 @@
               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
               Reactive Lights
             </a>
-            <div class="child-list">Point, Spot, Directional, and Rect lights.</div>
+            <div class="child-list">Point Lights, Spot Lights, Directional Lights, and Rect lights.<br><br>Light Intensity Reaction and/or Magnitude Controlled Color Shifting.</div>
           </div><!--
           <div class="subcategory">
             <div class="subcategory-title"
