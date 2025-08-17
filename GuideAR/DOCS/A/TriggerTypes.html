@@ -21,13 +21,14 @@
       <div class="gallery-grid">
         <div class="gallery-item">
           <div class="gallery-title">
-            Pick how AudioReactive triggers - BeginPlay is on by default
+            AudioReactive Uses BeginPlay by default to trigger.
           </div>
           <img src="../../DOCS/gifs/A/TriggerOverview.apng" alt="Trigger Types Overview">
           <div class="gallery-desc gallery-instruction">
             Sequencer Trigger will allow you to use an Event Trigger in sequencer to trigger AudioReactive.<br>
             The Collission Trigger by default will trigger when your player collides with the AudioReactive actor in the level.<br>
-            You can easily customize the collision trigger and attach it to projectiles - This method works great with the 'Rapid Fire' feature.
+            You can easily customize the collision trigger and attach it to projectiles – This method works great with the <a href="RapidFire.html" style="color:#64b5f6; font-weight:700; text-decoration:underline;">Rapid Fire</a> feature.
+            <br> Both Sequencer and Collision triggers will disable the BeginPlay trigger.
           </div>
         </div>
       </div>
@@ -41,3 +42,5 @@ document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forE
   el.style.cursor = 'pointer';
 });
   </script>
+</body>
+</html>
