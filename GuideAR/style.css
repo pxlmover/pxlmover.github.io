@@ -124,20 +124,31 @@ body::before {
   overflow: hidden;
 }
 .gallery-item img {
-  width: 100%;
-  min-width: 260px;
-  max-width: 540px;
-  max-height: 380px;
-  border-radius: 0;
-  box-shadow: none; /* Remove glow/shadow */
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 600px; /* Increase this value for taller images */
   object-fit: contain;
   margin-bottom: 16px;
   background: #181a2a;
   cursor: pointer;
-  transition: box-shadow 0.2s;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 0;
+}
+@media (max-width: 700px) {
+  .gallery-item img {
+    width: 100vw;
+    max-width: 100vw;
+    height: auto;
+    max-height: 90vw; /* Allow for much taller images on mobile */
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0;
+    display: block;
+  }
 }
 .gallery-desc,
 .gallery-instruction {
@@ -249,8 +260,8 @@ body::before {
     width: 100vw;
     max-width: 100vw;
     height: auto;
-    max-height: 60vw; /* Increase max-height for taller images */
-    object-fit: contain; /* Prevent cropping */
+    max-height: 90vw; /* Allow for much taller images on mobile */
+    object-fit: contain;
     margin-left: auto;
     margin-right: auto;
     border-radius: 0;
