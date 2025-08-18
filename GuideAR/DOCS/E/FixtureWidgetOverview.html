@@ -23,15 +23,33 @@
           <div class="gallery-title">
             Fixture Widget Setup:
           </div>
-          <img src="../../DOCS/gifs/E/DMXWidgetQuickView.apng" alt="Fixture Widget Overview">
+          <video src="../../DOCS/gifs/E/DMXWidgetQuickView.mp4" controls loop muted playsinline
+                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
+            Your browser does not support the video tag.
+          </video>
           <div class="gallery-desc gallery-instruction">
             The DMX Fixture Widget allows you to quickly group and arrange fixtures and assign them AudioReactive parameters. You can 'Select All Fixtures Of Type' to quickly select all fixtures of a certain type.<br>
             ..but first, those annoying fixture beam cone visualizers make it very difficult to work - simply press ALT+R to enable/disable them.<br>
+            You can use the 'Add Actor Tag On Selected Fixtures' to add the tag. Duplicate tags are currently NOT checked (in progress).<br>
             Once your Fixture Type dropdown is set, you can now see the '2. Select Actor Tag' is populated with all found Actor Tags in your level for that Fixture Type.<br>
-            Once the tag dropdown is selected, you can use the 'Add Actor Tag On Selected Fixtures' to add the tag. Duplicate tags are currently NOT checked (in progress).
-            <br>If you want to clear all and start fresh, you can utilize the "Clear ALL ACTOR TAGS On Selected Fixtures" button to clean any extra tags on selected fixtures.
+            Once the tag dropdown is selected, you can now select fixtures of that type, by their actor tag.
+            <br>If you want to clear all and start fresh, you can utilize the "Clear ALL ACTOR TAGS On Selected Fixtures" button to delete all actor tags on selected fixtures.
             <br>Actor Tags can also be added manually via the details panel for any fixture you have selected. Simply click the + button under the Actor Tag rollout in the Details of the fixture actor, and add the tag.
             Once added manually, the DMX Widget will automatically update the dropdown to include any manually added tags.
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-title">
+            Quickly Update Standard Fixtures To AudioReactive:
+          </div>
+          <video src="../../DOCS/gifs/E/UpdateFixturesAudioReactive.mp4" controls loop muted playsinline
+                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-desc gallery-instruction">
+            One of my favorite buttons, "Update All Fixtures To AudioReactive", will quickly swap out the standard engine version of the following fixtures to the AudioReactive versions:<br>
+            Moving Head<br>Static Head<br>WashLED<br>Strobe<br>"Laser"<br>
+            All existing fixture positions will be preserved, so you won't lose your layout.
           </div>
         </div>
       </div>
@@ -41,6 +59,9 @@
 document.querySelector('.back-link').addEventListener('click', function(e) {
   localStorage.setItem('guideARScroll', window.scrollY);
 });
-document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
+document.querySelectorAll('.gallery-item img, .gallery-item video, .gallery-item .gallery-desc').forEach(el => {
   el.style.cursor = 'pointer';
 });
+  </script>
+</body>
+</html>
