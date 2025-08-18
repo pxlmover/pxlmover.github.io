@@ -100,18 +100,29 @@ body::before {
 }
 .main-container {
   max-width: 620px;
-  margin: 36px auto 48px auto;
-  padding: 32px 32px 48px 32px;
+  margin: 12px auto 12px auto;
+  padding: 20px 14px 10px 2px; /* More top padding, tight bottom */
   background: rgba(24,26,42,0.85);
-  border-radius: 32px;
-  box-shadow: 0 8px 48px #181a2a44;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px #181a2a44;
   border: 1.5px solid #64b5f633;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 @media (max-width: 1000px) {
   .main-container {
     max-width: 99vw;
-    padding: 6vw 2vw 12vw 2vw;
+    padding: 3vw 1vw 5vw 1vw;
     border-radius: 18px;
+  }
+}
+@media (max-width: 700px) {
+  .main-container {
+    max-width: 99vw;
+    padding: 4vw 1vw 8vw 1vw;
+    border-radius: 14px;
   }
 }
 
@@ -261,13 +272,17 @@ body::before {
 
 /* Categories styles */
 .categories {
-  max-width: 500px; /* Reduced from 820px */
+  max-width: 500px;
   margin: 0 auto;
   padding: 0 12px 40px 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .category {
   width: 100%;
-  max-width: 500px; /* Ensures bubbles don't stretch wider than container */
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
   background: rgba(60,80,120,0.18);
@@ -278,6 +293,7 @@ body::before {
   overflow: hidden;
   transition: box-shadow 0.2s, border-color 0.2s;
   position: relative;
+  /* Remove any flex or width restrictions here */
 }
 .category::before {
   content: "";
@@ -319,9 +335,10 @@ body::before {
   filter: drop-shadow(0 2px 8px #222a);
 }
 .category-content {
-  padding: 18px 32px 18px 48px;
+  padding: 18px 18px 18px 18px; /* top, right, bottom, left */
   display: none;
   animation: fadeIn 0.4s;
+  text-align: center;
 }
 .category.open .category-content {
   display: block;
@@ -338,11 +355,13 @@ body::before {
   letter-spacing: 0.02em;
 }
 .child-list {
-  margin-left: 18px;
+  margin-left: 0;
   margin-bottom: 8px;
   font-size: 1em;
   color: #e0e0e0;
   line-height: 1.5;
+  text-align: center;
+  padding: 0 12px; /* left/right gap */
 }
 @keyframes showcase-hue-move {
   0%,100% { background-position: 0% 50%; }
@@ -356,8 +375,8 @@ body::before {
   .header { font-size: 1.3em; padding: 22px 4px 12px 4px; }
   .main-container {
     max-width: 99vw;
-    padding: 8vw 2vw 18vw 2vw;
-    border-radius: 18px;
+    padding: 4vw 1vw 8vw 1vw;
+    border-radius: 14px;
   }
   .categories { max-width: 99vw; padding: 0 2vw 24px 2vw; }
   .category-header { font-size: 1em; padding: 12px 12px; }
