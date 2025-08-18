@@ -43,16 +43,29 @@ const themes = [
 ];
 let currentTheme = 0;
 
+// Read theme from localStorage and apply immediately
+const savedTheme = localStorage.getItem('arThemeIndex');
+if (savedTheme !== null) {
+  currentTheme = parseInt(savedTheme, 10) || 0;
+  const t = themes[currentTheme];
+  document.body.style.setProperty('--body-bg', t.bodyBg);
+  document.body.style.setProperty('--header-bg', t.headerBg);
+  document.body.style.setProperty('--header-sub-bg', t.headerSubBg);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  // Signature
   const sig = document.createElement('div');
   sig.className = 'site-signature';
   sig.textContent = 'Created In Unreal Engine By Daniel Jensen - 2025';
   document.body.appendChild(sig);
-  
+
+  // Theme randomizer
   const btn = document.getElementById('theme-randomizer');
   if (btn) {
     btn.addEventListener('click', function() {
       currentTheme = (currentTheme + 1) % themes.length;
+      localStorage.setItem('arThemeIndex', currentTheme); // Save theme index
       const t = themes[currentTheme];
       document.body.style.setProperty('--body-bg', t.bodyBg);
       document.body.style.setProperty('--header-bg', t.headerBg);
