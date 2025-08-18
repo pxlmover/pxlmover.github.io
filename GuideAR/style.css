@@ -130,19 +130,22 @@ body::before {
 .gallery-grid {
   display: flex;
   flex-direction: column;
+  align-items: center;   /* Center items horizontally */
   gap: 40px;
   margin-bottom: 32px;
   margin-top: 18px;
 }
 .gallery-item {
+  width: 100%;
+  max-width: 500px;      /* Match your main container width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* Center contents horizontally */
   background: linear-gradient(120deg, #232a3a 60%, #181a2a 100%);
   border-radius: 18px;
   box-shadow: 0 4px 32px #a259f7cc, 0 0 0 2px #6a5cff55;
   border: 1.5px solid #a259f7cc;
   padding: 18px 18px 24px 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
   position: relative;
   overflow: hidden;
@@ -176,7 +179,8 @@ body::before {
 }
 .gallery-desc,
 .gallery-instruction {
-  text-align: left !important;
+  text-align: center !important;
+  width: 100%;
   font-size: 1.08em;
   color: #e0e0e0;
   font-family: 'Inter', 'Orbitron', Arial, sans-serif;
