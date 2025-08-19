@@ -28,7 +28,7 @@
             Your browser does not support the video tag.
           </video>
           <div class="gallery-desc gallery-instruction">
-            Moving Head fixtures are the most capable, as they allow not only dimmer/shutter/zoom/frost controls, but allow reactive motion through their Pan and Tilt functions.
+            Moving Head fixtures have extra available functions. They have the standard Dimmer/Shutter/Zoom/Frost controls, as well as the Pan and Tilt functions unique to this fixture.
             <br> Using Pan and Tilt with audio reaction can be very successful, <br>if you set your <a href="../B/SmoothingParams.html" style="color:#64b5f6; text-decoration:underline; font-weight:700;" target="_blank">Audio Smoothing</a> settings correctly.  Audio that has not been properly smoothed will make the lights move with extremely high acceleration.
             <br> Moving Heads also use the ColorWheel, instead of RGB values<br>as found in the Strobe, Wash, "Laser", and Static fixtures
             <br> Using a colorwheel means you are setting a value based on a pre-determined chart that assigns value ranges to specific colors, colorblends, and colorwheel animation presets.
@@ -48,6 +48,10 @@
             Moving Heads use a few unique parameters that have been added a sub-rollout,<br> "Moving Head Attributes" inside any DMX Fixture index.
             <br> Control the ColorWheel, Gobo, and Tilt Offset values.  Tilt Offset will add a positive or negative value (30/-30) and use that as the starting point for audioreaction.
             <br> If Audio Reaction is disabled on your Tilt Function, the Tilt Offset will instead be used as a static value to control the tilt.
+            <br> <strong>You can create your own custom ColorWheel / Gobo datatables and take full control over the values and animations.</strong> 
+                <br>Any alpha style image texture can be used as a gobo, and any color can be used in the colorwheel.
+                <br>Duplicate the existing datatables, adjust to your liking, and update the BP_MovingHead_AR's ColorWheel and Gobo Components to point to your new datatables.
+
           </div>
         </div>
         <div class="gallery-item">
@@ -62,7 +66,7 @@
             There are a few shared attributes that affect multiple fixtures types.
             <br>The parameters 'Shutter' and 'Enable Beam' are used across all fixtures.
             <br>Shutter controls the strobe affect, and like color and gobo, has it's own value chart full of preset animated effects.
-            <br>Enable beam, well, it enables the beam.  The volumetric beam that pairs with the "Zoom" function of your fixtures can be enabled/disabled with a single click.
+            <br>Enable beam, well, it enables the beam.  The awesome volumetric beam that reacts to the "Zoom" function of your fixtures can be enabled/disabled with a single click.
             <br>If you want to adjust the quality of the beam, for now you need to open the Blueprint 'BP_MovingHead_AR', select BP_MovingHead_AR root, and in details, you'll see the low/medium/high/ultra/custom presets.
             <br>This option is available per fixture in level, but if you want them all to update, adjust in the blueprint and compile.
           </div>
