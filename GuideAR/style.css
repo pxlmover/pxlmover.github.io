@@ -20,7 +20,7 @@ body::before {
 /* Header styles */
 .header {
   text-align: center;
-  padding: 48px 10px 18px 10px; /* Increase top padding, reduce bottom padding */
+  padding: 36px 10px 18px 10px; /* Increase top padding, reduce bottom padding */
   background: var(--header-bg, linear-gradient(90deg, #6a5cff, #64b5f6 40%, #a259f7 70%, #81c784 100%));
   color: #181a2a;
   font-family: 'Orbitron', 'Inter', Arial, sans-serif;
