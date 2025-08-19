@@ -963,7 +963,7 @@ body.party-mode {
         <span class="highlight-desc">Regular updates and a growing creative community.</span>
       </li>
     </ul>
-  </section>
+  </section><!--
   <section class="gallery-section">
     <h2 class="showcase-heading">AudioReactive Blueprint Screenshots</h2>
     <div class="gallery-grid">
@@ -979,9 +979,9 @@ body.party-mode {
       <img src="../images/BluePrintScreenshots/blueprint10.png" alt="Blueprint 10">
       <img src="../images/BluePrintScreenshots/blueprint11.png" alt="Blueprint 11">
       <img src="../images/BluePrintScreenshots/blueprint12.png" alt="Blueprint 12">
-      <!-- Add more images as needed -->
+       Add more images as needed 
     </div>
-  </section>
+  </section>-->
 
     <div style="width:100%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin:36px 0 28px 0;">
     <button id="party-switch"
@@ -1143,11 +1143,15 @@ document.addEventListener('visibilitychange', () => {
 });
 
   const partyBtn = document.getElementById('party-switch');
+  let partyActive = false;
   if (partyBtn) {
     partyBtn.addEventListener('click', function() {
+      if (partyActive) return; // Prevent over-triggering
+      partyActive = true;
       document.body.classList.add('party-mode');
       setTimeout(() => {
         document.body.classList.remove('party-mode');
+        partyActive = false;
       }, 4000);
     });
   }
