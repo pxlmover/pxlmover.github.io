@@ -59,9 +59,12 @@
             Your browser does not support the video tag.
           </video>
           <div class="gallery-desc gallery-instruction">
-            Moving Heads use a few unique parameters that have been added a sub-rollout,<br> "Moving Head Attributes" inside any DMX Fixture index.
-            <br> Control the ColorWheel, Gobo, and Tilt Offset values.  Tilt Offset will add a positive or negative value (30/-30) and use that as the starting point for audioreaction.
-            <br> If Audio Reaction is disabled on your Tilt Function, the Tilt Offset will instead be used as a static value to control the tilt.
+            There are a few shared attributes that affect multiple fixtures types.
+            <br>The parameters 'Shutter' and 'Enable Beam' are used across all fixtures.
+            <br>Shutter controls the strobe affect, and like color and gobo, has it's own value chart full of preset animated effects.
+            <br>Enable beam, well, it enables the beam.  The volumetric beam that pairs with the "Zoom" function of your fixtures can be enabled/disabled with a single click.
+            <br>If you want to adjust the quality of the beam, for now you need to open the Blueprint 'BP_MovingHead_AR', select the zoom component, and in details, you'll see the low/medium/high/ultra presets.
+            <br>This option is available per fixture in level, but if you want them all to update, adjust in the blueprint and compile.
           </div>
         </div>
       </div>
