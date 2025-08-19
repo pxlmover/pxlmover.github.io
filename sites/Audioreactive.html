@@ -786,6 +786,18 @@
   filter: drop-shadow(0 2px 12px #222a);
   margin-top: 12px;
 }
+
+body.party-mode {
+  animation: party-bg 1.2s ease-in-out infinite;
+}
+
+@keyframes party-bg {
+  0%   { background: linear-gradient(120deg, #ff4e8e, #fff176, #64b5f6); }
+  25%  { background: linear-gradient(120deg, #a259f7, #ff4e8e, #fff176); }
+  50%  { background: linear-gradient(120deg, #64b5f6, #a259f7, #ff4e8e); }
+  75%  { background: linear-gradient(120deg, #fff176, #64b5f6, #a259f7); }
+  100% { background: linear-gradient(120deg, #ff4e8e, #fff176, #64b5f6); }
+}
   </style>
   <!-- Security & CSP -->
 <meta http-equiv="Content-Security-Policy" content="
@@ -802,7 +814,7 @@
 </head>
 <body>
   <div class="update-banner">
-    🚀 <b>AudioReactive 3.0 Coming to Fab August 18th! 🚀
+    🚀 <b>AudioReactive 3.0 Coming to Fab the end of August! 🚀
   </div>
   <section class="hero">
     <h1>AudioReactive<br>for<br>Unreal Engine 5</h1>
@@ -911,8 +923,18 @@
       <a href="mailto:Daniel.Jensen01@gmail.com">Contact the Creator</a>
     </div>
     -->
+    <br>
   </section>
 
+  <div style="text-align:center; margin:36px 0 18px 0;">
+  <a href="https://pxlmover.github.io/GuideAR/GuideAR.html"
+     style="display:inline-block; background:linear-gradient(90deg,#ff4e8e,#a259f7 70%,#64b5f6 100%);
+            color:#fff; font-family:'Orbitron','Inter',Arial,sans-serif; font-size:1.18em; font-weight:900;
+            letter-spacing:0.06em; border-radius:22px; padding:18px 44px; box-shadow:0 6px 32px #a259f7cc;
+            text-decoration:none; margin:0 0 18px 0; transition:box-shadow 0.2s,background 0.2s;">
+    🚀 <span style="font-size:1.08em;">AR Primer</span>
+  </a>
+</div>
   <section class="highlights-section">
     <!--<h2>Why Choose AudioReactive?</h2>-->
     <ul class="highlights-list">
@@ -960,6 +982,23 @@
       <!-- Add more images as needed -->
     </div>
   </section>
+
+    <div style="width:100%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin:36px 0 28px 0;">
+    <button id="party-switch"
+      style="background:radial-gradient(circle at 60% 40%, #ff4e8e 0%, #fff176 80%, #a259f7 100%);
+             color:#181a2a; font-family:'Orbitron','Inter',Arial,sans-serif;
+             font-size:1.1em; font-weight:900; letter-spacing:0.06em;
+             border-radius:50%; width:88px; height:88px; box-shadow:0 0 32px #ff4e8ecc, 0 0 0 6px #fff17688;
+             border:none; cursor:pointer; transition:box-shadow 0.2s,background 0.2s; position:relative;
+             display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
+      <span style="font-size:2em; line-height:1; margin:0;">🎉</span>
+      <span style="font-size:0.62em; font-weight:700; margin:0; line-height:1.1; text-align:center;">Party<br>Switch</span>
+    </button>
+    <div style="font-family:'Orbitron','Inter',Arial,sans-serif; font-size:1em; font-weight:700; color:#ff4e8e; margin-top:8px; text-align:center;">
+      <br>Treat Yo’ Self!
+    </div>
+  </div>
+
   <!-- Lightbox for video playback -->
   <div id="video-lightbox">
     <div id="video-lightbox-content">
@@ -1102,6 +1141,16 @@ document.addEventListener('visibilitychange', () => {
     }
   }
 });
+
+  const partyBtn = document.getElementById('party-switch');
+  if (partyBtn) {
+    partyBtn.addEventListener('click', function() {
+      document.body.classList.add('party-mode');
+      setTimeout(() => {
+        document.body.classList.remove('party-mode');
+      }, 4000);
+    });
+  }
   </script>
 </body>
 </html>
