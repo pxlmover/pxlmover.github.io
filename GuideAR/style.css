@@ -16,7 +16,11 @@ body::before {
   background: #181a2acc;
   z-index: -1;
 }
-
+.main-container,
+.gallery-grid,
+.gallery-item {
+  box-sizing: border-box;
+}
 /* Header styles */
 .header {
   text-align: center;
@@ -99,9 +103,9 @@ body::before {
   }
 }
 .main-container {
-  max-width: 620px;
+  max-width: 900px;
   margin: 12px auto 12px auto;
-  padding: 20px 14px 10px 2px; /* More top padding, tight bottom */
+  padding: 20px 24px 10px 24px;
   background: rgba(24,26,42,0.85);
   border-radius: 20px;
   box-shadow: 0 4px 24px #181a2a44;
@@ -112,35 +116,47 @@ body::before {
   text-align: center;
 }
 @media (max-width: 1000px) {
-  .main-container {
+  .main-container,
+  .gallery-grid,
+  .gallery-item {
     max-width: 99vw;
+    width: 100%;
     padding: 3vw 1vw 5vw 1vw;
     border-radius: 18px;
+    box-sizing: border-box;
   }
 }
 @media (max-width: 700px) {
-  .main-container {
+  .main-container,
+  .gallery-grid,
+  .gallery-item {
     max-width: 99vw;
+    width: 100%;
     padding: 4vw 1vw 8vw 1vw;
     border-radius: 14px;
+    box-sizing: border-box;
   }
 }
 
 /* Gallery styles */
 .gallery-grid {
+  max-width: 900px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;   /* Center items horizontally */
+  align-items: center;
   gap: 40px;
   margin-bottom: 32px;
   margin-top: 18px;
 }
 .gallery-item {
   width: 100%;
-  max-width: 500px;      /* Match your main container width */
+  max-width: 900px;
   display: flex;
   flex-direction: column;
-  align-items: center;   /* Center contents horizontally */
+  align-items: center;
   background: linear-gradient(120deg, #232a3a 60%, #181a2a 100%);
   border-radius: 18px;
   box-shadow: 0 4px 32px #a259f7cc, 0 0 0 2px #6a5cff55;
@@ -151,10 +167,10 @@ body::before {
   overflow: hidden;
 }
 .gallery-item img {
-  width: auto;
+  width: 100%;
   max-width: 100%;
   height: auto;
-  max-height: 600px; /* Increase this value for taller images */
+  max-height: 600px;
   object-fit: contain;
   margin-bottom: 16px;
   background: #181a2a;
