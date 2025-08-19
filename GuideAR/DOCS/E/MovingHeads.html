@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Moving Heads – AudioReactive Docs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <div class="super-container">
+    <div class="header">
+      AudioReactive<br>
+      Primer
+    </div>
+    <div class="header-sub">
+      Moving Heads
+    </div>
+    <div class="main-container">
+      <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <div class="gallery-title">
+            Moving Head Intro
+          </div>
+          <video src="" controls loop muted playsinline
+                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-desc gallery-instruction">
+            Moving Head fixtures are the most capable, as they allow not only dimmer/shutter/zoom/frost controls, but allow reactive motion through their Pan and Tilt functions.
+            <br> Using Pan and Tilt with audio reaction can be very successful, <br>if you set your <a href="../B/SmoothingParams.html" style="color:#64b5f6; text-decoration:underline; font-weight:700;" target="_blank">Audio Smoothing</a> settings correctly.  Audio that has not been properly smoothed will make the lights move with extremely high acceleration.
+            <br> Moving Heads also use the ColorWheel, instead of RGB values<br>as found in the Strobe, Wash, "Laser", and Static fixtures
+            <br> Using a colorwheel means you are setting a value based on a pre-determined chart that assigns value ranges to specific colors, colorblends, and colorwheel animation presets.
+            <br> They also use a gobo wheel, with similar setup as the colorwheel, but instead of colors, you are selecting a gobo pattern, with certain ranges being animated gobo presets.
+            <br> These fixtures utilize the default DMX wheels that come with the engine, and can be found in either the plugins folder, or I've made duplicates inside the AudioReactive/DMX folder.
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-title">
+            Moving Head Midtro
+          </div>
+          <video src="" controls loop muted playsinline
+                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-desc gallery-instruction">
+            Moving Heads use a few unique parameters that have been added a sub-rollout,<br> "Moving Head Attributes" inside any DMX Fixture index.
+            <br> Control the ColorWheel, Gobo, and Tilt Offset values.  Tilt Offset will add a positive or negative value (30/-30) and use that as the starting point for audioreaction.
+            <br> If Audio Reaction is disabled on your Tilt Function, the Tilt Offset will instead be used as a static value to control the tilt.
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-title">
+            Moving Head Outro
+          </div>
+          <video src="" controls loop muted playsinline
+                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
+            Your browser does not support the video tag.
+          </video>
+          <div class="gallery-desc gallery-instruction">
+            Moving Heads use a few unique parameters that have been added a sub-rollout,<br> "Moving Head Attributes" inside any DMX Fixture index.
+            <br> Control the ColorWheel, Gobo, and Tilt Offset values.  Tilt Offset will add a positive or negative value (30/-30) and use that as the starting point for audioreaction.
+            <br> If Audio Reaction is disabled on your Tilt Function, the Tilt Offset will instead be used as a static value to control the tilt.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+document.querySelector('.back-link').addEventListener('click', function(e) {
+  localStorage.setItem('guideARScroll', window.scrollY);
+});
+document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
+  el.style.cursor = 'pointer';
+  el.addEventListener('click', function() {
+    const item = el.closest('.gallery-item');
+    const img = item.querySelector('img');
+    const caption = item.querySelector('.gallery-desc');
+    const modal = document.getElementById('gallery-modal');
+    const body = document.getElementById('gallery-modal-body');
+    let html = `
+      <div style="text-align:center; margin-bottom:18px;">
+        <button id="zoom-in" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#6a5cff; color:#fff; cursor:pointer;">+</button>
+        <button id="zoom-out" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#a259f7; color:#fff; cursor:pointer;">−</button>
+      </div>
+      <img src="${img ? img.src : ''}" alt="${img ? img.alt : ''}" style="max-width:90vw; max-height:80vh; width:auto; height:auto; box-shadow:none; display:block; margin:0 auto 32px auto; border-radius:0;">
+      <div style="font-size:1.15em; text-align:center; white-space:pre-line; word-break:break-word; margin:0 auto; max-width:540px;">
+        ${caption ? caption.innerHTML : ''}
+      </div>
+    `;
+    body.innerHTML = html;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Zoom functionality
+    let scale = 1;
+    const modalContent = document.getElementById('gallery-modal-content');
+    document.getElementById('zoom-in').onclick = function() {
+      scale = Math.min(scale + 0.2, 3);
+      modalContent.style.transform = `scale(${scale})`;
+      modalContent.style.transformOrigin = 'center center';
+    };
+    document.getElementById('zoom-out').onclick = function() {
+      scale = Math.max(scale - 0.2, 0.5);
+      modalContent.style.transform = `scale(${scale})`;
+      modalContent.style.transformOrigin = 'center center';
+    };
+  });
+});
+document.getElementById('gallery-modal-close').onclick = function() {
+  document.getElementById('gallery-modal').style.display = 'none';
+  document.body.style.overflow = '';
+  document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
+};
+document.getElementById('gallery-modal').onclick = function(e) {
+  if (e.target === this) {
+    this.style.display = 'none';
+    document.body.style.overflow = '';
+    document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
+  }
+};
+  </script>
+  <script src="../../common.js"></script>
+</body>
