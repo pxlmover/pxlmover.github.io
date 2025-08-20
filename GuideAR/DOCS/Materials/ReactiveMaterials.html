@@ -23,24 +23,34 @@
           <div class="gallery-title">
             Reactive Materials - Emission
           </div>
-          <video src="" controls loop muted playsinline
+          <video src="../../DOCS/Materials/gifs/EmissionOverview.mp4" controls loop muted playsinline
                  style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
             Your browser does not support the video tag.
           </video>
           <div class="gallery-desc gallery-instruction">
-            TEXT GOES HERE
+            Emission is the most popular material attributes to make AudioReactive, and for good reason.<br>It's really really cool.
+            <br> Any material instance that has the emissive function in the master material, will get these rollout attributes with fine control over the emissive reaction.
+            <br>I tried to make the parameters as self-explanatory as possible. 
+            In this example I raise the "Offset" to 1 which increases the brightness that allows me to see my mask and texture tiling without simulating or playing my level.
+            <br>Once I'm done, I'll set the Offset back to 0. It sets a 'floor/base' brightness on your emission, if it helps to think of it that way. 
+            <br> The Threshold is handy for preventing reaction under a certain value, allowing quieter moments to pass without triggering a reaction.
           </div>
         </div>
         <div class="gallery-item">
           <div class="gallery-title">
             Reactive Materials - Instance Parameters
           </div>
-          <video src="" controls loop muted playsinline
+          <video src="../../DOCS/Materials/gifs/OtherMaterialFunctions.mp4" controls loop muted playsinline
                  style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
             Your browser does not support the video tag.
           </video>
           <div class="gallery-desc gallery-instruction">
-            TEXT GOES HERE
+            There are several other reactive functions for Base Color, Roughness, Displacement, and WPO.
+            These functions are fairly simple and multiply incoming audio by your textures and that feeds into the material channel.<br>
+            Reactive Base Color will appear black in level until it receives audio input. The louder the audio, the more your texture will appear.<br>
+            Reactive Roughness will make your material more reflective or more matte.<br>
+            Reactive Displacement will push and pull your geometry based on audio input.<br>Displacement console commands and nanite required for reactive displacement to work.<br>
+            Reactive WPO (World Position Offset) will push/pull geometry based on local object normal. (sphere exploding effect, anything exploding really)
           </div>
         </div>
         <div class="gallery-item">
