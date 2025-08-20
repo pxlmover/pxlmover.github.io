@@ -808,6 +808,27 @@ body.party-mode {
   word-break: break-word;
   box-sizing: border-box;
 }
+
+.ar-primer-btn {
+  display: inline-block;
+  background: linear-gradient(90deg,#ff4e8e,#a259f7 70%,#64b5f6 100%);
+  color: #fff;
+  font-family: 'Orbitron','Inter',Arial,sans-serif;
+  font-size: 1.18em;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  border-radius: 22px;
+  padding: 18px 44px;
+  box-shadow: 0 6px 32px #a259f7cc;
+  text-decoration: none;
+  margin: 0 0 18px 0;
+  transition: transform 0.18s cubic-bezier(.4,1.4,.6,1), box-shadow 0.2s, background 0.2s;
+}
+
+.ar-primer-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 12px 48px #64b5f6cc;
+}
   </style>
   <!-- Security & CSP -->
 <meta http-equiv="Content-Security-Policy" content="
@@ -937,13 +958,9 @@ body.party-mode {
   </section>
 
   <div style="text-align:center; margin:36px 0 18px 0;">
-  <a href="https://pxlmover.github.io/GuideAR/GuideAR.html"
-     style="display:inline-block; background:linear-gradient(90deg,#ff4e8e,#a259f7 70%,#64b5f6 100%);
-            color:#fff; font-family:'Orbitron','Inter',Arial,sans-serif; font-size:1.18em; font-weight:900;
-            letter-spacing:0.06em; border-radius:22px; padding:18px 44px; box-shadow:0 6px 32px #a259f7cc;
-            text-decoration:none; margin:0 0 18px 0; transition:box-shadow 0.2s,background 0.2s;">
-     <span style="font-size:1.08em;">AudioReactive Primer</span>
-  </a>
+  <a href="GuideAR/GuideAR.html" class="ar-primer-btn">
+  🚀 AudioReactive Primer
+</a>
 </div>
   <section class="highlights-section">
     <!--<h2>Why Choose AudioReactive?</h2>-->
