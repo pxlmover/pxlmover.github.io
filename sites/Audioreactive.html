@@ -607,24 +607,14 @@
       font-weight: 700;
       letter-spacing: 0.02em;
     }
-    .highlights-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin: 0 auto;
-      padding: 0;
-      max-width: 800px;
-      list-style: none;
-    }
-    @media (max-width: 700px) {
-    .highlights-list {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 14px !important;
-      max-width: 98vw !important;
-      padding: 0 2vw !important;
-    }
-  }
+    .highlights-section .highlights-list {
+  display: grid;
+  grid-template-columns: repeat(3, 240px);
+  gap: 18px;
+  justify-content: center;
+  align-items: stretch;
+}
+
     .section-spaced {
       margin-top: 48px;
       margin-bottom: 48px;
@@ -798,6 +788,26 @@ body.party-mode {
   75%  { background: linear-gradient(120deg, #fff176, #64b5f6, #a259f7); }
   100% { background: linear-gradient(120deg, #ff4e8e, #fff176, #64b5f6); }
 }
+
+.highlights-section .highlight-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* This ensures text is centered horizontally */
+  width: 240px;
+  height: 110px;
+  border-radius: 32px;
+  background: linear-gradient(120deg, #64b5f6 60%, #a259f7 100%);
+  color: #fff;
+  font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+  font-size: 1.08em;
+  font-weight: 700;
+  box-shadow: 0 2px 12px #64b5f6cc;
+  margin: 0;
+  padding: 0 18px;
+  word-break: break-word;
+  box-sizing: border-box;
+}
   </style>
   <!-- Security & CSP -->
 <meta http-equiv="Content-Security-Policy" content="
@@ -932,7 +942,7 @@ body.party-mode {
             color:#fff; font-family:'Orbitron','Inter',Arial,sans-serif; font-size:1.18em; font-weight:900;
             letter-spacing:0.06em; border-radius:22px; padding:18px 44px; box-shadow:0 6px 32px #a259f7cc;
             text-decoration:none; margin:0 0 18px 0; transition:box-shadow 0.2s,background 0.2s;">
-    🚀 <span style="font-size:1.08em;">AR Primer</span>
+     <span style="font-size:1.08em;">AudioReactive Primer</span>
   </a>
 </div>
   <section class="highlights-section">
