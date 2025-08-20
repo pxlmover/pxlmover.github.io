@@ -42,16 +42,14 @@ const themes = [
   }
 ];
 let currentTheme = 0;
-
-// Read theme from localStorage and apply immediately
 const savedTheme = localStorage.getItem('arThemeIndex');
 if (savedTheme !== null) {
   currentTheme = parseInt(savedTheme, 10) || 0;
-  const t = themes[currentTheme];
-  document.body.style.setProperty('--body-bg', t.bodyBg);
-  document.body.style.setProperty('--header-bg', t.headerBg);
-  document.body.style.setProperty('--header-sub-bg', t.headerSubBg);
 }
+const t = themes[currentTheme];
+document.body.style.setProperty('--body-bg', t.bodyBg);
+document.body.style.setProperty('--header-bg', t.headerBg);
+document.body.style.setProperty('--header-sub-bg', t.headerSubBg);
 
 document.addEventListener('DOMContentLoaded', function() {
   // Signature
