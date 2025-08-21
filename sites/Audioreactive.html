@@ -545,6 +545,28 @@
       filter: drop-shadow(0 0 12px #00eaff88);
     }
 
+    #soundwave-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    #soundwave-svg {
+      width: 100vw;
+      height: 100vh;
+    }
+    #soundwave-path {
+      d: path("M0,90 Q240,60 480,90 Q720,120 960,90 Q1200,60 1440,90 Q1680,120 1920,90");
+      stroke: #00eaff;
+      stroke-width: 6;
+      fill: none;
+      opacity: 0.18;
+    }
+
     .highlights-list {
       list-style: none;
       padding: 0;
@@ -1040,140 +1062,20 @@ AudioReactive Primer
     <img id="img-lightbox-img" src="" alt="Screenshot" style="max-width:92vw;max-height:88vh;border-radius:18px;box-shadow:0 8px 48px #64b5f6cc;">
   </div>
 
+  <div id="soundwave-bg" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;pointer-events:none;overflow:hidden;">
+  <svg id="soundwave-svg" width="100vw" height="100vh" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="width:100vw;height:100vh;">
+  <!-- Paths will be added by JS -->
+</svg>
+</div>
+
   <script>
-    // Audio-Reactive Background using mic input
-/*
-async function startAudioReactiveBG() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    window.audioContext = audioContext; // <-- Add this
-    const analyser = audioContext.createAnalyser();
-    const source = audioContext.createMediaStreamSource(stream);
-    source.connect(analyser);
-    analyser.fftSize = 256;
-    const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-    document.body.classList.add('audio-reactive-bg');
-
-    function animateBG() {
-      analyser.getByteFrequencyData(dataArray);
-      // Get average volume
-      let sum = 0;
-      for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
-      const avg = sum / dataArray.length;
-      // Map avg to a brightness/gradient intensity
-      const base = '#181a2a';
-      const accent = '#00eaff';
-      const intensity = Math.min(100, Math.max(20, avg / 2));
-      const alpha = Math.max(0.08, Math.min(0.22, intensity / 400)); // 0.08 to 0.22
-      document.body.style.background = `
-        linear-gradient(120deg, ${base} 0%, ${accent}${Math.floor(alpha * 255).toString(16).padStart(2, '0')} 100%),
-        ${base}
-      `;
-      document.body.style.filter = `brightness(${1 + alpha * 0.6})`;
-      requestAnimationFrame(animateBG);
-    }
-    animateBG();
-  } catch (e) {
-    alert('Microphone access denied or not available.');
-  }
-}
-
-// Resume audio context if tab regains focus
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    if (window.audioContext && window.audioContext.state === 'suspended') {
-      window.audioContext.resume();
-    }
-  }
-});
-*/
-
-    // Lightbox video playback
-    document.querySelectorAll('.video-thumb, .short-thumb').forEach(thumb => {
-      thumb.addEventListener('click', function() {
-        const vid = this.getAttribute('data-video');
-        const lightbox = document.getElementById('video-lightbox');
-        const iframe = document.getElementById('video-lightbox-iframe');
-        iframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1`;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-    document.getElementById('video-lightbox-close').onclick = function() {
-      const lightbox = document.getElementById('video-lightbox');
-      const iframe = document.getElementById('video-lightbox-iframe');
-      lightbox.classList.remove('active');
-      iframe.src = '';
-      document.body.style.overflow = '';
-    };
-    document.getElementById('video-lightbox').onclick = function(e) {
-      if (e.target === this) {
-        this.classList.remove('active');
-        document.getElementById('video-lightbox-iframe').src = '';
-        document.body.style.overflow = '';
-      }
-    };
-
-    // Lightbox for gallery screenshots
-    document.querySelectorAll('.gallery-grid img').forEach(img => {
-      img.addEventListener('click', function() {
-        const lightbox = document.getElementById('img-lightbox');
-        const lightboxImg = document.getElementById('img-lightbox-img');
-        lightboxImg.src = this.src;
-        lightbox.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-      });
-    });
-    document.getElementById('img-lightbox-close').onclick = function() {
-      document.getElementById('img-lightbox').style.display = 'none';
-      document.getElementById('img-lightbox-img').src = '';
-      document.body.style.overflow = '';
-    };
-    document.getElementById('img-lightbox').onclick = function(e) {
-      if (e.target === this) {
-        this.style.display = 'none';
-        document.getElementById('img-lightbox-img').src = '';
-        document.body.style.overflow = '';
-      }
-    };
-
-    // Scroll handling for shorts strip
-    const shortsStrip = document.querySelector('.shorts-strip');
-    if (shortsStrip) {
-      shortsStrip.addEventListener('wheel', function(e) {
-        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-          e.preventDefault();
-          shortsStrip.scrollLeft += e.deltaY;
-        }
-      }, { passive: false });
-    }
-
-    // Animate the seed of the turbulence for a truly endless shimmer
-    const turb = document.querySelector('#turb');
-    let t = 0;
-    function animateTurb() {
-      t += 0.2; // Adjust for speed; higher = faster shimmer
-      if (turb) turb.setAttribute('seed', (2 + t % 10000));
-      requestAnimationFrame(animateTurb);
-    }
-    animateTurb();
-
-    document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    // Try to resume the audio context if suspended
-    if (window.audioContext && window.audioContext.state === 'suspended') {
-      window.audioContext.resume();
-    }
-  }
-});
-
+    document.addEventListener('DOMContentLoaded', function() {
+  // Party Switch functionality
   const partyBtn = document.getElementById('party-switch');
   let partyActive = false;
   if (partyBtn) {
     partyBtn.addEventListener('click', function() {
-      if (partyActive) return; // Prevent over-triggering
+      if (partyActive) return;
       partyActive = true;
       document.body.classList.add('party-mode');
       setTimeout(() => {
@@ -1182,6 +1084,57 @@ document.addEventListener('visibilitychange', () => {
       }, 4000);
     });
   }
+
+  // Enable mouse wheel horizontal scrolling for shorts-strip
+  const shortsStrip = document.querySelector('.shorts-strip');
+  if (shortsStrip) {
+    shortsStrip.addEventListener('wheel', function(e) {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+        shortsStrip.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+  }
+
+  // Animated soundwave lines - dynamic, full viewport coverage
+  const svg = document.getElementById('soundwave-svg');
+  const waveCount = 12;
+  const colors = [
+    "#00eaff", "#a259f7", "#fff176", "#81c784",
+    "#ff4e8e", "#6f6fff", "#b36fff", "#64b5f6",
+    "#e0e6ff", "#ffb6b6", "#ffd700", "#00ffb2"
+  ];
+  const waves = [];
+  for (let i = 0; i < waveCount; i++) {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("stroke", colors[i % colors.length]);
+    path.setAttribute("stroke-width", 2 + (waveCount - i) * 0.3);
+    path.setAttribute("fill", "none");
+    path.setAttribute("opacity", 0.07);
+    svg.appendChild(path);
+    waves.push(path);
+  }
+  let t = 0;
+  function animateWaves() {
+    t += 0.012; // slower motion
+    const svgHeight = svg.viewBox.baseVal.height;
+    waves.forEach((el, i) => {
+      const amp = 12 + i * 2.2;
+      const freq = 0.5 + i * 0.07;
+      // Spread waves evenly from 40px to svgHeight-40px
+      const baseY = 40 + i * ((svgHeight - 80) / (waveCount - 1));
+      let d = `M0,${baseY}`;
+      for (let j = 0; j <= 8; j++) {
+        const x = j * 240;
+        const y = baseY + Math.sin(t * freq + j * freq + i) * amp;
+        d += ` Q${x + 120},${y + Math.cos(t + j + i) * (amp/2)} ${x + 240},${baseY + Math.sin(t * freq + j * freq + i + 0.7) * amp}`;
+      }
+      el.setAttribute('d', d);
+    });
+    requestAnimationFrame(animateWaves);
+  }
+  animateWaves();
+});
   </script>
 </body>
 </html>
