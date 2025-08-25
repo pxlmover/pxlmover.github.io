@@ -851,6 +851,89 @@ body.party-mode {
   transform: scale(1.12);
   box-shadow: 0 12px 48px #64b5f6cc;
 }
+
+    /* AudioReactive v3 Feature Showcase Section */
+.ar-v3-showcase {
+  max-width: 900px;
+  margin: 32px auto 0 auto;
+  padding: 24px 18px 18px 18px;
+  border-radius: 24px;
+  background: linear-gradient(120deg, #181a2a 0%, #6f6fff 40%, #b36fff 70%, #00eaff 100%);
+  box-shadow: 0 4px 32px #00eaff44;
+}
+.ar-v3-showcase h1 {
+  font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+  font-size: 2.2em;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  background: linear-gradient(90deg, #00eaff 10%, #6f6fff 40%, #b36fff 70%, #00eaff 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: hero-gradient 7s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px #00eaff88);
+  margin-bottom: 10px;
+}
+.ar-v3-showcase .feature-desc {
+  font-size: 1.15em;
+  color: #e0e6ff;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+.ar-v3-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+.ar-v3-gallery-item {
+  background: #232a3a;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #00eaff88;
+  border: 1.5px solid #6f6fff;
+  padding: 16px 12px;
+  max-width: 340px;
+}
+.ar-v3-gallery-item video {
+  width: 100%;
+  max-width: 320px;
+  max-height: 180px;
+  border-radius: 12px;
+  background: #181a2a;
+  box-shadow: 0 2px 12px #00eaffcc;
+  margin-bottom: 10px;
+}
+.ar-v3-gallery-item div {
+  font-size: 1em;
+  color: #64b5f6;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ar-title-container {
+  position: relative;
+  box-shadow: none; /* Remove animated box-shadow from main container */
+}
+
+.ar-title-container::after {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 0 4px 32px #00eaff44;
+  filter: hue-rotate(0deg);
+  animation: ar-title-glow-hue 6s linear infinite;
+}
+
+@keyframes ar-title-glow-hue {
+  0%   { filter: hue-rotate(0deg); }
+  50%  { filter: hue-rotate(120deg); }
+  100% { filter: hue-rotate(0deg); }
+}
   </style>
   <!-- Security & CSP -->
 <meta http-equiv="Content-Security-Policy" content="
@@ -866,38 +949,74 @@ body.party-mode {
 <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
 <body>
-  <div class="update-banner">
+  <!--<div class="update-banner">
     🚀 <b>AudioReactive 3.0 Coming to Fab the end of August! 🚀
-  </div>
-  <section class="hero">
-    <h1>AudioReactive<br>for<br>Unreal Engine 5</h1>
-    <!-- Place this right after <h1> in your .hero section -->
-    <!-- Replace your current SVG with this for a seamless loop -->
-    <svg class="hero-soundwave" width="320" height="32" viewBox="0 0 320 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  </div>-->
+    <!-- Add this at the top of the page, just after <body>: -->
+  <div class="ar-title-container" style="
+  width:100%;max-width:520px;margin:32px auto 0 auto;
+  padding:24px 18px 18px 18px;
+  border-radius:12px;
+  background:linear-gradient(120deg,rgba(24,26,42,0.22) 0%,rgba(111,111,255,0.22) 40%,rgba(179,111,255,0.22) 70%,rgba(0,234,255,0.22) 100%);
+  box-shadow:0 4px 32px #00eaff44;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+">
+    <img src="../images/AudioReactive_LOGO.png" alt="AudioReactive Logo"
+      style="width:440px;max-width:160vw;margin-bottom:4px;border-radius:18px;background:#181a2a;">
+    <h1 style="font-family:'Orbitron','Inter',Arial,sans-serif;font-size:2.8em;font-weight:900;letter-spacing:0.04em;
+      background:linear-gradient(90deg,#00eaff 10%,#6f6fff 40%,#b36fff 70%,#00eaff 100%);
+      background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      animation:hero-gradient 7s ease-in-out infinite;filter:drop-shadow(0 0 18px #00eaff88);margin-bottom:10px;text-align:center;">
+      Unreal Engine<br><strong style="font-size:2.0em;">5</strong>
+    </h1>
+    <!-- Stylized custom spline zap graphic -->
+    <svg width="320" height="38" viewBox="0 0 320 38" fill="none" xmlns="http://www.w3.org/2000/svg"
+      style="margin-top:8px;filter:drop-shadow(0 0 12px #00eaff88);">
       <defs>
-        <filter id="wave-distort" x="-20%" y="-50%" width="140%" height="200%">
-          <feTurbulence id="turb" baseFrequency="0.03 0.15" numOctaves="2" seed="2" type="fractalNoise" result="turb"/>
-          <feDisplacementMap in2="turb" in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/>
-        </filter>
+        <linearGradient id="zap-gradient" x1="0" y1="19" x2="320" y2="19" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#00eaff"/>
+          <stop offset="0.4" stop-color="#6f6fff"/>
+          <stop offset="0.7" stop-color="#b36fff"/>
+          <stop offset="1" stop-color="#ff4e8e"/>
+        </linearGradient>
       </defs>
-      <polyline
-        filter="url(#wave-distort)"
-        points="0,16 8,10 16,22 24,8 32,24 40,12 48,20 56,14 64,18 72,12 80,22 88,10 96,24 104,8 112,20 120,14 128,18 136,12 144,22 152,10 160,24 168,8 176,20 184,14 192,18 200,12 208,22 216,10 224,24 232,8 240,20 248,14 256,18 264,12 272,22 280,10 288,24 296,8 304,20 312,14 320,16"
-        stroke="#00eaff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.85"/>
+      <path d="M0,19 Q40,5 80,19 Q120,33 160,19 Q200,5 240,19 Q280,33 320,19"
+        stroke="url(#zap-gradient)" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.92"/>
+      <polyline points="40,5 45,15 55,7 60,19 70,11 75,19"
+        stroke="#fff176" stroke-width="2.2" fill="none" opacity="0.7"/>
+      <polyline points="200,5 205,15 215,7 220,19 230,11 235,19"
+        stroke="#fff176" stroke-width="2.2" fill="none" opacity="0.7"/>
     </svg>
-    <p class="hero-desc">
-      Instantly make meshes, materials, particles, lights, and DMX fixtures react to music or sound.
-    </p>
-    <span class="hero-highlight">Bring your scenes to life!<br>NO code required.</span>
-    <br><br>
-    <div class="hero-btn-row">
-      <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
-      <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
-    </div>
-    <!-- Place this somewhere in your hero section if you want a button -->
-    <button id="start-audio-reactive" style="display:none;">Enable Audio-Reactive Background</button>
-  <section class="demo-section">
-    <h2>See AudioReactive in Action</h2>
+  </div>
+<section class="hero">
+  <p class="hero-desc">
+    Instantly make meshes, materials, particles, lights, and DMX fixtures react to music or sound.
+  </p>
+  <span class="hero-highlight">Bring your scenes to life!<br>NO code required.</span>
+  <br><br>
+  <div class="hero-btn-row">
+    <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
+    <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
+  </div>
+  <!-- Move the hero-soundwave SVG down here, just above Full Length Examples -->
+  <svg class="hero-soundwave" width="320" height="32" viewBox="0 0 320 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="wave-distort" x="-20%" y="-50%" width="140%" height="200%">
+        <feTurbulence id="turb" baseFrequency="0.03 0.15" numOctaves="2" seed="2" type="fractalNoise" result="turb"/>
+        <feDisplacementMap in2="turb" in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+    <polyline
+      filter="url(#wave-distort)"
+      points="0,16 8,10 16,22 24,8 32,24 40,12 48,20 56,14 64,18 72,12 80,22 88,10 96,24 104,8 112,20 120,14 128,18 136,12 144,22 152,10 160,24 168,8 176,20 184,14 192,18 200,12 208,22 216,10 224,24 232,8 240,20 248,14 256,18 264,12 272,22 280,10 288,24 296,8 304,20 312,14 320,16"
+      stroke="#00eaff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.85"/>
+  </svg>
+  <div class="demo-section">
+    <!--<h2>See AudioReactive in Action</h2>-->
     <div class="video-galleries">
       <!-- Main 16:9 Gallery -->
       <div class="video-gallery main-gallery" style="margin: 0 auto; max-width: 700px;">
@@ -918,6 +1037,19 @@ body.party-mode {
         </div>
       </div>
     </div>
+    <!-- Divider: Soundwave SVG -->
+    <svg class="hero-soundwave" width="320" height="32" viewBox="0 0 320 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:32px auto;">
+      <defs>
+        <filter id="wave-distort-divider1" x="-20%" y="-50%" width="140%" height="200%">
+          <feTurbulence baseFrequency="0.03 0.15" numOctaves="2" seed="2" type="fractalNoise" result="turb"/>
+          <feDisplacementMap in2="turb" in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+      <polyline
+        filter="url(#wave-distort-divider1)"
+        points="0,16 8,10 16,22 24,8 32,24 40,12 48,20 56,14 64,18 72,12 80,22 88,10 96,24 104,8 112,20 120,14 128,18 136,12 144,22 152,10 160,24 168,8 176,20 184,14 192,18 200,12 208,22 216,10 224,24 232,8 240,20 248,14 256,18 264,12 272,22 280,10 288,24 296,8 304,20 312,14 320,16"
+        stroke="#00eaff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.85"/>
+    </svg>
     <!-- Shorts Gallery: now on its own line, full width -->
     <div class="shorts-gallery-container">
       <div class="video-gallery shorts-gallery" style="max-width: 700px; margin: 32px auto 0 auto;">
@@ -950,6 +1082,19 @@ body.party-mode {
         </div>
       </div>
     </div>
+    <!-- Divider: Soundwave SVG -->
+    <svg class="hero-soundwave" width="320" height="32" viewBox="0 0 320 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:32px auto;">
+      <defs>
+        <filter id="wave-distort-divider2" x="-20%" y="-50%" width="140%" height="200%">
+          <feTurbulence baseFrequency="0.03 0.15" numOctaves="2" seed="2" type="fractalNoise" result="turb"/>
+          <feDisplacementMap in2="turb" in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+      <polyline
+        filter="url(#wave-distort-divider2)"
+        points="0,16 8,10 16,22 24,8 32,24 40,12 48,20 56,14 64,18 72,12 80,22 88,10 96,24 104,8 112,20 120,14 128,18 136,12 144,22 152,10 160,24 168,8 176,20 184,14 192,18 200,12 208,22 216,10 224,24 232,8 240,20 248,14 256,18 264,12 272,22 280,10 288,24 296,8 304,20 312,14 320,16"
+        stroke="#00eaff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.85"/>
+    </svg>
     <!-- Tutorials Gallery -->
     <div class="video-gallery tutorials-gallery" style="margin: 40px auto 0 auto; max-width: 700px;">
       <h3 class="tutorials-heading">Tutorials</h3>
@@ -1031,7 +1176,61 @@ AudioReactive Primer
        Add more images as needed 
     </div>
   </section>-->
-
+  <div class="ar-v3-showcase"
+  style="max-width:900px;margin:32px auto 0 auto;padding:18px 8px 12px 8px;border-radius:18px;
+    background:linear-gradient(90deg,rgba(24,26,42,0.22) 0%,rgba(111,111,255,0.22) 40%,rgba(179,111,255,0.22) 70%,rgba(0,234,255,0.22) 100%);
+    box-shadow:0 2px 18px #00eaff33;animation:ar-v3-bg-move 8s ease-in-out infinite;">
+    <h1 style="font-family:'Orbitron','Inter',Arial,sans-serif;font-size:2.0em;font-weight:900;letter-spacing:0.04em;
+    background:linear-gradient(90deg,#00eaff 10%,#6f6fff 40%,#b36fff 70%,#00eaff 100%);
+    background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    animation:hero-gradient 7s ease-in-out infinite;filter:drop-shadow(0 0 12px #00eaff88);margin-bottom:6px;text-align:center;">
+      AudioReactive v3 – End of August Update!
+    </h1>
+    <ul style="
+      font-family:'Orbitron', 'Montserrat', Arial, sans-serif;
+      font-size:1em;
+      color:#51a2ff;
+      margin-bottom:10px;
+      line-height:1.7;
+      list-style:disc inside;
+      padding-left:32px;
+      padding-right:32px;
+      text-align:left;
+      text-shadow:0 0 2px #00eaff88, 0 0 2px #181a2a;
+      font-weight:700;
+      letter-spacing:0.02em;
+    ">
+      <li><strong>Split Band Processing:</strong> Metasound frequency splitting for band based reactions.</li>
+      <li><strong>Live Audio Input:</strong> React to your voice or PC audio in real time.</li>
+      <li><strong>Rapid Fire:</strong> Trigger AudioReactive with short burst sound effects - <em>perfect for short or repeated effects!</em></li>
+      <li><strong>Audio Smoothing:</strong> Per-track smoothing for softer reactions and improved DMX acceleration control.</li>
+      <li><strong>Built-in Tooltips:</strong> Hover for instant help on nearly every parameter.</li>
+    </ul>
+    <!--
+    <div class="ar-v3-gallery"
+    style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:18px;justify-items:center;align-items:center;overflow-x:auto;padding-bottom:8px;">
+      <div class="ar-v3-gallery-item" style="background:#232a3a;border-radius:14px;box-shadow:0 2px 12px #00eaff88;border:1px solid #6f6fff;padding:10px 6px;max-width:220px;min-width:180px;">
+        <video src="gallery/LiveAudioInputDemo.mp4" controls loop muted playsinline style="width:100%;max-width:200px;max-height:110px;border-radius:8px;background:#181a2a;box-shadow:0 2px 8px #00eaffcc;margin-bottom:6px;"></video>
+        <div style="font-size:0.98em;color:#64b5f6;font-weight:700;text-align:center;">Live Audio Input</div>
+      </div>
+      <div class="ar-v3-gallery-item" style="background:#232a3a;border-radius:14px;box-shadow:0 2px 12px #ff4e8e88;border:1px solid #b36fff;padding:10px 6px;max-width:220px;min-width:180px;">
+        <video src="gallery/RapidFireDemo.mp4" controls loop muted playsinline style="width:100%;max-width:200px;max-height:110px;border-radius:8px;background:#181a2a;box-shadow:0 2px 8px #ff4e8ecc;margin-bottom:6px;"></video>
+        <div style="font-size:0.98em;color:#ff4e8e;font-weight:700;text-align:center;">Rapid Fire FX</div>
+      </div>
+      <div class="ar-v3-gallery-item" style="background:#232a3a;border-radius:14px;box-shadow:0 2px 12px #fff17688;border:1px solid #fff176;padding:10px 6px;max-width:220px;min-width:180px;">
+        <video src="gallery/SmoothingDemo.mp4" controls loop muted playsinline style="width:100%;max-width:200px;max-height:110px;border-radius:8px;background:#181a2a;box-shadow:0 2px 8px #fff176cc;margin-bottom:6px;"></video>
+        <div style="font-size:0.98em;color:#fff176;font-weight:700;text-align:center;">Audio Smoothing</div>
+      </div>
+      <div class="ar-v3-gallery-item" style="background:#232a3a;border-radius:14px;box-shadow:0 2px 12px #81c78488;border:1px solid #81c784;padding:10px 6px;max-width:220px;min-width:180px;">
+        <video src="gallery/DetailsRolloutDemo.mp4" controls loop muted playsinline style="width:100%;max-width:200px;max-height:110px;border-radius:8px;background:#181a2a;box-shadow:0 2px 8px #81c784cc;margin-bottom:6px;"></video>
+        <div style="font-size:0.98em;color:#81c784;font-weight:700;text-align:center;">Details Rollout & Tooltips</div>
+      </div>
+      <div class="ar-v3-gallery-item" style="background:#232a3a;border-radius:14px;box-shadow:0 2px 12px #b36fff88;border:1px solid #b36fff;padding:10px 6px;max-width:220px;min-width:180px;">
+        <video src="gallery/TimerPerformanceDemo.mp4" controls loop muted playsinline style="width:100%;max-width:200px;max-height:110px;border-radius:8px;background:#181a2a;box-shadow:0 2px 8px #b36fffcc;margin-bottom:6px;"></video>
+        <div style="font-size:0.98em;color:#b36fff;font-weight:700;text-align:center;">Custom Timer Performance</div>
+      </div>
+    </div>-->
+  </div>
     <div style="width:100%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin:36px 0 28px 0;">
     <button id="party-switch"
       style="background:radial-gradient(circle at 60% 40%, #ff4e8e 0%, #fff176 80%, #a259f7 100%);
