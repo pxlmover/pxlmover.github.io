@@ -18,91 +18,282 @@
     }
     body.audio-reactive-bg {
       transition: background 0.2s, filter 0.2s;
-      /* The gradient will be updated by JS */
       background-blend-mode: lighten, normal;
     }
     body.audio-reactive-bg::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.10;
-  background: url('https://www.transparenttextures.com/patterns/noise.png');
-  mix-blend-mode: multiply;
-}
-    .hero {
-      /* background: radial-gradient(ellipse at 60% 40%, #1a1e3a 0%, #0a0a1a 80%) no-repeat; */
-      background: none;
-      color: #e0e6ff;
-      text-align: center;
-      padding: 0 20px;
-      position: relative;
-      overflow: hidden;
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.10;
+      background: url('https://www.transparenttextures.com/patterns/noise.png');
+      mix-blend-mode: multiply;
+    }
+
+    /* New Hero Container */
+    .hero-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 40px auto 32px auto;
+      padding: 48px 32px;
+      background: linear-gradient(135deg, 
+        rgba(0,234,255,0.08) 0%, 
+        rgba(111,111,255,0.12) 25%, 
+        rgba(179,111,255,0.10) 50%, 
+        rgba(255,78,142,0.08) 75%, 
+        rgba(0,234,255,0.06) 100%);
+      border-radius: 32px;
+      box-shadow: 0 8px 48px rgba(0,234,255,0.2), 
+                  inset 0 1px 0 rgba(255,255,255,0.1);
+      border: 1px solid rgba(100,181,246,0.2);
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      gap: 36px;
       align-items: center;
-      min-height: 380px; /* or try height: 60vh; for more responsiveness */
+      position: relative;
+      overflow: hidden;
     }
-    .hero h1 {
-      font-size: 2.8em;
-      font-weight: 700;
-      margin-bottom: 10px;
+
+    .hero-container::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,234,255,0.1) 0%, transparent 70%);
+      animation: pulse-glow 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .logo-section img {
+      width: 320px;
+      max-width: 90%;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #181a2a 0%, #2a1a3a 100%);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4),
+                  0 2px 8px rgba(0,234,255,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-section img:hover {
+      transform: scale(1.05) rotate(-1deg);
+    }
+
+    .content-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      z-index: 1;
+    }
+
+    .title-group {
+      text-align: center;
+    }
+
+    .main-title {
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-size: 3.5em;
+      font-weight: 900;
       letter-spacing: 0.03em;
-      background: linear-gradient(90deg, #00eaff 10%, #6f6fff 40%, #b36fff 70%, #00eaff 100%);
+      line-height: 1.1;
+      margin: 0 0 16px 0;
+      background: linear-gradient(90deg, #00eaff 0%, #6f6fff 35%, #b36fff 65%, #ff4e8e 100%);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: hero-gradient 7s ease-in-out infinite;
-      filter: drop-shadow(0 0 18px #00eaff88);
+      filter: drop-shadow(0 4px 24px rgba(0,234,255,0.4));
     }
+
     @keyframes hero-gradient {
-      0%,100% { background-position: 0% 50%; }
+      0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
     }
-    .hero p {
-      font-size: 1.3em;
-      margin-bottom: 30px;
-      color: #e0e6ff;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      text-shadow: 0 2px 12px #0a0a1a, 0 0px 8px #00eaff33;
+
+    .wave-decoration {
+      margin: 0 auto 24px auto;
+      filter: drop-shadow(0 4px 16px rgba(0,234,255,0.5));
     }
+
+    .description-text {
+      font-size: 1.25em;
+      line-height: 1.6;
+      color: #e0e6ff;
+      text-align: center;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .highlight-text {
+      display: block;
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-size: 1.5em;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-align: center;
+      margin-bottom: 32px;
+      background: linear-gradient(90deg, #fff176 0%, #81c784 50%, #64b5f6 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: showcase-hue-move 5s ease-in-out infinite;
+      filter: drop-shadow(0 2px 12px rgba(255,241,118,0.3));
+    }
+
+    @keyframes showcase-hue-move {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
     .cta-btn {
       display: inline-block;
-      background: #181a2a;
+      background: linear-gradient(135deg, #181a2a 0%, #2a1a3a 100%);
       color: #00eaff;
       font-weight: 700;
-      font-size: 1.2em;
-      padding: 16px 36px;
-      border-radius: 32px;
+      font-size: 1.1em;
+      padding: 14px 32px;
+      border-radius: 28px;
       text-decoration: none;
-      box-shadow: 0 4px 32px #00eaff33;
+      box-shadow: 0 4px 24px rgba(0,234,255,0.3),
+                  inset 0 1px 0 rgba(255,255,255,0.1);
       border: 2px solid #00eaff;
-      transition: background 0.2s, color 0.2s, transform 0.2s, border 0.2s;
-      margin: 0 10px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
+
+    .cta-btn::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(0,234,255,0.3) 0%, transparent 70%);
+      transition: width 0.3s ease, height 0.3s ease;
+      transform: translate(-50%, -50%);
+    }
+
     .cta-btn:hover {
-      background: #00eaff;
-      color: #181a2a;
-      border: 2px solid #fff;
-      transform: scale(1.05);
+      background: linear-gradient(135deg, #00eaff 0%, #6f6fff 100%);
+      color: #fff;
+      border-color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,234,255,0.5),
+                  inset 0 1px 0 rgba(255,255,255,0.2);
     }
+
+    .cta-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .hero-container {
+        padding: 36px 24px;
+        gap: 28px;
+      }
+      
+      .logo-section img {
+        width: 240px;
+      }
+      
+      .main-title {
+        font-size: 2.5em;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-container {
+        margin: 20px auto 24px auto;
+        border-radius: 24px;
+        padding: 24px 20px;
+      }
+      
+      .logo-section img {
+        width: 200px;
+      }
+      
+      .main-title {
+        font-size: 2em;
+      }
+      
+      .button-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .cta-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    /* AR Primer Button */
+    .ar-primer-section {
+      text-align: center;
+      margin: 0 0 48px 0;
+      padding: 0 20px;
+    }
+
+    .ar-primer-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #ff4e8e, #a259f7 70%, #64b5f6 100%);
+      color: #fff;
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-size: 1.18em;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      border-radius: 22px;
+      padding: 18px 44px;
+      box-shadow: 0 6px 32px rgba(162,89,247,0.5);
+      text-decoration: none;
+      transition: transform 0.18s cubic-bezier(.4,1.4,.6,1), box-shadow 0.2s;
+    }
+
+    .ar-primer-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 12px 48px rgba(100,181,246,0.6);
+    }
+
+    /* Rest of your styles remain the same */
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 18px;
       margin: 40px auto 24px auto;
-      max-width: 700px;         /* Reduce width */
+      max-width: 700px;
       padding: 0 8px;
       background: none !important;
       box-shadow: none !important;
       border: none !important;
       justify-items: center;
     }
+    
     .feature-card {
       background: rgba(30,40,60,0.7);
       border: 1px solid #64b5f633;
@@ -117,11 +308,13 @@
       overflow: hidden;
       will-change: transform;
     }
+    
     .feature-card:hover {
       box-shadow: 0 8px 48px #64b5f6cc, 0 2px 12px #0005;
       border-color: #81c784;
       transform: scale(1.045) translateY(-2px);
     }
+    
     .feature-card h3 {
       color: #81c784;
       margin-top: 0;
@@ -129,453 +322,31 @@
       font-size: 1.3em;
       font-weight: 700;
     }
+    
     .feature-card p {
       color: #e0e0e0;
       font-size: 1.05em;
       margin-bottom: 0;
     }
-    .demo-section {
+    
+    .highlights-section {
       text-align: center;
-      margin: 60px 0 40px 0;
+      margin: 48px 0;
+      padding: 0 20px;
     }
-    .demo-section h2 {
-      color: #64b5f6;
-      font-size: 2em;
-      margin-bottom: 18px;
-    }
-    .video-galleries {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      align-items: flex-start;
-      margin-bottom: 16px; /* Was 40px, now matches other section gaps */
-      flex-wrap: wrap;
-    }
-    .video-gallery {
-      flex: 1 1 340px;
-      min-width: 260px;
-      max-width: 420px;
-      background: rgba(30,40,60,0.5);
-      border-radius: 16px;
-      padding: 10px 10px 18px 10px;
-      box-shadow: 0 2px 16px #0005;
-      margin-bottom: 0; /* Prevents stacking extra margin */
-      padding-bottom: 28px; /* Add extra space for hover scaling */
-      min-height: 270px;    /* Ensure enough height for 16:9 thumbs + hover */
-    }
-    .video-gallery h3 {
-      color: #fff176;
-      font-size: 1.1em;
-      margin-bottom: 10px;
-      text-align: left;
-      letter-spacing: 0.03em;
-      font-weight: 700;
-    }
-    .video-grid {
+    
+    .highlights-section .highlights-list {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      max-height: 400px;
-      overflow-y: auto;
-      overflow-x: hidden; /* Prevents horizontal scrollbar on hover */
-      overflow: visible !important; /* Allow hover scaling to overflow */
-      padding-bottom: 12px;         /* Extra space for hover effect */
-    }
-    .shorts-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .video-thumb, .short-thumb {
-      position: relative;
-      cursor: pointer;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px #0008;
-      transition: transform 0.18s, box-shadow 0.18s;
-      background: #181818;
-      min-height: 0;
-    }
-    .video-thumb:hover, .short-thumb:hover {
-      transform: scale(1.04);
-      box-shadow: 0 8px 32px #64b5f6cc;
-    }
-    .video-thumb img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      display: block;
-      background: #222;
-    }
-    .short-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      aspect-ratio: 9/16;
-      display: block;
-      border-radius: 10px;
-      transition: transform 0.3s cubic-bezier(.4,2,.6,1);
-    }
-    .play-btn {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2em;
-      color: #fff176;
-      text-shadow: 0 2px 12px #000a;
-      pointer-events: none;
-      opacity: 0.92;
-    }
-    .tutorials-gallery {
-      margin: 40px auto 0 auto;
-      max-width: 700px;
-      background: rgba(30,40,60,0.5);
-      border-radius: 16px;
-      padding: 10px 10px 18px 10px; /* Reduced top padding for better vertical centering */
-      box-shadow: 0 2px 16px #0005;
-    }
-    .tutorials-heading {
-      display: flex;
+      grid-template-columns: repeat(3, 240px);
+      gap: 18px;
       justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-size: 3.5em; /* Match other headings */
-      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      margin-top: 0;         /* Remove any top margin */
-      margin-bottom: 18px;   /* Space from thumbnails */
-      background: linear-gradient(90deg, #fff176, #64b5f6, #81c784, #fff176 80%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: tutorials-hue-move 5s ease-in-out infinite;
-      filter: drop-shadow(0 2px 12px #222a);
-    }
-    @keyframes tutorials-hue-move {
-      0%,100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    @media (max-width: 1100px) {
-      .video-galleries {
-        flex-direction: column;
-        gap: 18px;
-        align-items: stretch;
-      }
-      .video-gallery {
-        max-width: 100%;
-        margin-bottom: 18px;
-      }
-    }
-    @media (max-width: 800px) {
-      .features {
-        flex-direction: column;
-        gap: 18px;
-      }
-      .feature-card {
-        max-width: 100%;
-      }
-      .video-thumb {
-        max-width: calc(50% - 16px);
-      }
-    }
-    @media (max-width: 700px) {
-      .video-gallery,
-      .tutorials-gallery,
-      .shorts-gallery {
-        max-width: 98vw !important;
-        width: 98vw !important;
-        min-width: 0 !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        padding: 6px 2vw 16px 2vw !important;
-        border-radius: 10px !important;
-      }
-      .shorts-strip {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 8px !important;
-        overflow-x: visible !important;
-        padding: 8px 0 12px 0 !important;
-        background: none !important;
-        border-radius: 0 !important;
-        scrollbar-width: none !important;
-      }
-      .short-thumb {
-        flex: unset !important;
-        width: 100% !important;
-        height: auto !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
-        border-radius: 8px !important;
-        margin: 0 !important;
-      }
-      .short-thumb {
-        height: 160px !important;
-        max-height: 38vw !important;
-      }
-      .short-thumb img {
-        height: 100% !important;
-        object-fit: cover !important;
-      }
-      .main-gallery {
-        padding-bottom: 8px !important;
-        min-height: unset !important;
-      }
-      .main-gallery .video-grid {
-        max-height: none !important;
-        padding-bottom: 0 !important;
-      }
-    }
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2em; }
-      .features { padding: 0 4px; }
-      .feature-card { padding: 18px 8px; }
-      .demo-video { max-width: 100vw; }
-      .video-thumb {
-        max-width: 100%;
-      }
-      #video-lightbox-content {
-        width: 98vw;
-        max-width: 98vw;
-      }
-    }
-
-    /* Lightbox styles */
-    #video-lightbox {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(10,20,40,0.92);
-      backdrop-filter: blur(8px);
-      align-items: center;
-      justify-content: center;
-    }
-    #video-lightbox.active {
-      display: flex;
-    }
-    #video-lightbox-content {
-      position: relative;
-      width: 90vw;
-      max-width: 800px;
-      aspect-ratio: 16/9;
-      background: #111;
-      border-radius: 16px;
-      box-shadow: 0 4px 32px #000a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #video-lightbox-iframe {
-      width: 100%;
-      height: 100%;
-      border-radius: 16px;
-    }
-    #video-lightbox-close {
-      position: absolute;
-      top: -48px;
-      right: 0;
-      font-size: 2.5em;
-      color: #fff;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 10;
-      padding: 0 10px;
-      line-height: 1;
-      transition: color 0.2s;
-    }
-    #video-lightbox-close:hover { color: #64b5f6; }
-
-    .shorts-strip {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding: 12px 0 18px 0;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: thin;
-      scrollbar-color: #64b5f6 #222;
-      background: rgba(30,40,60,0.25);
-      border-radius: 12px;
-    }
-    .shorts-strip::-webkit-scrollbar {
-      height: 10px;
-      background: #222;
-      border-radius: 8px;
-    }
-    .shorts-strip::-webkit-scrollbar-thumb {
-      background: #64b5f6;
-      border-radius: 8px;
-    }
-    .short-thumb {
-      flex: 0 0 110px;
-      height: 196px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #181818;
-      box-shadow: 0 2px 12px #0008;
-      position: relative;
-      cursor: pointer;
-      scroll-snap-align: center;
-      transition: transform 0.18s, box-shadow 0.18s;
-      will-change: transform;
-    }
-    .short-thumb:hover, .short-thumb:focus {
-      transform: scale(1.08) rotate(-2deg);
-      box-shadow: 0 8px 32px #64b5f6cc;
-      z-index: 2;
-    }
-    .short-thumb:active img {
-      transform: scale(0.97);
-    }
-    .shorts-heading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-size: 2.97em; /* 2.2em * 1.35 = 2.97em */
-      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      margin-top: 0;         /* Remove any top margin */
-      margin-bottom: 18px;   /* Keep bottom margin for spacing from thumbnails */
-      background: linear-gradient(90deg, #64b5f6, #fff176, #81c784, #64b5f6 80%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shorts-hue-move 5s ease-in-out infinite;
-      filter: drop-shadow(0 2px 12px #222a);
-    }
-    @keyframes shorts-hue-move {
-      0%,100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    .showcase-heading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-size: 2.97em;
-      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      margin-top: 0;         /* Remove any top margin */
-      margin-bottom: 18px;   /* Keep bottom margin for spacing from thumbnails */
-      background: linear-gradient(90deg, #81c784, #64b5f6, #fff176, #81c784 80%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: showcase-hue-move 5s ease-in-out infinite;
-      filter: drop-shadow(0 2px 12px #222a);
-    }
-    @keyframes showcase-hue-move {
-      0%,100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    .video-gallery, .features {
-      box-shadow: 0 4px 32px #00eaff22, 0 2px 12px #b36fff22;
-    }
-
-    .shorts-gallery-container {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
-    .hero-btn-row {
-      display: flex;
-      flex-direction: column;      /* Stack vertically */
-      gap: 12px;                   /* Space between buttons */
-      justify-content: center;
-      align-items: center;
-      margin-top: 10px;
-    }
-    .cta-btn {
-      font-size: 0.72em;           /* 40% smaller */
-      padding: 10px 22px;          /* Scaled padding */
-      border-radius: 24px;
-      margin: 0;
-      min-width: 180px;
-      box-sizing: border-box;
-    }
-    .hero-desc {
-      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-      font-size: 1.18em;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      background: linear-gradient(90deg, #64b5f6, #fff176, #81c784, #64b5f6 80%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: showcase-hue-move 5s ease-in-out infinite;
-      filter: drop-shadow(0 2px 8px #222a);
-      margin-bottom: 18px;
-      text-align: center;
-    }
-    /* Soundwave SVG animation */
-    @keyframes wave-move {
-      0%   { stroke-dashoffset: 0; }
-      100% { stroke-dashoffset: -320; }
-    }
-    .hero-soundwave #wave {
-      stroke-dasharray: 320;
-      stroke-dashoffset: 0;
-      animation: wave-move 4s linear infinite;
-    }
-
-    /* Animate the SVG turbulence for a subtle, endless shimmer */
-    @keyframes turb-anim {
-      0%   { filter: url(#wave-distort); }
-      100% { filter: url(#wave-distort); }
-    }
-    .hero-soundwave {
-      max-width: 90vw;
-      width: 320px;
-      height: 32px;
-      margin: 24px auto 0 auto;
-      display: block;
-      filter: drop-shadow(0 0 12px #00eaff88);
-    }
-
-    #soundwave-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -2;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    #soundwave-svg {
-      width: 100vw;
-      height: 100vh;
-    }
-    #soundwave-path {
-      d: path("M0,90 Q240,60 480,90 Q720,120 960,90 Q1200,60 1440,90 Q1680,120 1920,90");
-      stroke: #00eaff;
-      stroke-width: 6;
-      fill: none;
-      opacity: 0.18;
-    }
-
-    .highlights-list {
+      align-items: stretch;
       list-style: none;
       padding: 0;
-      margin: 36px auto 36px auto;
-      max-width: 520px;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
+      margin: 36px auto;
+      max-width: 900px;
     }
+    
     .highlights-list li {
       background: rgba(30,40,60,0.55);
       border: 1.5px solid #64b5f655;
@@ -589,10 +360,12 @@
       flex-direction: column;
       align-items: flex-start;
     }
+    
     .highlights-list li:hover {
       border-color: #81c784cc;
       box-shadow: 0 6px 32px #64b5f633;
     }
+    
     .highlight-title {
       font-family: 'Orbitron', 'Inter', Arial, sans-serif;
       font-size: 1.18em;
@@ -608,6 +381,7 @@
       filter: drop-shadow(0 2px 8px #222a);
       display: inline-block;
     }
+    
     .highlight-desc {
       font-family: 'Inter', Arial, sans-serif;
       font-size: 1em;
@@ -617,128 +391,89 @@
       line-height: 1.5;
     }
 
-    .highlights-section {
-      text-align: center;
-      margin: 40px 0;
-      padding: 0 20px;
-    }
-    .highlights-section h2 {
-      color: #64b5f6;
-      font-size: 2em;
-      margin-bottom: 18px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-    .highlights-section .highlights-list {
-  display: grid;
-  grid-template-columns: repeat(3, 240px);
-  gap: 18px;
-  justify-content: center;
-  align-items: stretch;
-}
-
-    .section-spaced {
-      margin-top: 48px;
-      margin-bottom: 48px;
-    }
-    .demo-section,
-    .shorts-gallery-container,
-    .tutorials-gallery,
-    .highlights-section {
-      margin-top: 48px !important;
-      margin-bottom: 0 !important;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-    .highlights-section {
-      margin-bottom: 48px !important;
+    @media (max-width: 800px) {
+      .highlights-section .highlights-list {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
     }
 
-    /* Responsive gallery grid for screenshots */
-    .gallery-section {
-      margin: 48px auto;
+    /* AR V3 Showcase */
+    .ar-v3-showcase {
+      max-width: 900px;
+      margin: 32px auto 0 auto;
+      padding: 18px 8px 12px 8px;
+      border-radius: 18px;
+      background: linear-gradient(90deg, rgba(24,26,42,0.22) 0%, rgba(111,111,255,0.22) 40%, rgba(179,111,255,0.22) 70%, rgba(0,234,255,0.22) 100%);
+      box-shadow: 0 2px 18px #00eaff33;
+      animation: ar-v3-bg-move 8s ease-in-out infinite;
+    }
+
+    .ar-v3-showcase h1 {
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-size: 2.0em;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      background: linear-gradient(90deg, #00eaff 10%, #6f6fff 40%, #b36fff 70%, #00eaff 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: hero-gradient 7s ease-in-out infinite;
+      filter: drop-shadow(0 0 12px #00eaff88);
+      margin-bottom: 6px;
       text-align: center;
     }
-    .gallery-heading {
-      color: #64b5f6;
-      font-size: 1.8em;
-      margin-bottom: 20px;
-      font-weight: 600;
-      text-align: center;
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-      margin: 0 auto 30px auto;
-      max-width: 1200px;
-      padding: 0 8px;
-    }
-    .gallery-grid img {
+
+    /* Party Button */
+    .party-button-section {
       width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 2px 12px #0005;
-      cursor: zoom-in;
-      transition: box-shadow 0.2s, transform 0.2s;
-      background: #222;
-    }
-    .gallery-grid img:hover,
-    .gallery-grid img:focus {
-      box-shadow: 0 4px 24px #64b5f6cc, 0 2px 12px #0005;
-      outline: 2px solid #64b5f6;
-      transform: scale(1.03);
-      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 36px 0 28px 0;
     }
 
-    /* On small screens, stack images in a single column */
-    @media (max-width: 700px) {
-      .gallery-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        max-width: 98vw;
-        padding: 0 2vw;
-      }
-      .gallery-grid img {
-        aspect-ratio: 16/9;
-        min-width: 0;
-      }
+    #party-switch {
+      background: radial-gradient(circle at 60% 40%, #ff4e8e 0%, #fff176 80%, #a259f7 100%);
+      color: #181a2a;
+      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+      font-size: 1.1em;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      border-radius: 50%;
+      width: 88px;
+      height: 88px;
+      box-shadow: 0 0 32px #ff4e8ecc, 0 0 0 6px #fff17688;
+      border: none;
+      cursor: pointer;
+      transition: box-shadow 0.2s, background 0.2s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
     }
-    /* Center and scale screenshots gallery on mobile */
-    @media (max-width: 700px) {
-      .gallery-section {
-        margin: 32px auto;
-        padding: 0;
-        width: 100vw;
-        max-width: 100vw;
-        box-sizing: border-box;
-        text-align: center;
-      }
-      .gallery-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        max-width: 98vw;
-        width: 98vw;
-        padding: 0 1vw;
-        margin: 0 auto;
-        box-sizing: border-box;
-      }
-      .gallery-grid img {
-        width: 100%;
-        max-width: 98vw;
-        height: auto;
-        aspect-ratio: 16/9;
-        min-width: 0;
-        margin: 0 auto;
-        display: block;
-      }
+
+    body.party-mode {
+      animation: party-bg 1.2s ease-in-out infinite;
     }
-    /* Image Lightbox styles */
-    #img-lightbox {
+
+    @keyframes party-bg {
+      0% { background: linear-gradient(120deg, #ff4e8e, #fff176, #64b5f6); }
+      25% { background: linear-gradient(120deg, #a259f7, #ff4e8e, #fff176); }
+      50% { background: linear-gradient(120deg, #64b5f6, #a259f7, #ff4e8e); }
+      75% { background: linear-gradient(120deg, #fff176, #64b5f6, #a259f7); }
+      100% { background: linear-gradient(120deg, #ff4e8e, #fff176, #64b5f6); }
+    }
+
+    /* Lightboxes */
+    #video-lightbox, #img-lightbox {
       display: none;
       position: fixed;
-      z-index: 99999;
+      z-index: 9999;
       top: 0;
       left: 0;
       width: 100vw;
@@ -748,389 +483,92 @@
       align-items: center;
       justify-content: center;
     }
-    #img-lightbox.active {
+
+    #video-lightbox.active, #img-lightbox.active {
       display: flex;
     }
-    #img-lightbox-close {
-      position: absolute;
-      top: 24px;
-      right: 36px;
-      font-size: 3em;
-      color: #fff;
-      cursor: pointer;
-      z-index: 10;
-    }
-    #img-lightbox-img {
-      max-width: 92vw;
-      max-height: 88vh;
-      border-radius: 18px;
-      box-shadow: 0 8px 48px #64b5f6cc;
+
+    /* Soundwave Background */
+    #soundwave-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      pointer-events: none;
+      overflow: hidden;
     }
 
-    .update-banner {
-      width: 100%;
-      background: linear-gradient(90deg, #64b5f6, #81c784 80%);
-      color: #181a2a;
-      font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-      font-size: 1.75em;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-      text-align: center;
-      padding: 18px 0 14px 0;
-      box-shadow: 0 2px 16px #64b5f655;
-      border-bottom: 2px solid #fff176;
-      z-index: 1000;
-      position: relative;
+    #soundwave-svg {
+      width: 100vw;
+      height: 100vh;
     }
-
-    .hero-highlight {
-  display: inline-block;
-  font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-  font-size: 1.35em;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  background: linear-gradient(90deg, #64b5f6, #fff176, #81c784, #64b5f6 80%);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: showcase-hue-move 5s ease-in-out infinite;
-  filter: drop-shadow(0 2px 12px #222a);
-  margin-top: 12px;
-}
-
-body.party-mode {
-  animation: party-bg 1.2s ease-in-out infinite;
-}
-
-@keyframes party-bg {
-  0%   { background: linear-gradient(120deg, #ff4e8e, #fff176, #64b5f6); }
-  25%  { background: linear-gradient(120deg, #a259f7, #ff4e8e, #fff176); }
-  50%  { background: linear-gradient(120deg, #64b5f6, #a259f7, #ff4e8e); }
-  75%  { background: linear-gradient(120deg, #fff176, #64b5f6, #a259f7); }
-  100% { background: linear-gradient(120deg, #ff4e8e, #fff176, #64b5f6); }
-}
-
-.highlights-section .highlight-bubble {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center; /* This ensures text is centered horizontally */
-  width: 240px;
-  height: 110px;
-  border-radius: 32px;
-  background: linear-gradient(120deg, #64b5f6 60%, #a259f7 100%);
-  color: #fff;
-  font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-  font-size: 1.08em;
-  font-weight: 700;
-  box-shadow: 0 2px 12px #64b5f6cc;
-  margin: 0;
-  padding: 0 18px;
-  word-break: break-word;
-  box-sizing: border-box;
-}
-
-.ar-primer-btn {
-  display: inline-block;
-  background: linear-gradient(90deg,#ff4e8e,#a259f7 70%,#64b5f6 100%);
-  color: #fff;
-  font-family: 'Orbitron','Inter',Arial,sans-serif;
-  font-size: 1.18em;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  border-radius: 22px;
-  padding: 18px 44px;
-  box-shadow: 0 6px 32px #a259f7cc;
-  text-decoration: none;
-  margin: 0 0 18px 0;
-  transition: transform 0.18s cubic-bezier(.4,1.4,.6,1), box-shadow 0.2s, background 0.2s;
-}
-
-.ar-primer-btn:hover {
-  transform: scale(1.12);
-  box-shadow: 0 12px 48px #64b5f6cc;
-}
-
-    /* AudioReactive v3 Feature Showcase Section */
-.ar-v3-showcase {
-  max-width: 900px;
-  margin: 32px auto 0 auto;
-  padding: 24px 18px 18px 18px;
-  border-radius: 24px;
-  background: linear-gradient(120deg, #181a2a 0%, #6f6fff 40%, #b36fff 70%, #00eaff 100%);
-  box-shadow: 0 4px 32px #00eaff44;
-}
-.ar-v3-showcase h1 {
-  font-family: 'Orbitron', 'Inter', Arial, sans-serif;
-  font-size: 2.2em;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  background: linear-gradient(90deg, #00eaff 10%, #6f6fff 40%, #b36fff 70%, #00eaff 100%);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: hero-gradient 7s ease-in-out infinite;
-  filter: drop-shadow(0 0 12px #00eaff88);
-  margin-bottom: 10px;
-}
-.ar-v3-showcase .feature-desc {
-  font-size: 1.15em;
-  color: #e0e6ff;
-  margin-bottom: 18px;
-  line-height: 1.5;
-}
-.ar-v3-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
-}
-.ar-v3-gallery-item {
-  background: #232a3a;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px #00eaff88;
-  border: 1.5px solid #6f6fff;
-  padding: 16px 12px;
-  max-width: 340px;
-}
-.ar-v3-gallery-item video {
-  width: 100%;
-  max-width: 320px;
-  max-height: 180px;
-  border-radius: 12px;
-  background: #181a2a;
-  box-shadow: 0 2px 12px #00eaffcc;
-  margin-bottom: 10px;
-}
-.ar-v3-gallery-item div {
-  font-size: 1em;
-  color: #64b5f6;
-  font-weight: 700;
-  text-align: center;
-}
-
-.ar-title-container {
-  position: relative;
-  box-shadow: none; /* Remove animated box-shadow from main container */
-}
-
-.ar-title-container::after {
-  content: "";
-  position: absolute;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 0;
-  box-shadow: 0 4px 32px #00eaff44;
-  filter: hue-rotate(0deg);
-  animation: ar-title-glow-hue 6s linear infinite;
-}
-
-@keyframes ar-title-glow-hue {
-  0%   { filter: hue-rotate(0deg); }
-  50%  { filter: hue-rotate(120deg); }
-  100% { filter: hue-rotate(0deg); }
-}
   </style>
-  <!-- Security & CSP -->
-<meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  script-src 'self' 'unsafe-inline';
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  font-src 'self' https://fonts.gstatic.com;
-  img-src 'self' https: data:;
-  frame-src https://www.youtube.com;
-">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-<meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' https: data:;
+    frame-src https://www.youtube.com;
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
 <body>
-  <!--<div class="update-banner">
-    🚀 <b>AudioReactive 3.0 Coming to Fab the end of August! 🚀
-  </div>-->
-    <!-- Add this at the top of the page, just after <body>: -->
-  <div class="ar-title-container" style="
-  width:100%;max-width:520px;margin:32px auto 0 auto;
-  padding:24px 18px 18px 18px;
-  border-radius:12px;
-  background:linear-gradient(120deg,rgba(24,26,42,0.22) 0%,rgba(111,111,255,0.22) 40%,rgba(179,111,255,0.22) 70%,rgba(0,234,255,0.22) 100%);
-  box-shadow:0 4px 32px #00eaff44;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  position:relative;
-  overflow:hidden;
-">
-    <img src="../images/AudioReactive_LOGO.png" alt="AudioReactive Logo"
-      style="width:440px;max-width:160vw;margin-bottom:4px;border-radius:18px;background:#181a2a;">
-    <h1 style="font-family:'Orbitron','Inter',Arial,sans-serif;font-size:2.8em;font-weight:900;letter-spacing:0.04em;
-      background:linear-gradient(90deg,#00eaff 10%,#6f6fff 40%,#b36fff 70%,#00eaff 100%);
-      background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      animation:hero-gradient 7s ease-in-out infinite;filter:drop-shadow(0 0 18px #00eaff88);margin-bottom:10px;text-align:center;">
-      Unreal Engine <strong style="font-size:1.2em;">5</strong>
-    </h1>
-    <!-- Stylized custom spline zap graphic -->
-    <svg width="320" height="38" viewBox="0 0 320 38" fill="none" xmlns="http://www.w3.org/2000/svg"
-      style="margin-top:8px;filter:drop-shadow(0 0 12px #00eaff88);">
-      <defs>
-        <linearGradient id="zap-gradient" x1="0" y1="19" x2="320" y2="19" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#00eaff"/>
-          <stop offset="0.4" stop-color="#6f6fff"/>
-          <stop offset="0.7" stop-color="#b36fff"/>
-          <stop offset="1" stop-color="#ff4e8e"/>
-        </linearGradient>
-      </defs>
-      <path d="M0,19 Q40,5 80,19 Q120,33 160,19 Q200,5 240,19 Q280,33 320,19"
-        stroke="url(#zap-gradient)" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.92"/>
-      <polyline points="40,5 45,15 55,7 60,19 70,11 75,19"
-        stroke="#fff176" stroke-width="2.2" fill="none" opacity="0.7"/>
-      <polyline points="200,5 205,15 215,7 220,19 230,11 235,19"
-        stroke="#fff176" stroke-width="2.2" fill="none" opacity="0.7"/>
-    </svg>
+  <!-- Hero Section -->
+  <div class="hero-container">
+    <div class="logo-section">
+      <img src="../images/AudioReactive_LOGO.png" alt="AudioReactive Logo">
+    </div>
+    <div class="content-section">
+      <div class="title-group">
+        <h1 class="main-title">
+          AudioReactive for<br>
+          Unreal Engine <strong style="font-size:1.1em;">5</strong>
+        </h1>
+        <svg class="wave-decoration" width="320" height="38" viewBox="0 0 320 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="zap-gradient" x1="0" y1="19" x2="320" y2="19" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00eaff"/>
+              <stop offset="0.4" stop-color="#6f6fff"/>
+              <stop offset="0.7" stop-color="#b36fff"/>
+              <stop offset="1" stop-color="#ff4e8e"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,19 Q40,5 80,19 Q120,33 160,19 Q200,5 240,19 Q280,33 320,19"
+            stroke="url(#zap-gradient)" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.92"/>
+          <polyline points="40,5 45,15 55,7 60,19 70,11 75,19"
+            stroke="#fff176" stroke-width="2.2" fill="none" opacity="0.7"/>
+          <polyline points="200,5 205,15 215,7 220,19 230,11 235,19"
+            stroke="#fff176" stroke-width="2.2" fill="none" opacity="0.7"/>
+        </svg>
+      </div>
+      <p class="description-text">
+        Instantly make meshes, materials, particles, lights, and DMX fixtures react to music or sound.
+      </p>
+      <span class="highlight-text">
+        Bring your scenes to life!<br>
+        NO code required.
+      </span>
+      <div class="button-group">
+        <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
+        <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
+      </div>
+    </div>
   </div>
-<section class="hero">
-  <p class="hero-desc">
-    Instantly make meshes, materials, particles, lights, and DMX fixtures react to music or sound.
-  </p>
-  <span class="hero-highlight">Bring your scenes to life!<br>NO code required.</span>
-  <br><br>
-  <div class="hero-btn-row">
-    <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
-    <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
-  </div>
-  <!-- Move the hero-soundwave SVG down here, just above Full Length Examples -->
-  <svg class="hero-soundwave" width="320" height="32" viewBox="0 0 320 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <filter id="wave-distort" x="-20%" y="-50%" width="140%" height="200%">
-        <feTurbulence id="turb" baseFrequency="0.03 0.15" numOctaves="2" seed="2" type="fractalNoise" result="turb"/>
-        <feDisplacementMap in2="turb" in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-    </defs>
-    <polyline
-      filter="url(#wave-distort)"
-      points="0,16 8,10 16,22 24,8 32,24 40,12 48,20 56,14 64,18 72,12 80,22 88,10 96,24 104,8 112,20 120,14 128,18 136,12 144,22 152,10 160,24 168,8 176,20 184,14 192,18 200,12 208,22 216,10 224,24 232,8 240,20 248,14 256,18 264,12 272,22 280,10 288,24 296,8 304,20 312,14 320,16"
-      stroke="#00eaff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.85"/>
-  </svg>
-  <div class="demo-section">
-    <!--<h2>See AudioReactive in Action</h2>-->
-    <div class="video-galleries">
-      <!-- Main 16:9 Gallery -->
-      <div class="video-gallery main-gallery" style="margin: 0 auto; max-width: 700px;">
-        <h3 class="showcase-heading">Full Length Examples</h3>
-        <div class="video-grid" style="max-height: 400px; overflow-y: auto;">
-          <div class="video-thumb" data-video="tDN36A4GY0A">
-            <img src="https://img.youtube.com/vi/tDN36A4GY0A/hqdefault.jpg" alt="Demo 1">
-            <span class="play-btn">&#9658;</span>
-          </div>
-          <div class="video-thumb" data-video="RIAoybR0RqA">
-            <img src="https://img.youtube.com/vi/RIAoybR0RqA/hqdefault.jpg" alt="Demo 2">
-            <span class="play-btn">&#9658;</span>
-          </div>
-          <div class="video-thumb" data-video="DYHG-BUa6eM">
-            <img src="https://img.youtube.com/vi/DYHG-BUa6eM/hqdefault.jpg" alt="Demo 3">
-            <span class="play-btn">&#9658;</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Divider: Soundwave SVG -->
-    <svg class="hero-soundwave" width="320" height="32" viewBox="0 0 320 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:32px auto;">
-      <defs>
-        <filter id="wave-distort-divider1" x="-20%" y="-50%" width="140%" height="200%">
-          <feTurbulence baseFrequency="0.03 0.15" numOctaves="2" seed="2" type="fractalNoise" result="turb"/>
-          <feDisplacementMap in2="turb" in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/>
-        </filter>
-      </defs>
-      <polyline
-        filter="url(#wave-distort-divider1)"
-        points="0,16 8,10 16,22 24,8 32,24 40,12 48,20 56,14 64,18 72,12 80,22 88,10 96,24 104,8 112,20 120,14 128,18 136,12 144,22 152,10 160,24 168,8 176,20 184,14 192,18 200,12 208,22 216,10 224,24 232,8 240,20 248,14 256,18 264,12 272,22 280,10 288,24 296,8 304,20 312,14 320,16"
-        stroke="#00eaff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.85"/>
-    </svg>
-    <!-- Shorts Gallery: now on its own line, full width -->
-    <div class="shorts-gallery-container">
-      <div class="video-gallery shorts-gallery" style="max-width: 700px; margin: 32px auto 0 auto;">
-        <h3 class="shorts-heading">Vertical Shorts</h3>
-        <div class="shorts-strip">
-          <div class="short-thumb" data-video="AxnpEaIT6xs">
-            <img src="https://img.youtube.com/vi/AxnpEaIT6xs/hqdefault.jpg" alt="Short 1">
-            <span class="play-btn">&#9658;</span>
-          </div>
-          <div class="short-thumb" data-video="CLkXr9hu5BI">
-            <img src="https://img.youtube.com/vi/CLkXr9hu5BI/hqdefault.jpg" alt="Short 2">
-            <span class="play-btn">&#9658;</span>
-          </div>
-          <div class="short-thumb" data-video="nCNGJAkmGyM">
-            <img src="https://img.youtube.com/vi/nCNGJAkmGyM/hqdefault.jpg" alt="Short 3">
-            <span class="play-btn">&#9658;</span>
-          </div>
-          <div class="short-thumb" data-video="WxYo4iG0-uY">
-            <img src="https://img.youtube.com/vi/WxYo4iG0-uY/hqdefault.jpg" alt="Short 4">
-            <span class="play-btn">&#9658;</span>
-          </div>
-          <div class="short-thumb" data-video="jF8R8y4vDTM">
-            <img src="https://img.youtube.com/vi/jF8R8y4vDTM/hqdefault.jpg" alt="Short 5">
-            <span class="play-btn">&#9658;</span>
-          </div>
-          <div class="short-thumb" data-video="HpbQLFqLbqc">
-            <img src="https://img.youtube.com/vi/HpbQLFqLbqc/hqdefault.jpg" alt="Short 6">
-            <span class="play-btn">&#9658;</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Divider: Soundwave SVG -->
-    <svg class="hero-soundwave" width="320" height="32" viewBox="0 0 320 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:32px auto;">
-      <defs>
-        <filter id="wave-distort-divider2" x="-20%" y="-50%" width="140%" height="200%">
-          <feTurbulence baseFrequency="0.03 0.15" numOctaves="2" seed="2" type="fractalNoise" result="turb"/>
-          <feDisplacementMap in2="turb" in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/>
-        </filter>
-      </defs>
-      <polyline
-        filter="url(#wave-distort-divider2)"
-        points="0,16 8,10 16,22 24,8 32,24 40,12 48,20 56,14 64,18 72,12 80,22 88,10 96,24 104,8 112,20 120,14 128,18 136,12 144,22 152,10 160,24 168,8 176,20 184,14 192,18 200,12 208,22 216,10 224,24 232,8 240,20 248,14 256,18 264,12 272,22 280,10 288,24 296,8 304,20 312,14 320,16"
-        stroke="#00eaff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.85"/>
-    </svg>
-    <!-- Tutorials Gallery -->
-    <div class="video-gallery tutorials-gallery" style="margin: 40px auto 0 auto; max-width: 700px;">
-      <h3 class="tutorials-heading">Tutorials</h3>
-      <div class="video-grid">
-        <div class="video-thumb" data-video="DrsU8OB6Q0Y">
-          <img src="https://img.youtube.com/vi/DrsU8OB6Q0Y/hqdefault.jpg" alt="Tutorial 1">
-          <span class="play-btn">&#9658;</span>
-        </div>
-        <div class="video-thumb" data-video="gNOzQNSr2cw">
-          <img src="https://img.youtube.com/vi/gNOzQNSr2cw/hqdefault.jpg" alt="Tutorial 2">
-          <span class="play-btn">&#9658;</span>
-        </div>
-        <div class="video-thumb" data-video="JdZOO1pQEtc">
-          <img src="https://img.youtube.com/vi/JdZOO1pQEtc/hqdefault.jpg" alt="Tutorial 3">
-          <span class="play-btn">&#9658;</span>
-        </div>
-        <!-- Add more tutorial video-thumb blocks here -->
-      </div>
-    </div>
-    <!--
-    <div class="links">
-      <a href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Fab Listing</a>
-      <a href="https://www.youtube.com/@AudioReactive_UE" target="_blank">YouTube Channel</a>
-      <a href="mailto:Daniel.Jensen01@gmail.com">Contact the Creator</a>
-    </div>
-    -->
-    <br>
-  </section>
 
-  <div style="text-align:center; margin:36px 0 18px 0;">
-  <a href="../GuideAR/GuideAR.html" class="ar-primer-btn">
-AudioReactive Primer
-</a>
-</div>
+  <!-- AR Primer Button Section -->
+  <div class="ar-primer-section">
+    <a href="../GuideAR/GuideAR.html" class="ar-primer-btn">
+      AudioReactive Primer
+    </a>
+  </div>
+
+  <!-- Highlights Section -->
   <section class="highlights-section">
-    <!--<h2>Why Choose AudioReactive?</h2>-->
     <ul class="highlights-list">
       <li>
         <span class="highlight-title">Blueprint-Only Simplicity</span>
@@ -1157,48 +595,24 @@ AudioReactive Primer
         <span class="highlight-desc">Regular updates and a growing creative community.</span>
       </li>
     </ul>
-  </section><!--
-  <section class="gallery-section">
-    <h2 class="showcase-heading">AudioReactive Blueprint Screenshots</h2>
-    <div class="gallery-grid">
-      <img src="../images/BluePrintScreenshots/blueprint1.png" alt="Blueprint 1">
-      <img src="../images/BluePrintScreenshots/blueprint2.png" alt="Blueprint 2">
-      <img src="../images/BluePrintScreenshots/blueprint3.png" alt="Blueprint 3">
-      <img src="../images/BluePrintScreenshots/blueprint4.png" alt="Blueprint 4">
-      <img src="../images/BluePrintScreenshots/blueprint5.png" alt="Blueprint 5">
-      <img src="../images/BluePrintScreenshots/blueprint6.png" alt="Blueprint 6">
-      <img src="../images/BluePrintScreenshots/blueprint7.png" alt="Blueprint 7">
-      <img src="../images/BluePrintScreenshots/blueprint8.png" alt="Blueprint 8">
-      <img src="../images/BluePrintScreenshots/blueprint9.png" alt="Blueprint 9">
-      <img src="../images/BluePrintScreenshots/blueprint10.png" alt="Blueprint 10">
-      <img src="../images/BluePrintScreenshots/blueprint11.png" alt="Blueprint 11">
-      <img src="../images/BluePrintScreenshots/blueprint12.png" alt="Blueprint 12">
-       Add more images as needed 
-    </div>
-  </section>-->
-  <div class="ar-v3-showcase"
-  style="max-width:900px;margin:32px auto 0 auto;padding:18px 8px 12px 8px;border-radius:18px;
-    background:linear-gradient(90deg,rgba(24,26,42,0.22) 0%,rgba(111,111,255,0.22) 40%,rgba(179,111,255,0.22) 70%,rgba(0,234,255,0.22) 100%);
-    box-shadow:0 2px 18px #00eaff33;animation:ar-v3-bg-move 8s ease-in-out infinite;">
-    <h1 style="font-family:'Orbitron','Inter',Arial,sans-serif;font-size:2.0em;font-weight:900;letter-spacing:0.04em;
-    background:linear-gradient(90deg,#00eaff 10%,#6f6fff 40%,#b36fff 70%,#00eaff 100%);
-    background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-    animation:hero-gradient 7s ease-in-out infinite;filter:drop-shadow(0 0 12px #00eaff88);margin-bottom:6px;text-align:center;">
-      AudioReactive v3 – End of August Update!
-    </h1>
+  </section>
+
+  <!-- AR V3 Showcase -->
+  <div class="ar-v3-showcase">
+    <h1>AudioReactive v3 – End of August Update!</h1>
     <ul style="
-      font-family:'Orbitron', 'Montserrat', Arial, sans-serif;
-      font-size:1em;
-      color:#51a2ff;
-      margin-bottom:10px;
-      line-height:1.7;
-      list-style:disc inside;
-      padding-left:32px;
-      padding-right:32px;
-      text-align:left;
-      text-shadow:0 0 2px #00eaff88, 0 0 2px #181a2a;
-      font-weight:700;
-      letter-spacing:0.02em;
+      font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
+      font-size: 1em;
+      color: #51a2ff;
+      margin-bottom: 10px;
+      line-height: 1.7;
+      list-style: disc inside;
+      padding-left: 32px;
+      padding-right: 32px;
+      text-align: left;
+      text-shadow: 0 0 2px #00eaff88, 0 0 2px #181a2a;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     ">
       <li><strong>Split Band Processing:</strong> Metasound frequency splitting for band based reactions.</li>
       <li><strong>Live Audio Input:</strong> React to your voice or PC audio in real time.</li>
@@ -1206,48 +620,20 @@ AudioReactive Primer
       <li><strong>Audio Smoothing:</strong> Per-track smoothing for softer reactions and improved DMX acceleration control.</li>
       <li><strong>Built-in Tooltips:</strong> Hover for instant help on nearly every parameter.</li>
     </ul>
-    <!--
-    <div class="ar-v3-gallery"
-    style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:18px;justify-items:center;align-items:center;overflow-x:auto;padding-bottom:8px;">
-      <div class="ar-v3-gallery-item" style="background:#232a3a;border-radius:14px;box-shadow:0 2px 12px #00eaff88;border:1px solid #6f6fff;padding:10px 6px;max-width:220px;min-width:180px;">
-        <video src="gallery/LiveAudioInputDemo.mp4" controls loop muted playsinline style="width:100%;max-width:200px;max-height:110px;border-radius:8px;background:#181a2a;box-shadow:0 2px 8px #00eaffcc;margin-bottom:6px;"></video>
-        <div style="font-size:0.98em;color:#64b5f6;font-weight:700;text-align:center;">Live Audio Input</div>
-      </div>
-      <div class="ar-v3-gallery-item" style="background:#232a3a;border-radius:14px;box-shadow:0 2px 12px #ff4e8e88;border:1px solid #b36fff;padding:10px 6px;max-width:220px;min-width:180px;">
-        <video src="gallery/RapidFireDemo.mp4" controls loop muted playsinline style="width:100%;max-width:200px;max-height:110px;border-radius:8px;background:#181a2a;box-shadow:0 2px 8px #ff4e8ecc;margin-bottom:6px;"></video>
-        <div style="font-size:0.98em;color:#ff4e8e;font-weight:700;text-align:center;">Rapid Fire FX</div>
-      </div>
-      <div class="ar-v3-gallery-item" style="background:#232a3a;border-radius:14px;box-shadow:0 2px 12px #fff17688;border:1px solid #fff176;padding:10px 6px;max-width:220px;min-width:180px;">
-        <video src="gallery/SmoothingDemo.mp4" controls loop muted playsinline style="width:100%;max-width:200px;max-height:110px;border-radius:8px;background:#181a2a;box-shadow:0 2px 8px #fff176cc;margin-bottom:6px;"></video>
-        <div style="font-size:0.98em;color:#fff176;font-weight:700;text-align:center;">Audio Smoothing</div>
-      </div>
-      <div class="ar-v3-gallery-item" style="background:#232a3a;border-radius:14px;box-shadow:0 2px 12px #81c78488;border:1px solid #81c784;padding:10px 6px;max-width:220px;min-width:180px;">
-        <video src="gallery/DetailsRolloutDemo.mp4" controls loop muted playsinline style="width:100%;max-width:200px;max-height:110px;border-radius:8px;background:#181a2a;box-shadow:0 2px 8px #81c784cc;margin-bottom:6px;"></video>
-        <div style="font-size:0.98em;color:#81c784;font-weight:700;text-align:center;">Details Rollout & Tooltips</div>
-      </div>
-      <div class="ar-v3-gallery-item" style="background:#232a3a;border-radius:14px;box-shadow:0 2px 12px #b36fff88;border:1px solid #b36fff;padding:10px 6px;max-width:220px;min-width:180px;">
-        <video src="gallery/TimerPerformanceDemo.mp4" controls loop muted playsinline style="width:100%;max-width:200px;max-height:110px;border-radius:8px;background:#181a2a;box-shadow:0 2px 8px #b36fffcc;margin-bottom:6px;"></video>
-        <div style="font-size:0.98em;color:#b36fff;font-weight:700;text-align:center;">Custom Timer Performance</div>
-      </div>
-    </div>-->
   </div>
-    <div style="width:100%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin:36px 0 28px 0;">
-    <button id="party-switch"
-      style="background:radial-gradient(circle at 60% 40%, #ff4e8e 0%, #fff176 80%, #a259f7 100%);
-             color:#181a2a; font-family:'Orbitron','Inter',Arial,sans-serif;
-             font-size:1.1em; font-weight:900; letter-spacing:0.06em;
-             border-radius:50%; width:88px; height:88px; box-shadow:0 0 32px #ff4e8ecc, 0 0 0 6px #fff17688;
-             border:none; cursor:pointer; transition:box-shadow 0.2s,background 0.2s; position:relative;
-             display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
+
+  <!-- Party Button -->
+  <div class="party-button-section">
+    <button id="party-switch">
       <span style="font-size:2em; line-height:1; margin:0;">🎉</span>
       <span style="font-size:0.62em; font-weight:700; margin:0; line-height:1.1; text-align:center;">Party<br>Switch</span>
     </button>
     <div style="font-family:'Orbitron','Inter',Arial,sans-serif; font-size:1em; font-weight:700; color:#ff4e8e; margin-top:8px; text-align:center;">
-      <br>Treat Yo’ Self!
+      <br>Treat Yo' Self!
     </div>
   </div>
 
-  <!-- Lightbox for video playback -->
+  <!-- Lightboxes -->
   <div id="video-lightbox">
     <div id="video-lightbox-content">
       <button id="video-lightbox-close" aria-label="Close">&times;</button>
@@ -1255,85 +641,72 @@ AudioReactive Primer
     </div>
   </div>
 
-  <!-- Image Lightbox for gallery screenshots -->
-  <div id="img-lightbox" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100vw; height:100vh; background:rgba(10,20,40,0.92); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
-    <span id="img-lightbox-close" style="position:absolute;top:24px;right:36px;font-size:3em;color:#fff;cursor:pointer;z-index:10;">&times;</span>
-    <img id="img-lightbox-img" src="" alt="Screenshot" style="max-width:92vw;max-height:88vh;border-radius:18px;box-shadow:0 8px 48px #64b5f6cc;">
+  <div id="img-lightbox">
+    <span id="img-lightbox-close">&times;</span>
+    <img id="img-lightbox-img" src="" alt="Screenshot">
   </div>
 
-  <div id="soundwave-bg" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;pointer-events:none;overflow:hidden;">
-  <svg id="soundwave-svg" width="100vw" height="100vh" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="width:100vw;height:100vh;">
-  <!-- Paths will be added by JS -->
-</svg>
-</div>
+  <!-- Soundwave Background -->
+  <div id="soundwave-bg">
+    <svg id="soundwave-svg" width="100vw" height="100vh" viewBox="0 0 1920 1080" preserveAspectRatio="none"></svg>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-  // Party Switch functionality
-  const partyBtn = document.getElementById('party-switch');
-  let partyActive = false;
-  if (partyBtn) {
-    partyBtn.addEventListener('click', function() {
-      if (partyActive) return;
-      partyActive = true;
-      document.body.classList.add('party-mode');
-      setTimeout(() => {
-        document.body.classList.remove('party-mode');
-        partyActive = false;
-      }, 4000);
-    });
-  }
-
-  // Enable mouse wheel horizontal scrolling for shorts-strip
-  const shortsStrip = document.querySelector('.shorts-strip');
-  if (shortsStrip) {
-    shortsStrip.addEventListener('wheel', function(e) {
-      if (e.deltaY !== 0) {
-        e.preventDefault();
-        shortsStrip.scrollLeft += e.deltaY;
+      // Party Switch functionality
+      const partyBtn = document.getElementById('party-switch');
+      let partyActive = false;
+      if (partyBtn) {
+        partyBtn.addEventListener('click', function() {
+          if (partyActive) return;
+          partyActive = true;
+          document.body.classList.add('party-mode');
+          setTimeout(() => {
+            document.body.classList.remove('party-mode');
+            partyActive = false;
+          }, 4000);
+        });
       }
-    }, { passive: false });
-  }
 
-  // Animated soundwave lines - dynamic, full viewport coverage
-  const svg = document.getElementById('soundwave-svg');
-  const waveCount = 12;
-  const colors = [
-    "#00eaff", "#a259f7", "#fff176", "#81c784",
-    "#ff4e8e", "#6f6fff", "#b36fff", "#64b5f6",
-    "#e0e6ff", "#ffb6b6", "#ffd700", "#00ffb2"
-  ];
-  const waves = [];
-  for (let i = 0; i < waveCount; i++) {
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("stroke", colors[i % colors.length]);
-    path.setAttribute("stroke-width", 2 + (waveCount - i) * 0.3);
-    path.setAttribute("fill", "none");
-    path.setAttribute("opacity", 0.07);
-    svg.appendChild(path);
-    waves.push(path);
-  }
-  let t = 0;
-  function animateWaves() {
-    t += 0.012; // slower motion
-    const svgHeight = svg.viewBox.baseVal.height;
-    waves.forEach((el, i) => {
-      const amp = 12 + i * 2.2;
-      const freq = 0.5 + i * 0.07;
-      // Spread waves evenly from 40px to svgHeight-40px
-      const baseY = 40 + i * ((svgHeight - 80) / (waveCount - 1));
-      let d = `M0,${baseY}`;
-      for (let j = 0; j <= 8; j++) {
-        const x = j * 240;
-        const y = baseY + Math.sin(t * freq + j * freq + i) * amp;
-        d += ` Q${x + 120},${y + Math.cos(t + j + i) * (amp/2)} ${x + 240},${baseY + Math.sin(t * freq + j * freq + i + 0.7) * amp}`;
+      // Animated soundwave lines - dynamic, full viewport coverage
+      const svg = document.getElementById('soundwave-svg');
+      const waveCount = 12;
+      const colors = [
+        "#00eaff", "#a259f7", "#fff176", "#81c784",
+        "#ff4e8e", "#6f6fff", "#b36fff", "#64b5f6",
+        "#e0e6ff", "#ffb6b6", "#ffd700", "#00ffb2"
+      ];
+      const waves = [];
+      for (let i = 0; i < waveCount; i++) {
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("stroke", colors[i % colors.length]);
+        path.setAttribute("stroke-width", 2 + (waveCount - i) * 0.3);
+        path.setAttribute("fill", "none");
+        path.setAttribute("opacity", 0.07);
+        svg.appendChild(path);
+        waves.push(path);
       }
-      el.setAttribute('d', d);
+      
+      let t = 0;
+      function animateWaves() {
+        t += 0.012;
+        const svgHeight = svg.viewBox.baseVal.height;
+        waves.forEach((el, i) => {
+          const amp = 12 + i * 2.2;
+          const freq = 0.5 + i * 0.07;
+          const baseY = 40 + i * ((svgHeight - 80) / (waveCount - 1));
+          let d = `M0,${baseY}`;
+          for (let j = 0; j <= 8; j++) {
+            const x = j * 240;
+            const y = baseY + Math.sin(t * freq + j * freq + i) * amp;
+            d += ` Q${x + 120},${y + Math.cos(t + j + i) * (amp/2)} ${x + 240},${baseY + Math.sin(t * freq + j * freq + i + 0.7) * amp}`;
+          }
+          el.setAttribute('d', d);
+        });
+        requestAnimationFrame(animateWaves);
+      }
+      animateWaves();
     });
-    requestAnimationFrame(animateWaves);
-  }
-  animateWaves();
-});
   </script>
 </body>
 </html>
