@@ -37,15 +37,13 @@
       max-width: 1000px;
       margin: 40px auto 32px auto;
       padding: 48px 32px;
-      background: linear-gradient(135deg, 
-        rgba(0,234,255,0.08) 0%, 
-        rgba(111,111,255,0.12) 25%, 
-        rgba(179,111,255,0.10) 50%, 
-        rgba(255,78,142,0.08) 75%, 
-        rgba(0,234,255,0.06) 100%);
+      background: linear-gradient(90deg, 
+        rgba(24,26,42,0.22) 0%, 
+        rgba(111,111,255,0.22) 40%, 
+        rgba(179,111,255,0.22) 70%, 
+        rgba(0,234,255,0.22) 100%);
       border-radius: 32px;
-      box-shadow: 0 8px 48px rgba(0,234,255,0.2), 
-                  inset 0 1px 0 rgba(255,255,255,0.1);
+      box-shadow: 0 2px 18px #00eaff33;
       border: 1px solid rgba(100,181,246,0.2);
       display: flex;
       flex-direction: column;
@@ -62,14 +60,8 @@
       right: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(0,234,255,0.1) 0%, transparent 70%);
-      animation: pulse-glow 8s ease-in-out infinite;
+      background: none;
       pointer-events: none;
-    }
-
-    @keyframes pulse-glow {
-      0%, 100% { opacity: 0.5; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.1); }
     }
 
     .logo-section {
@@ -131,12 +123,15 @@
     }
 
     .description-text {
+      font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
       font-size: 1.25em;
       line-height: 1.6;
-      color: #e0e6ff;
+      color: #51a2ff;
       text-align: center;
       margin-bottom: 12px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      text-shadow: 0 0 2px #00eaff88, 0 0 2px #181a2a;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
     .highlight-text {
