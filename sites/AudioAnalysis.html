@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AudioAnalysis - Professional MIDI Control</title>
+  <meta name="description" content="Professional-grade audio analysis with flexible MIDI control integration for real-time performance">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-bg: #181a2a;
+      --secondary-bg: rgba(30,40,60,0.7);
+      --accent-blue: #00eaff;
+      --accent-purple: #6f6fff;
+      --accent-pink: #b36fff;
+      --accent-green: #81c784;
+      --accent-yellow: #fff176;
+      --text-primary: #e0e6ff;
+      --text-secondary: #e0e0e0;
+      --border-color: #64b5f633;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(120deg, var(--primary-bg) 0%, #1a0a2a 100%);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    .header {
+      background: linear-gradient(90deg, var(--accent-blue) 10%, var(--accent-purple) 40%, var(--accent-pink) 70%, var(--accent-blue) 100%);
+      background-size: 200% 200%;
+      animation: header-gradient 7s ease-in-out infinite;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 32px rgba(0,234,255,0.3);
+    }
+
+    .header h1 {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 2.5em;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: var(--primary-bg);
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 1.1em;
+      color: var(--primary-bg);
+      opacity: 0.9;
+    }
+
+    @keyframes header-gradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .panel {
+      background: var(--secondary-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .panel:hover {
+      box-shadow: 0 8px 48px rgba(100,181,246,0.4);
+      border-color: var(--accent-green);
+    }
+
+    .panel h2 {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 1.4em;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #666;
+      transition: background 0.3s;
+    }
+
+    .status-indicator.connected {
+      background: var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-green);
+    }
+
+    .status-indicator.error {
+      background: #ff4444;
+      box-shadow: 0 0 10px #ff4444;
+    }
+
+    .midi-device-list {
+      list-style: none;
+      margin: 15px 0;
+    }
+
+    .midi-device-item {
+      background: rgba(0,234,255,0.1);
+      border: 1px solid rgba(0,234,255,0.3);
+      border-radius: 8px;
+      padding: 12px 15px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .midi-device-item:hover {
+      background: rgba(0,234,255,0.2);
+      border-color: var(--accent-blue);
+    }
+
+    .midi-device-item.active {
+      background: rgba(129,199,132,0.2);
+      border-color: var(--accent-green);
+    }
+
+    .btn {
+      background: var(--accent-blue);
+      color: var(--primary-bg);
+      border: none;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Orbitron', Arial, sans-serif;
+      letter-spacing: 0.02em;
+    }
+
+    .btn:hover {
+      background: var(--accent-green);
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(129,199,132,0.4);
+    }
+
+    .btn:disabled {
+      background: #666;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .control-group {
+      background: rgba(111,111,255,0.1);
+      border: 1px solid rgba(111,111,255,0.3);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s;
+    }
+
+    .control-group:hover {
+      background: rgba(111,111,255,0.15);
+      border-color: var(--accent-purple);
+    }
+
+    .control-group h3 {
+      font-size: 1.1em;
+      color: var(--accent-purple);
+      margin-bottom: 15px;
+      font-family: 'Orbitron', Arial, sans-serif;
+    }
+
+    .parameter-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 6px;
+      border-left: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .parameter-item.learning {
+      border-left-color: var(--accent-yellow);
+      background: rgba(255,241,118,0.1);
+    }
+
+    .parameter-item.mapped {
+      border-left-color: var(--accent-green);
+      background: rgba(129,199,132,0.1);
+    }
+
+    .parameter-value {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 700;
+      color: var(--accent-blue);
+      min-width: 60px;
+      text-align: right;
+    }
+
+    .learn-btn {
+      background: var(--accent-yellow);
+      color: var(--primary-bg);
+      border: none;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.8em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .learn-btn:hover {
+      background: var(--accent-pink);
+      transform: scale(1.05);
+    }
+
+    .learn-btn.learning {
+      background: var(--accent-pink);
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .visualizer {
+      height: 300px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .visualizer canvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+    }
+
+    .log-panel {
+      background: rgba(0,0,0,0.4);
+      border-radius: 12px;
+      padding: 15px;
+      height: 200px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85em;
+    }
+
+    .log-entry {
+      margin-bottom: 4px;
+      opacity: 0.8;
+    }
+
+    .log-entry.midi { color: var(--accent-blue); }
+    .log-entry.audio { color: var(--accent-green); }
+    .log-entry.error { color: #ff4444; }
+    .log-entry.info { color: var(--accent-yellow); }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .controls-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header h1 {
+        font-size: 2em;
+      }
+    }
+
+    .audio-controls {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+
+    .audio-input-select {
+      background: rgba(0,234,255,0.1);
+      border: 1px solid rgba(0,234,255,0.3);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--text-primary);
+      font-family: inherit;
+      min-width: 200px;
+    }
+
+    .performance-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .stat-value {
+      font-size: 1.5em;
+      font-weight: 700;
+      font-family: 'Orbitron', Arial, sans-serif;
+      color: var(--accent-blue);
+    }
+
+    .stat-label {
+      font-size: 0.8em;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+  </style>
+  <!-- Security & CSP -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' https: data:;
+    connect-src 'self' blob:;
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+  <div class="header">
+    <h1>🎛️ AudioAnalysis</h1>
+    <p>Professional MIDI Control & Real-Time Audio Analysis</p>
+  </div>
+
+  <div class="container">
+    <div class="grid">
+      <!-- MIDI Control Panel -->
+      <div class="panel">
+        <h2>
+          <span class="status-indicator" id="midi-status"></span>
+          MIDI Control
+        </h2>
+        
+        <div class="audio-controls">
+          <button class="btn" id="init-midi">Initialize MIDI</button>
+          <button class="btn" id="refresh-devices">Refresh Devices</button>
+        </div>
+        
+        <div id="midi-devices-container">
+          <h3>Available MIDI Devices:</h3>
+          <ul class="midi-device-list" id="midi-device-list">
+            <li class="midi-device-item">No MIDI devices detected</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Audio Analysis Panel -->
+      <div class="panel">
+        <h2>
+          <span class="status-indicator" id="audio-status"></span>
+          Audio Analysis
+        </h2>
+        
+        <div class="audio-controls">
+          <button class="btn" id="start-audio">Start Analysis</button>
+          <button class="btn" id="stop-audio">Stop Analysis</button>
+          <select class="audio-input-select" id="audio-input-select">
+            <option value="">Select Audio Input...</option>
+          </select>
+        </div>
+        
+        <div class="performance-stats">
+          <div class="stat-item">
+            <div class="stat-value" id="sample-rate">0</div>
+            <div class="stat-label">Sample Rate (Hz)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="buffer-size">0</div>
+            <div class="stat-label">Buffer Size</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="latency">0</div>
+            <div class="stat-label">Latency (ms)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-time Visualizer -->
+      <div class="panel full-width">
+        <h2>Real-time Audio Visualizer</h2>
+        <div class="visualizer">
+          <canvas id="audio-visualizer" width="800" height="300"></canvas>
+        </div>
+      </div>
+
+      <!-- MIDI Parameter Mapping -->
+      <div class="panel">
+        <h2>Parameter Mapping</h2>
+        <p style="margin-bottom: 20px; opacity: 0.8;">Map MIDI controllers to audio analysis parameters for real-time control.</p>
+        
+        <div class="controls-grid">
+          <div class="control-group">
+            <h3>🎚️ Frequency Analysis</h3>
+            <div class="parameter-item" data-param="low-freq">
+              <span>Low Frequency Gain</span>
+              <div>
+                <button class="learn-btn" data-param="low-freq">Learn</button>
+                <span class="parameter-value" id="low-freq-value">0</span>
+              </div>
+            </div>
+            <div class="parameter-item" data-param="mid-freq">
+              <span>Mid Frequency Gain</span>
+              <div>
+                <button class="learn-btn" data-param="mid-freq">Learn</button>
+                <span class="parameter-value" id="mid-freq-value">0</span>
+              </div>
+            </div>
+            <div class="parameter-item" data-param="high-freq">
+              <span>High Frequency Gain</span>
+              <div>
+                <button class="learn-btn" data-param="high-freq">Learn</button>
+                <span class="parameter-value" id="high-freq-value">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>🔊 Volume & Dynamics</h3>
+            <div class="parameter-item" data-param="volume">
+              <span>Master Volume</span>
+              <div>
+                <button class="learn-btn" data-param="volume">Learn</button>
+                <span class="parameter-value" id="volume-value">0</span>
+              </div>
+            </div>
+            <div class="parameter-item" data-param="dynamics">
+              <span>Dynamic Range</span>
+              <div>
+                <button class="learn-btn" data-param="dynamics">Learn</button>
+                <span class="parameter-value" id="dynamics-value">0</span>
+              </div>
+            </div>
+            <div class="parameter-item" data-param="threshold">
+              <span>Threshold Level</span>
+              <div>
+                <button class="learn-btn" data-param="threshold">Learn</button>
+                <span class="parameter-value" id="threshold-value">50</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>⚡ Effects & Processing</h3>
+            <div class="parameter-item" data-param="smoothing">
+              <span>Smoothing Factor</span>
+              <div>
+                <button class="learn-btn" data-param="smoothing">Learn</button>
+                <span class="parameter-value" id="smoothing-value">25</span>
+              </div>
+            </div>
+            <div class="parameter-item" data-param="sensitivity">
+              <span>Sensitivity</span>
+              <div>
+                <button class="learn-btn" data-param="sensitivity">Learn</button>
+                <span class="parameter-value" id="sensitivity-value">75</span>
+              </div>
+            </div>
+            <div class="parameter-item" data-param="resonance">
+              <span>Resonance Q</span>
+              <div>
+                <button class="learn-btn" data-param="resonance">Learn</button>
+                <span class="parameter-value" id="resonance-value">10</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Log -->
+      <div class="panel">
+        <h2>Activity Log</h2>
+        <div class="log-panel" id="activity-log">
+          <div class="log-entry info">System initialized - waiting for MIDI and audio connections...</div>
+        </div>
+        <div style="margin-top: 15px;">
+          <button class="btn" id="clear-log" style="background: #666;">Clear Log</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="audio-analysis-midi.js"></script>
+</body>
+</html>

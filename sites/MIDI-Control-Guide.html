@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIDI Control Documentation - AudioReactive</title>
+  <meta name="description" content="Professional MIDI control documentation for AudioReactive audio analysis system">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../GuideAR/style.css">
+  <style>
+    .midi-demo-section {
+      background: linear-gradient(120deg, rgba(24,26,42,0.8) 0%, rgba(111,111,255,0.1) 40%, rgba(179,111,255,0.1) 70%, rgba(0,234,255,0.1) 100%);
+      border: 1px solid rgba(0,234,255,0.3);
+      border-radius: 18px;
+      padding: 30px;
+      margin: 40px 0;
+      box-shadow: 0 4px 32px rgba(0,234,255,0.2);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .feature-card {
+      background: rgba(30,40,60,0.6);
+      border: 1px solid rgba(100,181,246,0.3);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: #81c784;
+      box-shadow: 0 8px 32px rgba(100,181,246,0.3);
+      transform: translateY(-2px);
+    }
+
+    .feature-card h3 {
+      color: #64b5f6;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 1.2em;
+      margin-bottom: 12px;
+    }
+
+    .midi-controller-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .controller-item {
+      background: rgba(0,234,255,0.1);
+      border: 1px solid rgba(0,234,255,0.3);
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .controller-name {
+      font-weight: 700;
+      color: #00eaff;
+      margin-bottom: 8px;
+    }
+
+    .controller-desc {
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+    .code-block {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(100,181,246,0.3);
+      border-radius: 8px;
+      padding: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    .setup-steps {
+      counter-reset: step-counter;
+    }
+
+    .setup-step {
+      counter-increment: step-counter;
+      background: rgba(129,199,132,0.1);
+      border: 1px solid rgba(129,199,132,0.3);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .setup-step::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: -15px;
+      top: 15px;
+      background: #81c784;
+      color: #181a2a;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: 'Orbitron', Arial, sans-serif;
+    }
+
+    .setup-step h3 {
+      color: #81c784;
+      font-family: 'Orbitron', Arial, sans-serif;
+      margin-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .setup-step p {
+      margin-left: 20px;
+      line-height: 1.6;
+    }
+
+    .warning-box {
+      background: rgba(255,241,118,0.1);
+      border: 1px solid rgba(255,241,118,0.4);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .warning-box .warning-title {
+      color: #fff176;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .launch-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #00eaff, #6f6fff 40%, #b36fff 70%, #ff4e8e 100%);
+      color: #181a2a;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 1.1em;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 15px 30px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(0,234,255,0.3);
+      margin: 20px 0;
+    }
+
+    .launch-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 32px rgba(0,234,255,0.5);
+    }
+
+    .parameter-table {
+      width: 100%;
+      background: rgba(30,40,60,0.6);
+      border: 1px solid rgba(100,181,246,0.3);
+      border-radius: 12px;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .parameter-table th,
+    .parameter-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid rgba(100,181,246,0.2);
+    }
+
+    .parameter-table th {
+      background: rgba(0,234,255,0.1);
+      color: #00eaff;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    .parameter-table tr:hover {
+      background: rgba(100,181,246,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="super-container">
+    <div class="header">
+      Professional MIDI Control<br>
+      Integration Guide
+    </div>
+    
+    <div class="header-sub">
+      Real-time Audio Analysis & Performance Control
+    </div>
+
+    <div class="main-container">
+      <!-- Launch Application Button -->
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="AudioAnalysis.html" class="launch-btn">🎛️ Launch AudioAnalysis Application</a>
+      </div>
+
+      <!-- Introduction Section -->
+      <div class="midi-demo-section">
+        <h1 style="font-family: 'Orbitron', Arial, sans-serif; color: #00eaff; font-size: 2em; margin-bottom: 20px;">
+          🎹 Professional MIDI Control System
+        </h1>
+        <p style="font-size: 1.1em; line-height: 1.6; margin-bottom: 20px;">
+          The AudioAnalysis MIDI Control System provides professional-grade performance control for real-time audio analysis. 
+          Map any MIDI controller to audio analysis parameters for dynamic, hands-on control during live performances or studio work.
+        </p>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>🔗 Web MIDI API Integration</h3>
+            <p>Direct browser connection to MIDI devices without additional drivers or software.</p>
+          </div>
+          <div class="feature-card">
+            <h3>🎚️ MIDI Learn Functionality</h3>
+            <p>One-click mapping of any MIDI controller to any audio parameter with visual feedback.</p>
+          </div>
+          <div class="feature-card">
+            <h3>📊 Real-time Visualization</h3>
+            <p>Live waveform and frequency spectrum display with responsive parameter feedback.</p>
+          </div>
+          <div class="feature-card">
+            <h3>⚡ Low-Latency Performance</h3>
+            <p>Optimized for real-time performance with minimal latency and maximum responsiveness.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Setup Instructions -->
+      <div class="category">
+        <div class="category-header">Setup & Getting Started</div>
+        <div class="category-content">
+          <div class="warning-box">
+            <div class="warning-title">Browser Compatibility</div>
+            <p>This system requires a modern browser with Web MIDI API support (Chrome, Edge, Opera). Firefox requires manual enabling of MIDI support.</p>
+          </div>
+
+          <div class="setup-steps">
+            <div class="setup-step">
+              <h3>Connect Your MIDI Controller</h3>
+              <p>Connect your MIDI controller to your computer via USB or wireless connection. The system supports all standard MIDI controllers including keyboards, control surfaces, and pad controllers.</p>
+            </div>
+
+            <div class="setup-step">
+              <h3>Initialize MIDI System</h3>
+              <p>Click the "Initialize MIDI" button in the AudioAnalysis application. Your browser may request permission to access MIDI devices - click "Allow" to proceed.</p>
+            </div>
+
+            <div class="setup-step">
+              <h3>Connect Audio Input</h3>
+              <p>Click "Start Analysis" and grant microphone access when prompted. Alternatively, select a specific audio input device from the dropdown menu.</p>
+            </div>
+
+            <div class="setup-step">
+              <h3>Map MIDI Controllers</h3>
+              <p>Click "Learn" next to any parameter, then move a control on your MIDI device. The system will automatically map that controller to the parameter.</p>
+            </div>
+
+            <div class="setup-step">
+              <h3>Start Performing</h3>
+              <p>Your MIDI controllers now control audio analysis parameters in real-time! Watch the visualizer respond to both audio input and MIDI control.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Supported Controllers -->
+      <div class="category">
+        <div class="category-header">Supported MIDI Controllers</div>
+        <div class="category-content">
+          <p>The system supports any standard MIDI controller that sends Control Change (CC) messages. Tested and recommended controllers:</p>
+          
+          <div class="midi-controller-list">
+            <div class="controller-item">
+              <div class="controller-name">Akai MPK Mini</div>
+              <div class="controller-desc">Compact 25-key controller with knobs and pads</div>
+            </div>
+            <div class="controller-item">
+              <div class="controller-name">Novation Launchpad</div>
+              <div class="controller-desc">Grid-based pad controller for trigger control</div>
+            </div>
+            <div class="controller-item">
+              <div class="controller-name">Arturia MiniLab</div>
+              <div class="controller-desc">25-key controller with rotary encoders</div>
+            </div>
+            <div class="controller-item">
+              <div class="controller-name">Behringer X-Touch Mini</div>
+              <div class="controller-desc">Dedicated control surface with faders</div>
+            </div>
+            <div class="controller-item">
+              <div class="controller-name">Native Instruments Maschine</div>
+              <div class="controller-desc">Drum machine with extensive controls</div>
+            </div>
+            <div class="controller-item">
+              <div class="controller-name">Any MIDI Keyboard</div>
+              <div class="controller-desc">Standard keyboards with mod wheels, knobs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parameter Reference -->
+      <div class="category">
+        <div class="category-header">Mappable Parameters</div>
+        <div class="category-content">
+          <p>All audio analysis parameters can be mapped to MIDI controllers for real-time performance control:</p>
+          
+          <table class="parameter-table">
+            <thead>
+              <tr>
+                <th>Parameter Category</th>
+                <th>Parameter Name</th>
+                <th>Range</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Frequency Analysis</td>
+                <td>Low Frequency Gain</td>
+                <td>0-100</td>
+                <td>Boost/cut low frequency response</td>
+              </tr>
+              <tr>
+                <td>Frequency Analysis</td>
+                <td>Mid Frequency Gain</td>
+                <td>0-100</td>
+                <td>Boost/cut mid frequency response</td>
+              </tr>
+              <tr>
+                <td>Frequency Analysis</td>
+                <td>High Frequency Gain</td>
+                <td>0-100</td>
+                <td>Boost/cut high frequency response</td>
+              </tr>
+              <tr>
+                <td>Volume & Dynamics</td>
+                <td>Master Volume</td>
+                <td>0-100</td>
+                <td>Overall analysis volume level</td>
+              </tr>
+              <tr>
+                <td>Volume & Dynamics</td>
+                <td>Dynamic Range</td>
+                <td>0-100</td>
+                <td>Compression/expansion of dynamic range</td>
+              </tr>
+              <tr>
+                <td>Volume & Dynamics</td>
+                <td>Threshold Level</td>
+                <td>0-100</td>
+                <td>Minimum level for analysis response</td>
+              </tr>
+              <tr>
+                <td>Effects & Processing</td>
+                <td>Smoothing Factor</td>
+                <td>0-100</td>
+                <td>Temporal smoothing of analysis data</td>
+              </tr>
+              <tr>
+                <td>Effects & Processing</td>
+                <td>Sensitivity</td>
+                <td>0-100</td>
+                <td>Overall analysis sensitivity</td>
+              </tr>
+              <tr>
+                <td>Effects & Processing</td>
+                <td>Resonance Q</td>
+                <td>0-100</td>
+                <td>Frequency band resonance quality</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Advanced Features -->
+      <div class="category">
+        <div class="category-header">Advanced Features</div>
+        <div class="category-content">
+          <div class="subcategory">
+            <h3 style="color: #64b5f6; font-family: 'Orbitron', Arial, sans-serif;">Multi-Device Support</h3>
+            <p>Connect multiple MIDI controllers simultaneously. Each device can control different parameter sets, allowing for complex performance setups.</p>
+          </div>
+
+          <div class="subcategory">
+            <h3 style="color: #64b5f6; font-family: 'Orbitron', Arial, sans-serif;">Real-time Performance Monitoring</h3>
+            <p>Monitor system performance with real-time statistics including sample rate, buffer size, and latency measurements.</p>
+          </div>
+
+          <div class="subcategory">
+            <h3 style="color: #64b5f6; font-family: 'Orbitron', Arial, sans-serif;">Visual Feedback System</h3>
+            <p>Immediate visual feedback shows which controllers are mapped, currently learning, and actively sending data.</p>
+          </div>
+
+          <div class="subcategory">
+            <h3 style="color: #64b5f6; font-family: 'Orbitron', Arial, sans-serif;">Automatic Device Detection</h3>
+            <p>Hot-plug support automatically detects and connects new MIDI devices without system restart.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical Details -->
+      <div class="category">
+        <div class="category-header">Technical Implementation</div>
+        <div class="category-content">
+          <div class="code-block">
+// MIDI Control Change Handler
+handleMIDIMessage(event) {
+  const [status, controller, value] = event.data;
+  
+  if ((status & 0xF0) === 0xB0) { // Control Change
+    const channel = status & 0x0F;
+    this.applyMIDIControl(controller, value);
+  }
+}
+
+// Parameter Application
+applyMIDIControl(controllerId, midiValue) {
+  const paramName = this.midiMappings.get(controllerId);
+  const param = this.parameters[paramName];
+  const paramValue = param.min + (midiValue/127) * (param.max - param.min);
+  
+  this.applyAudioParameter(paramName, paramValue);
+}
+          </div>
+
+          <div class="subcategory">
+            <h3 style="color: #64b5f6; font-family: 'Orbitron', Arial, sans-serif;">Web Audio API Integration</h3>
+            <p>Uses the Web Audio API for low-latency audio processing with real-time parameter updates applied directly to the audio analysis chain.</p>
+          </div>
+
+          <div class="subcategory">
+            <h3 style="color: #64b5f6; font-family: 'Orbitron', Arial, sans-serif;">Canvas-Based Visualization</h3>
+            <p>High-performance canvas rendering with requestAnimationFrame for smooth 60fps visualization that responds to both audio and MIDI input.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Troubleshooting -->
+      <div class="category">
+        <div class="category-header">Troubleshooting</div>
+        <div class="category-content">
+          <div class="subcategory">
+            <h3 style="color: #ff4444;">MIDI Device Not Detected</h3>
+            <p>• Ensure your MIDI device is properly connected and powered on<br>
+            • Try refreshing the device list<br>
+            • Check your browser's MIDI permissions<br>
+            • Some devices require specific drivers - check manufacturer documentation</p>
+          </div>
+
+          <div class="subcategory">
+            <h3 style="color: #ff4444;">Audio Input Issues</h3>
+            <p>• Grant microphone permissions when prompted<br>
+            • Check your system's audio input settings<br>
+            • Try selecting a different audio input device<br>
+            • Ensure your audio interface is recognized by the system</p>
+          </div>
+
+          <div class="subcategory">
+            <h3 style="color: #ff4444;">High Latency or Performance Issues</h3>
+            <p>• Close other applications using audio resources<br>
+            • Reduce buffer size if your audio interface supports it<br>
+            • Use Chrome or Edge for best Web Audio performance<br>
+            • Consider using a dedicated audio interface for lower latency</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Integration with AudioReactive -->
+      <div class="midi-demo-section">
+        <h2 style="font-family: 'Orbitron', Arial, sans-serif; color: #81c784; margin-bottom: 15px;">
+          🔗 Integration with AudioReactive
+        </h2>
+        <p>This MIDI control system complements the AudioReactive Unreal Engine plugin by providing:</p>
+        <ul style="margin: 15px 0; padding-left: 20px; line-height: 1.8;">
+          <li><strong>Real-time Parameter Testing:</strong> Test audio analysis settings before implementing in Unreal Engine</li>
+          <li><strong>Performance Validation:</strong> Validate MIDI controller mappings and response times</li>
+          <li><strong>Parameter Discovery:</strong> Experiment with parameter combinations to find optimal settings</li>
+          <li><strong>Live Performance:</strong> Control AudioReactive parameters during live events via MIDI</li>
+        </ul>
+        
+        <div style="text-align: center; margin-top: 30px;">
+          <a href="../GuideAR/GuideAR.html" class="launch-btn">📖 AudioReactive Documentation</a>
+          <a href="Audioreactive.html" class="launch-btn">🎬 View AudioReactive Demos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
