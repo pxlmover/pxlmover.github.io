@@ -3,79 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Material Overview – AudioReactive Docs</title>
+  <title>AudioReactive Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 </head>
-<script src="../../common.js"></script>
-<body>
+<body data-guide-page="Materials.MaterialOverview">
   <div class="super-container">
-    <div class="header">
-      AudioReactive
-    </div>
-    <div class="header-sub">
-      Material Overview
-    </div>
+    <div class="header">AudioReactive<br>Primer</div>
+    <div class="header-sub" id="doc-page-title"></div>
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
       <div class="section-title"></div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Material Example 1
-          </div>
-          <video src="gifs/PATHGOESHERE.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-            Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Description for Material Example 1.
-          </div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Material Example 2
-          </div>
-          <video src="gifs/PATHGOESHERE.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-            Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Description for Material Example 2.
-          </div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Material Example 3
-          </div>
-          <video src="gifs/PATHGOESHERE.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-            Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Description for Material Example 3.
-          </div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Material Example 4
-          </div>
-          <video src="gifs/PATHGOESHERE.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-            Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Description for Material Example 4.
-          </div>
-        </div>
-      </div>
+      <div class="gallery-grid" id="doc-gallery-grid"></div>
     </div>
   </div>
-  <script>
-document.querySelector('.back-link').addEventListener('click', function(e) {
-  localStorage.setItem('guideARScroll', window.scrollY);
-});
-document.querySelectorAll('.gallery-item video, .gallery-item .gallery-desc').forEach(el => {
-  el.style.cursor = 'pointer';
-});
-  </script>
+  <script src="../docs-content.js"></script>
+  <script src="../doc-page.js"></script>
+  <script src="../../common.js"></script>
+</body>
+</html>

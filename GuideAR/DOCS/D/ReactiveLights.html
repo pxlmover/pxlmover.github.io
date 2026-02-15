@@ -3,50 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Reactive Lights – AudioReactive Docs</title>
+  <title>AudioReactive Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 </head>
-<script src="../../common.js"></script>
-<body>
+<body data-guide-page="D.ReactiveLights">
   <div class="super-container">
-    <div class="header">
-      AudioReactive<br>
-      Primer
-    </div>
-    <div class="header-sub">
-      Reactive Lights
-    </div>
+    <div class="header">AudioReactive<br>Primer</div>
+    <div class="header-sub" id="doc-page-title"></div>
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
       <div class="section-title"></div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Light Control Setup:
-          </div>
-          <video src="../../DOCS/gifs/D/AddLights.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-          Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Add and configure lights in your scene for audio-reactive control.<br>
-            Easily set up intensity, loudness based colorshifting, or static color with intensity only reactions.
-            Enabling "Set Solid Color" will disable color reactions and only use intensity/brightness reaction.<br>
-            Adjust multipliers and assign the audio track<br>
-          </div>
-        </div>
-      </div>
+      <div class="gallery-grid" id="doc-gallery-grid"></div>
     </div>
   </div>
-  <script>
-document.querySelector('.back-link').addEventListener('click', function(e) {
-  localStorage.setItem('guideARScroll', window.scrollY);
-});
-document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
-  el.style.cursor = 'pointer';
-});
-</script>
-<script src="../../common.js"></script>
+  <script src="../docs-content.js"></script>
+  <script src="../doc-page.js"></script>
+  <script src="../../common.js"></script>
 </body>
 </html>

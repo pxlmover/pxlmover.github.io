@@ -3,48 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Rapid Fire – AudioReactive Docs</title>
+  <title>AudioReactive Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 </head>
-<body>
+<body data-guide-page="A.RapidFire">
   <div class="super-container">
-    <div class="header">
-      AudioReactive<br>
-      Primer
-    </div>
-    <div class="header-sub">
-      Rapid Fire
-    </div>
+    <div class="header">AudioReactive<br>Primer</div>
+    <div class="header-sub" id="doc-page-title"></div>
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
       <div class="section-title"></div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Rapid Fire Overview:
-          </div>
-          <video src="../../DOCS/gifs/A/RapidFire.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-          Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            The Rapid Fire feature lets you trigger AudioReactive multiple times in quick succession.
-            <br>Combine Rapid Fire with the <a href="TriggerTypes.html" style="color:#64b5f6; font-weight:700; text-decoration:underline;">Collision Trigger</a> to create effects that respond to projectiles or fast-moving objects.
-            <br>Adjust the Rapid Fire Reset setting to tell AudioReactive how long to wait before allowing another trigger. Values are in seconds.
-          </div>
-        </div>
-      </div>
+      <div class="gallery-grid" id="doc-gallery-grid"></div>
     </div>
   </div>
-  <script>
-document.querySelector('.back-link').addEventListener('click', function(e) {
-  localStorage.setItem('guideARScroll', window.scrollY);
-});
-document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
-  el.style.cursor = 'pointer';
-});
-</script>
-<script src="../../common.js"></script>
+  <script src="../docs-content.js"></script>
+  <script src="../doc-page.js"></script>
+  <script src="../../common.js"></script>
 </body>
 </html>

@@ -3,60 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Live Mode (Beta) – AudioReactive Docs</title>
+  <title>AudioReactive Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 </head>
-<script src="../../common.js"></script>
-<body>
+<body data-guide-page="B.LiveMode">
   <div class="super-container">
-    <div class="header">
-      AudioReactive<br>
-      Primer
-    </div>
-    <div class="header-sub">
-      Live Mode (Beta)
-    </div>
+    <div class="header">AudioReactive<br>Primer</div>
+    <div class="header-sub" id="doc-page-title"></div>
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
       <div class="section-title"></div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Live Mode Overview:     (BETA)
-          </div>
-          <video src="../../DOCS/gifs/B/LiveAudioEnable.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-          Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Enable Live Mode to use real-time audio input for your reactions. This feature allows you to connect a microphone or other live audio source and see immediate feedback.
-            <br>Use a Virtual Audio Cable to instantly route any audio playing through your PC into the AudioReactive system.
-            <br>Instantly visualize anything playing on your PC, in your browser, in your DAW, or simply through your microphone.<br>
-            Live Mode uses the MetaSound_LIVE_AR asset.<br>
-            Live Mode is currently in BETA so you may experience a few bugs or have Unreal crash.  I have used it successfully for long periods of time (45 minute stress test without issue).
-          </div>
-        </div><!--
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Live Mode Overview:
-          </div>
-          <img src="../../DOCS/gifs/B/EnableBands.apng" alt="Live Mode Overview">
-          <div class="gallery-desc gallery-instruction">
-            Once Live Mode is enabled, you can monitor and adjust input sensitivity, smoothing, and routing options for your live audio feed.
-          </div>-->
-        </div>
-      </div>
+      <div class="gallery-grid" id="doc-gallery-grid"></div>
     </div>
   </div>
-  <script>
-document.querySelector('.back-link').addEventListener('click', function(e) {
-  localStorage.setItem('guideARScroll', window.scrollY);
-});
-document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
-  el.style.cursor = 'pointer';
-});
-  </script>
+  <script src="../docs-content.js"></script>
+  <script src="../doc-page.js"></script>
   <script src="../../common.js"></script>
 </body>
 </html>

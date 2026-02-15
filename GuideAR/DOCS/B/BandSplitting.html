@@ -3,123 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Band Splitting (Beta) – AudioReactive Docs</title>
+  <title>AudioReactive Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 </head>
-<script src="../../common.js"></script>
-<body>
+<body data-guide-page="B.BandSplitting">
   <div class="super-container">
-    <div class="header">
-      AudioReactive<br>
-      Primer
-    </div>
-    <div class="header-sub">
-      Band Splitting (Beta)
-    </div>
+    <div class="header">AudioReactive<br>Primer</div>
+    <div class="header-sub" id="doc-page-title"></div>
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
       <div class="section-title"></div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Plug In Your Sound - Set Smoothing Levels:
-          </div>
-          <video src="../../DOCS/gifs/B/EnableBands.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-          Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Enabling 'Band Mode' will disable the 'Audio Track' system and switch to a Metasound frequency splitting system.
-            <br>Smoothing Distance - Larger Values = Smoother Response.
-            <br>Small Change Smoothing - How much smoothing to apply to small frequency changes.
-            <br>Large Change Smoothing - How much smoothing to apply to large frequency changes.
-          </div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Locate the MetaSound_AR asset:
-          </div>
-          <video src="../../DOCS/gifs/B/MetaSoundContent.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-          Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            You'll find the MetaSound_AR file in the Audioreactive/MetaSound folder.
-          </div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Explore the MetaSound Graph:
-          </div>
-          <video src="../../DOCS/gifs/B/MetaSoundOverview.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-          Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Once in the Metasound graph, you'll notice it goes through high/low pass filters, through a band splitter, and each band gets fine controls over the sound.
-            <br>To trigger the track manually within MetaSounds, disconnect the 'Wave Player' nodes 'Wave Asset' blue pipe and set the track you wish to process.
-            <br>The pink wire zig-zags are fun little visualizers that will light up based on the strength of the band signal, allowing you to see the result of the 'In Range B' knob on each bands Map Range node.
-            <br>The In Range B controls the master values that get passed from MetaSounds into your reactive elements.
-          </div>
-        </div>
-      </div>
+      <div class="gallery-grid" id="doc-gallery-grid"></div>
     </div>
   </div>
-  <script>
-document.querySelector('.back-link').addEventListener('click', function(e) {
-  localStorage.setItem('guideARScroll', window.scrollY);
-});
-document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
-  el.style.cursor = 'pointer';
-  el.addEventListener('click', function() {
-    const item = el.closest('.gallery-item');
-    const img = item.querySelector('img');
-    const caption = item.querySelector('.gallery-desc');
-    const modal = document.getElementById('gallery-modal');
-    const body = document.getElementById('gallery-modal-body');
-    let html = `
-      <div style="text-align:center; margin-bottom:18px;">
-        <button id="zoom-in" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#6a5cff; color:#fff; cursor:pointer;">+</button>
-        <button id="zoom-out" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#a259f7; color:#fff; cursor:pointer;">−</button>
-      </div>
-      <img src="${img.src}" alt="${img.alt}" style="max-width:90vw; max-height:80vh; width:auto; height:auto; box-shadow:none; display:block; margin:0 auto 32px auto; border-radius:0;">
-      <div style="font-size:1.15em; text-align:center; white-space:pre-line; word-break:break-word; margin:0 auto; max-width:540px;">
-        ${caption.innerHTML}
-      </div>
-    `;
-    body.innerHTML = html;
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-
-    // Zoom functionality
-    let scale = 1;
-    const modalContent = document.getElementById('gallery-modal-content');
-    document.getElementById('zoom-in').onclick = function() {
-      scale = Math.min(scale + 0.2, 3);
-      modalContent.style.transform = `scale(${scale})`;
-      modalContent.style.transformOrigin = 'center center';
-    };
-    document.getElementById('zoom-out').onclick = function() {
-      scale = Math.max(scale - 0.2, 0.5);
-      modalContent.style.transform = `scale(${scale})`;
-      modalContent.style.transformOrigin = 'center center';
-    };
-  });
-});
-document.getElementById('gallery-modal-close').onclick = function() {
-  document.getElementById('gallery-modal').style.display = 'none';
-  document.body.style.overflow = '';
-  document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
-};
-document.getElementById('gallery-modal').onclick = function(e) {
-  if (e.target === this) {
-    this.style.display = 'none';
-    document.body.style.overflow = '';
-    document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
-  }
-};
-  </script>
+  <script src="../docs-content.js"></script>
+  <script src="../doc-page.js"></script>
   <script src="../../common.js"></script>
 </body>
 </html>

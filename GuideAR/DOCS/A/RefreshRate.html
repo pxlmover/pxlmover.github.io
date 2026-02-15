@@ -3,50 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Refresh Rate – AudioReactive Docs</title>
+  <title>AudioReactive Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 </head>
-<body>
+<body data-guide-page="A.RefreshRate">
   <div class="super-container">
-    <div class="header">
-      AudioReactive<br>
-      Primer
-    </div>
-    <div class="header-sub">
-      Refresh Rate
-    </div>
+    <div class="header">AudioReactive<br>Primer</div>
+    <div class="header-sub" id="doc-page-title"></div>
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
       <div class="section-title"></div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Set the audio reaction update speed.
-          </div>
-          <video src="../../DOCS/gifs/A/RefreshRate.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-          Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            The 'Refresh Rate' determines how often the system updates audio-reactive elements.
-            <br>Lower values (e.g., 0.01) provide smoother, more frequent updates but may use more CPU and reduce FPS. Values lower than 0.01 give diminished returns.
-            <br>Higher values can be used (0.1+) to get a more choppy, stuttered, even stop motion feel to the reaction response.
-            <br>Higher values (e.g., 0.1) reduce update frequency and can improve performance on slower systems.
-            <br>Adjust this setting to balance responsiveness and system load for your project.
-          </div>
-        </div>
-      </div>
+      <div class="gallery-grid" id="doc-gallery-grid"></div>
     </div>
   </div>
-  <script>
-document.querySelector('.back-link').addEventListener('click', function(e) {
-  localStorage.setItem('guideARScroll', window.scrollY);
-});
-document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
-  el.style.cursor = 'pointer';
-});
-  </script>
+  <script src="../docs-content.js"></script>
+  <script src="../doc-page.js"></script>
   <script src="../../common.js"></script>
 </body>
 </html>

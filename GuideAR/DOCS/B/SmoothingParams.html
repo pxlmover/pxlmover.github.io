@@ -3,63 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Smoothing Parameters – AudioReactive Docs</title>
+  <title>AudioReactive Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 </head>
-<script src="../../common.js"></script>
-<body>
+<body data-guide-page="B.SmoothingParams">
   <div class="super-container">
-    <div class="header">
-      AudioReactive<br>
-      Primer
-    </div>
-    <div class="header-sub">
-      Smoothing Parameters
-    </div>
+    <div class="header">AudioReactive<br>Primer</div>
+    <div class="header-sub" id="doc-page-title"></div>
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
       <div class="section-title"></div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Smooth Those Reactions:
-          </div>
-          <video src="../gifs/B/AudioTrackSmoothing.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-          Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Under the 'B-Audio' Rollout, you'll find the smoothing options for each audio track. Adjust smoothing parameters to control how quickly values respond to changes in your audio intensity.
-            <br>Smoothing Distance - Larger Values = Smoother Response.
-            Small Change Smoothing - How much smoothing to apply to small frequency changes.
-            Large Change Smoothing - How much smoothing to apply to large frequency changes.
-          </div>
-        </div><!--
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Smoothing Overview:
-          </div>
-          <video src="../gifs/B/SmoothingParams.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-          Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Fine-tune attack, release, and curve type to optimize responsiveness for your workflow. The settings here affect how smoothly your audio data is visualized and processed.
-          </div>
-        </div>-->
-      </div>
+      <div class="gallery-grid" id="doc-gallery-grid"></div>
     </div>
   </div>
-  <script>
-document.querySelector('.back-link').addEventListener('click', function(e) {
-  // Save scroll position before navigating
-  localStorage.setItem('guideARScroll', window.scrollY);
-});
-document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
-  el.style.cursor = 'pointer';
-});
-</script>
-<script src="../../common.js"></script>
+  <script src="../docs-content.js"></script>
+  <script src="../doc-page.js"></script>
+  <script src="../../common.js"></script>
 </body>
 </html>

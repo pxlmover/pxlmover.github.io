@@ -3,131 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Moving Heads – AudioReactive Docs</title>
+  <title>AudioReactive Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 </head>
-<body>
+<body data-guide-page="E.MovingHeads">
   <div class="super-container">
-    <div class="header">
-      AudioReactive<br>
-      Primer
-    </div>
-    <div class="header-sub">
-      Moving Heads
-    </div>
+    <div class="header">AudioReactive<br>Primer</div>
+    <div class="header-sub" id="doc-page-title"></div>
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Moving Head Intro
-          </div>
-          <video src="../../DOCS/gifs/E/MovingHeadFunctions.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-            Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Moving Head fixtures have extra functions. They have the standard Dimmer/Shutter/Zoom/Frost controls, as well as the Pan and Tilt functions unique to this fixture.
-            Each function has it's own Audio Track Override as well as a "Mute Function" checkbox for detailed per function control.
-            <br> Using Pan and Tilt with audio reaction can be very successful, <br>if you set your <a href="../B/SmoothingParams.html" style="color:#64b5f6; text-decoration:underline; font-weight:700;" target="_blank">Audio Smoothing</a> settings correctly.  Audio that has not been properly smoothed will make the lights move with extremely high acceleration.
-            <br> Moving Heads also use the ColorWheel, instead of RGB values<br>as found in the Strobe, Wash, "Laser", and Static fixtures
-            <br> Using a colorwheel means you are setting a value based on a pre-determined chart that assigns value ranges to specific colors, colorblends, and colorwheel animation presets.
-            <br> They also use a gobo wheel, with similar setup as the colorwheel, but instead of colors, you are selecting a gobo pattern, with certain ranges being animated gobo presets.
-            <br> These fixtures utilize the default DMX wheels that come with the engine, and can be found in either the plugins folder, or I've made duplicates inside the AudioReactive/DMX folder.
-          </div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Moving Head Midtro
-          </div>
-          <video src="../../DOCS/gifs/E/DMXEffectTables.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-            Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Moving Heads use a few unique parameters that have been added a sub-rollout,<br> "Moving Head Attributes" inside any DMX Fixture index.
-            <br> Control the ColorWheel, Gobo, and Tilt Offset values.  Tilt Offset will add a positive or negative value (30/-30) and use that as the starting point for audioreaction.
-            <br> If Audio Reaction is disabled on your Tilt Function, the Tilt Offset will instead be used as a static value to control the tilt.
-            <br> <strong>You can create your own custom ColorWheel / Gobo datatables and take full control over the values and animations.</strong> 
-                <br>Any alpha style image texture can be used as a gobo, and any color can be used in the colorwheel.
-                <br>Duplicate the existing datatables, adjust to your liking, and update the BP_MovingHead_AR's ColorWheel and Gobo Components to point to your new datatables.
-
-          </div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-title">
-            Moving Head Outro
-          </div>
-          <video src="../../DOCS/gifs/E/MovingHeadAttributes.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-            Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            There are a few shared attributes that affect multiple fixtures types.
-            <br>The parameters 'Shutter' and 'Enable Beam' are used across all fixtures.
-            <br>Shutter controls the strobe affect, and like color and gobo, has it's own value chart full of preset animated effects.
-            <br>Enable beam, well, it enables the beam.  The awesome volumetric beam that reacts to the "Zoom" function of your fixtures can be enabled/disabled with a single click.
-            <br>If you want to adjust the quality of the beam, for now you need to open the Blueprint 'BP_MovingHead_AR', select BP_MovingHead_AR root, and in details, you'll see the low/medium/high/ultra/custom presets.
-            <br>This option is available per fixture in level, but if you want them all to update, adjust in the blueprint and compile.
-          </div>
-        </div>
-      </div>
+      <div class="section-title"></div>
+      <div class="gallery-grid" id="doc-gallery-grid"></div>
     </div>
   </div>
-  <script>
-document.querySelector('.back-link').addEventListener('click', function(e) {
-  localStorage.setItem('guideARScroll', window.scrollY);
-});
-document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
-  el.style.cursor = 'pointer';
-  el.addEventListener('click', function() {
-    const item = el.closest('.gallery-item');
-    const img = item.querySelector('img');
-    const caption = item.querySelector('.gallery-desc');
-    const modal = document.getElementById('gallery-modal');
-    const body = document.getElementById('gallery-modal-body');
-    let html = `
-      <div style="text-align:center; margin-bottom:18px;">
-        <button id="zoom-in" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#6a5cff; color:#fff; cursor:pointer;">+</button>
-        <button id="zoom-out" style="font-size:1.4em; margin:0 12px; padding:6px 18px; border-radius:8px; border:none; background:#a259f7; color:#fff; cursor:pointer;">−</button>
-      </div>
-      <img src="${img ? img.src : ''}" alt="${img ? img.alt : ''}" style="max-width:90vw; max-height:80vh; width:auto; height:auto; box-shadow:none; display:block; margin:0 auto 32px auto; border-radius:0;">
-      <div style="font-size:1.15em; text-align:center; white-space:pre-line; word-break:break-word; margin:0 auto; max-width:540px;">
-        ${caption ? caption.innerHTML : ''}
-      </div>
-    `;
-    body.innerHTML = html;
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-
-    // Zoom functionality
-    let scale = 1;
-    const modalContent = document.getElementById('gallery-modal-content');
-    document.getElementById('zoom-in').onclick = function() {
-      scale = Math.min(scale + 0.2, 3);
-      modalContent.style.transform = `scale(${scale})`;
-      modalContent.style.transformOrigin = 'center center';
-    };
-    document.getElementById('zoom-out').onclick = function() {
-      scale = Math.max(scale - 0.2, 0.5);
-      modalContent.style.transform = `scale(${scale})`;
-      modalContent.style.transformOrigin = 'center center';
-    };
-  });
-});
-document.getElementById('gallery-modal-close').onclick = function() {
-  document.getElementById('gallery-modal').style.display = 'none';
-  document.body.style.overflow = '';
-  document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
-};
-document.getElementById('gallery-modal').onclick = function(e) {
-  if (e.target === this) {
-    this.style.display = 'none';
-    document.body.style.overflow = '';
-    document.getElementById('gallery-modal-content').style.transform = 'scale(1)';
-  }
-};
-  </script>
+  <script src="../docs-content.js"></script>
+  <script src="../doc-page.js"></script>
   <script src="../../common.js"></script>
 </body>
+</html>

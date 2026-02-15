@@ -3,49 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Trigger Types – AudioReactive Docs</title>
+  <title>AudioReactive Docs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 </head>
-<body>
+<body data-guide-page="A.TriggerTypes">
   <div class="super-container">
-    <div class="header">
-      AudioReactive<br>
-      Primer
-    </div>
-    <div class="header-sub">
-      Trigger Types
-    </div>
+    <div class="header">AudioReactive<br>Primer</div>
+    <div class="header-sub" id="doc-page-title"></div>
     <div class="main-container">
       <a href="../../GuideAR.html" class="back-link">&larr; Back to Guide</a>
       <div class="section-title"></div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-title">
-            AudioReactive Uses BeginPlay by default to trigger.
-          </div>
-          <video src="../../DOCS/gifs/A/TriggerOverview.webm" controls loop muted playsinline
-                 style="width:100%;max-width:1080px;max-height:760px;display:block;margin-bottom:16px;background:#181a2a;border-radius:0;">
-          Your browser does not support the video tag.
-          </video>
-          <div class="gallery-desc gallery-instruction">
-            Sequencer Trigger will allow you to use an Event Trigger in sequencer to trigger AudioReactive.<br>
-            The Collision Trigger by default will trigger when your player collides with the AudioReactive actor in the level.<br>
-            You can easily customize the collision trigger and attach it to projectiles – This method works great with the <a href="RapidFire.html" style="color:#64b5f6; font-weight:700; text-decoration:underline;">Rapid Fire</a> feature.
-            <br> Both Sequencer and Collision triggers will disable the BeginPlay trigger.
-          </div>
-        </div>
-      </div>
+      <div class="gallery-grid" id="doc-gallery-grid"></div>
     </div>
   </div>
-  <script>
-document.querySelector('.back-link').addEventListener('click', function(e) {
-  localStorage.setItem('guideARScroll', window.scrollY);
-});
-document.querySelectorAll('.gallery-item img, .gallery-item .gallery-desc').forEach(el => {
-  el.style.cursor = 'pointer';
-});
-  </script>
+  <script src="../docs-content.js"></script>
+  <script src="../doc-page.js"></script>
   <script src="../../common.js"></script>
 </body>
 </html>

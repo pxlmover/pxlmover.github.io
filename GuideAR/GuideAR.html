@@ -45,197 +45,8 @@
     <div class="search-bar" style="margin-top:0;">
       <input type="text" id="searchInput" placeholder="🔍 AudioReactive Keyword Wizard">
     </div>
-    <div class="categories" id="categories">
-      <!-- Category A -->
-      <div class="category">
-        <div class="category-header">A - Core Controls</div>
-        <div class="category-content">
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/A/PlaybackAndDelay.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Playback & Timing
-            </a>
-            <div class="child-list">Set Track Playback Start Time (seek ahead), or set the reaction to start after a specific delay (After Trigger Delay).</div>
-          </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/A/RefreshRate.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Refresh Rate Settings
-            </a>
-            <div class="child-list">Adjust the master refresh rate of the AudioReactive engine. Lower values (0.01) yield buttery smooth reactions, while higher values (0.1+) give a choppy / stop motion feel.</div>
-          </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/A/TriggerTypes.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Trigger Types (Sequencer/Collision)
-            </a>
-            <div class="child-list">The BeginPlay Trigger is enabled by default. Enabling Sequencer or Collision Trigger will disable BeginPlay activation.<br>
-              <br>Sequencer uses an Event Trigger to start AudioReactive using Custom Event - SEQTRACKTRIGGER</div>
-          </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/A/RapidFire.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Rapid Fire System (Beta)
-            </a>
-            <div class="child-list">Enable Rapid Fire for repeated reactions. This feature works best with short burst audio tracks of any combination and quantity. Perfect for projectile hits, impacts, and other one-shot effects.<br>
-              <br>This allows AudioReactive to be re-triggered using the 'Rapid Fire Reset' Parameter, allowing you to set a cooldown in seconds.</div>
-          </div>
-        </div>
-      </div>
-      <!-- Category B -->
-      <div class="category">
-        <div class="category-header">B - Audio</div>
-        <div class="category-content">
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/B/TrackManagement.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Audio Track Management
-            </a>
-            <div class="child-list">Add your audio tracks. There is no limit to the number of tracks you can add. Sound Effects, Song Stems, etc.</div>
-          </div>
-                  <!-- Replace the Peak Visualization Tools subcategory block with this: -->
-        <div class="subcategory">
-          <a class="subcategory-title"
-            href="DOCS/B/PeakVisualization.html"
-            style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-            Peak Visualization Tools
-          </a>
-          <div class="child-list">Visualize audio peaks for accurate audio normalization. Each Audio Track has it's own 'peak' parameter at default 0.36. The lower the value, the louder the reaction from that specific track.</div>
-        </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-              href="DOCS/B/BandSplitting.html"
-              style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-            Band Splitting (Beta)
-          </a>
-          <div class="child-list">Split a track into frequency bands (0-3) and assign them as you would Audio Track numbers (0-3). Enabling Band Mode will disable the Audio Track system.</div>
-      </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/B/SmoothingParams.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Smoothing Parameters (Beta)
-            </a>
-            <div class="child-list">Fine-tune smoothing for more natural reactions. Control smoothing window, and how much small and large jumps in frequency are independently smoothed out.</div>
-          </div>
-            <!-- Replace the Live Mode (Beta) subcategory block with this: -->
-            <div class="subcategory">
-              <a class="subcategory-title"
-                href="DOCS/B/LiveMode.html"
-                style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-                Live Mode (Beta)
-              </a>
-              <div class="child-list">Enable live mode for real-time audio input. This feature is very new, super cool, and might still have a bug or two. You know how it is.<br>
-              <br>Uses an identical Metasound graph as the Band Mode but with a custom input to bring in live PC audio</div>
-            </div>
-        </div>
-      </div>
-      <!-- Category C -->
-      <div class="category">
-        <div class="category-header">C - Mesh Reaction</div>
-        <div class="category-content">
-          <div class="subcategory">
-            <a class="subcategory-title"
-              href="DOCS/C/StaticMeshControl.html"
-              style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Static Mesh Control
-            </a>
-            <div class="child-list">Control static mesh transforms with audio. Independently control any combination of transform reactions on any axis.</div>
-          </div>
-            <div class="subcategory">
-              <a class="subcategory-title"
-                href="DOCS/C/ActorsWithComponents.html"
-                style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-                Actors with Static Mesh Components
-              </a>
-              <div class="child-list">Control Actors containing Static Mesh components with audio. Actor Tag driven workflow captures all Static Mesh components in your actor.<br> 
-              <br>Tested using a single static mesh component, using multiple may have unexpected results (or could be really awesome).</div>
-            </div>
-        </div>
-      </div>
-      <!-- Category D -->
-      <div class="category">
-        <div class="category-header">D - Light Reaction</div>
-        <div class="category-content">
-          <div class="subcategory">
-            <a class="subcategory-title"
-              href="DOCS/D/ReactiveLights.html"
-              style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Reactive Lights
-            </a>
-            <div class="child-list">Point Lights, Spot Lights, Directional Lights, and Rect lights.<br><br>Light Intensity Reaction and/or Magnitude Controlled Color Shifting.</div>
-          </div>
-        </div>
-      </div>
-      <!-- Category E -->
-      <div class="category">
-        <div class="category-header">E - DMX</div>
-        <div class="category-content">
-        <div class="subcategory">
-          <a class="subcategory-title"
-            href="DOCS/E/FixtureWidgetOverview.html"
-            style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-            DMX Fixture Setup Widget
-          </a>
-          <div class="child-list">Prepare fixtures, assign tags, create groups, and manage large DMX setups using handy selection tools.</div>
-        </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/E/MovingHeads.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Moving Head Control
-            </a>
-            <div class="child-list">Make your Moving Heads AudioReactive. Each function can be set to static or reactive values. 
-              <br><br>Audio Tracks can be assigned PER FUNCTION for precise control.<br>
-              <br>Available Reactive Functions:<br> Dimmer - Colorwheel - Shutter - Gobo - Zoom - Frost - Pan - Tilt.</div>
-          </div>
-          <div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Static/Strobe/Wash"
-                 data-desc="Configure static, strobe, and wash effects."
-                 data-img="">
-              Static/Strobe/Wash
-            </div>
-            <div class="child-list">Configure statics, strobes, and washes<br>Dimmer - Color - Shutter.</div>
-          </div>
-          <div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Laser Groups (with beam parameters!)"
-                 data-desc="Set up laser groups and beam parameters."
-                 data-img="">
-              "Lasers"
-            </div>
-            <div class="child-list">Set up "lasers" individually or in groups.<br>Set static values or set any combination of paramaters to audioreactive.<br>Angle - Length - Beam Count - Beam Width</div>
-          </div>
-          <!--<div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Add Functions (Dimmer, etc.)"
-                 data-desc="Add extra functions like dimmer and more."
-                 data-img="">
-              Adding Functions to Fixtures
-            </div>
-            <div class="child-list">Functions are good</div>
-          </div>-->
-        </div>
-      </div>
-            <!-- Place this after the E - DMX category dropdown in your GuideAR.html: -->
-      <div style="width:100%;text-align:center;margin:32px 0 0 0;">
-        <a href="DOCS/Materials/ReactiveMaterials.html"
-           style="display:inline-block; background:linear-gradient(90deg,#a259f7,#64b5f6 70%,#fff176 100%);
-                  color:#181a2a; font-family:'Orbitron','Inter',Arial,sans-serif; font-size:1.18em; font-weight:900;
-                  letter-spacing:0.04em; border-radius:18px; padding:16px 38px; box-shadow:0 4px 24px #64b5f6cc;
-                  text-decoration:none; margin:0 0 18px 0; transition:box-shadow 0.2s,background 0.2s;">
-          AudioReactive Materials
-        </a>
-      </div>
-          </div>
-        </div>
-      </div>
+    <div class="categories" id="categories"></div>
+    <div id="guide-featured-link" style="width:100%;text-align:center;margin:32px 0 0 0;"></div>
     </div>
   </div>
 
@@ -247,10 +58,83 @@
     </div>
   </div>
 
-  
-  <script>
+    <script src="guide-content.js"></script>
+    <script>
   // Track user-expanded categories
   let userExpandedCategories = new Set();
+
+    function renderGuideContent() {
+      const categoriesRoot = document.getElementById('categories');
+      const featuredRoot = document.getElementById('guide-featured-link');
+      if (!categoriesRoot || !window.GUIDE_CONTENT) return;
+
+      categoriesRoot.innerHTML = '';
+
+      (window.GUIDE_CONTENT.categories || []).forEach(category => {
+        const categoryEl = document.createElement('div');
+        categoryEl.className = 'category';
+
+        const headerEl = document.createElement('div');
+        headerEl.className = 'category-header';
+        headerEl.textContent = category.header;
+
+        const contentEl = document.createElement('div');
+        contentEl.className = 'category-content';
+
+        (category.items || []).forEach(item => {
+          const subcategoryEl = document.createElement('div');
+          subcategoryEl.className = 'subcategory';
+
+          if (item.href) {
+            const linkEl = document.createElement('a');
+            linkEl.className = 'subcategory-title';
+            linkEl.href = item.href;
+            linkEl.textContent = item.title;
+            subcategoryEl.appendChild(linkEl);
+          } else {
+            const titleEl = document.createElement('div');
+            titleEl.className = 'subcategory-title';
+            titleEl.textContent = item.title;
+            if (item.modal) {
+              titleEl.setAttribute('data-title', item.modal.title || item.title);
+              titleEl.setAttribute('data-desc', item.modal.description || '');
+              titleEl.setAttribute('data-img', item.modal.image || '');
+            }
+            subcategoryEl.appendChild(titleEl);
+          }
+
+          const descEl = document.createElement('div');
+          descEl.className = 'child-list';
+          descEl.textContent = item.description || '';
+          subcategoryEl.appendChild(descEl);
+
+          contentEl.appendChild(subcategoryEl);
+        });
+
+        categoryEl.appendChild(headerEl);
+        categoryEl.appendChild(contentEl);
+        categoriesRoot.appendChild(categoryEl);
+      });
+
+      if (featuredRoot) {
+        const featuredLink = window.GUIDE_CONTENT.featuredLink;
+        if (featuredLink && featuredLink.href && featuredLink.label) {
+          featuredRoot.innerHTML = `
+            <a href="${featuredLink.href}"
+              style="display:inline-block; background:linear-gradient(90deg,#a259f7,#64b5f6 70%,#fff176 100%);
+              color:#181a2a; font-family:'Orbitron','Inter',Arial,sans-serif; font-size:1.18em; font-weight:900;
+              letter-spacing:0.04em; border-radius:18px; padding:16px 38px; box-shadow:0 4px 24px #64b5f6cc;
+              text-decoration:none; margin:0 0 18px 0; transition:box-shadow 0.2s,background 0.2s;">
+              ${featuredLink.label}
+            </a>
+          `;
+        } else {
+          featuredRoot.innerHTML = '';
+        }
+      }
+    }
+
+    renderGuideContent();
 
   // Expand/collapse categories and track user action
   document.querySelectorAll('.category-header').forEach((header, idx) => {
