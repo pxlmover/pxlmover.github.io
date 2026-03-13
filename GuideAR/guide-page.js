@@ -360,18 +360,13 @@ function bindInfoModal() {
   });
 }
 
-function restoreExpandedCategories() {
-  const saved = localStorage.getItem(EXPANDED_CATEGORIES_STORAGE_KEY);
-  if (!saved) return;
+function initializeCollapsedCategories() {
+  // Always start with a clean collapsed state on page load.
+  userExpandedCategories = new Set();
+  localStorage.removeItem(EXPANDED_CATEGORIES_STORAGE_KEY);
 
-  userExpandedCategories = new Set((JSON.parse(saved) || []).map(String));
   document.querySelectorAll('.category').forEach(cat => {
-    const key = getCategoryKeyFromElement(cat);
-    if (key && userExpandedCategories.has(key)) {
-      setCategoryOpen(cat, true);
-    } else {
-      setCategoryOpen(cat, false);
-    }
+    setCategoryOpen(cat, false);
   });
 }
 
@@ -388,6 +383,6 @@ document.addEventListener('DOMContentLoaded', function () {
   bindCategoryToggles();
   bindSearch();
   bindInfoModal();
-  restoreExpandedCategories();
+  initializeCollapsedCategories();
   restoreScrollPosition();
 });
