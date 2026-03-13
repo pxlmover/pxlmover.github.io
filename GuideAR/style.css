@@ -576,7 +576,7 @@ body[data-guide-page] .gallery-title {
 }
 .subcategory {
   margin-bottom: 20px;
-  max-height: 260px;
+  max-height: none;
   opacity: 1;
   transform: translateY(0);
   display: flex;
@@ -1107,6 +1107,7 @@ body:not([data-guide-page]) .subcategory {
   position: relative;
   width: 100%;
   max-width: 100%;
+  max-height: none;
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
