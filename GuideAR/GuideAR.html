@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <title>AudioReactive for Unreal Engine Documentation</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <!-- Security & CSP -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' 'unsafe-inline';
+    script-src 'self';
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' https: data:;
@@ -25,235 +27,40 @@
 </head>
 <body>
   <div class="super-container">
-  <div class="header">
-    AudioReactive<br>
-    Primer
+  <div class="primer-title-shell" aria-label="AudioReactive Primer">
+  <div class="header primer-title">
+    <span>AudioReactive</span><br>
+    <span>Primer</span>
+  </div>
   </div>
   <!--<div class="header-sub">
     Guide & Documentation
   </div>-->
   <div class="main-container">
-        <!-- Standalone Material Category Button -->
-    <div style="width:100%;text-align:center;margin-top:0;margin-bottom:22px;">
-      <button id="theme-randomizer"
-        style="background:linear-gradient(90deg,#64b5f6,#a259f7);color:#181a2a;font-family:'Orbitron','Inter',Arial,sans-serif;
-        font-size:0.66em;font-weight:700;letter-spacing:0.04em;border-radius:8px;padding:7px 15px;box-shadow:0 2px 12px #64b5f6cc;
-        border:none;cursor:pointer;transition:box-shadow 0.2s,background 0.2s;">
-        🎲 Randomize Theme
+    <div class="search-bar search-bar-compact">
+      <input type="text" id="searchInput" placeholder="🔍 Type here to Filter">
+    </div>
+    <div id="search-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <div class="categories" id="categories"></div>
+    <div id="guide-featured-link"></div>
+    <div class="guide-utility-actions" aria-label="Page utilities">
+      <button id="theme-randomizer" class="theme-randomizer-btn" aria-label="Spectrum Shift">
+        Spectrum Shift
       </button>
     </div>
-    <div class="search-bar" style="margin-top:0;">
-      <input type="text" id="searchInput" placeholder="🔍 AudioReactive Keyword Wizard">
-    </div>
-    <div class="categories" id="categories"></div>
-    <div id="guide-featured-link" style="width:100%;text-align:center;margin:32px 0 0 0;"></div>
     </div>
   </div>
 
   <!-- Info Card Modal -->
-  <div id="info-modal" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100vw; height:100vh; background:rgba(10,20,40,0.92); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
-    <div id="info-modal-content" style="background:#222d; border-radius:18px; box-shadow:0 8px 48px #64b5f6cc; max-width:96vw; max-height:90vh; overflow:auto; padding:32px 24px; color:#e0e0e0; position:relative;">
-      <span id="info-modal-close" style="position:absolute;top:18px;right:28px;font-size:2.5em;color:#fff;cursor:pointer;z-index:10;">&times;</span>
+  <div id="info-modal" aria-hidden="true">
+    <div id="info-modal-content" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+      <button id="info-modal-close" type="button" aria-label="Close info card">&times;</button>
       <div id="info-modal-body"></div>
     </div>
   </div>
 
-    <script src="guide-content.js"></script>
-    <script>
-  // Track user-expanded categories
-  let userExpandedCategories = new Set();
-
-    function renderGuideContent() {
-      const categoriesRoot = document.getElementById('categories');
-      const featuredRoot = document.getElementById('guide-featured-link');
-      if (!categoriesRoot || !window.GUIDE_CONTENT) return;
-
-      categoriesRoot.innerHTML = '';
-
-      (window.GUIDE_CONTENT.categories || []).forEach(category => {
-        const categoryEl = document.createElement('div');
-        categoryEl.className = 'category';
-
-        const headerEl = document.createElement('div');
-        headerEl.className = 'category-header';
-        headerEl.textContent = category.header;
-
-        const contentEl = document.createElement('div');
-        contentEl.className = 'category-content';
-
-        (category.items || []).forEach(item => {
-          const subcategoryEl = document.createElement('div');
-          subcategoryEl.className = 'subcategory';
-
-          if (item.href) {
-            const linkEl = document.createElement('a');
-            linkEl.className = 'subcategory-title';
-            linkEl.href = item.href;
-            linkEl.textContent = item.title;
-            subcategoryEl.appendChild(linkEl);
-          } else {
-            const titleEl = document.createElement('div');
-            titleEl.className = 'subcategory-title';
-            titleEl.textContent = item.title;
-            if (item.modal) {
-              titleEl.setAttribute('data-title', item.modal.title || item.title);
-              titleEl.setAttribute('data-desc', item.modal.description || '');
-              titleEl.setAttribute('data-img', item.modal.image || '');
-            }
-            subcategoryEl.appendChild(titleEl);
-          }
-
-          const descEl = document.createElement('div');
-          descEl.className = 'child-list';
-          descEl.textContent = item.description || '';
-          subcategoryEl.appendChild(descEl);
-
-          contentEl.appendChild(subcategoryEl);
-        });
-
-        categoryEl.appendChild(headerEl);
-        categoryEl.appendChild(contentEl);
-        categoriesRoot.appendChild(categoryEl);
-      });
-
-      if (featuredRoot) {
-        const featuredLink = window.GUIDE_CONTENT.featuredLink;
-        if (featuredLink && featuredLink.href && featuredLink.label) {
-          featuredRoot.innerHTML = `
-            <a href="${featuredLink.href}"
-              style="display:inline-block; background:linear-gradient(90deg,#a259f7,#64b5f6 70%,#fff176 100%);
-              color:#181a2a; font-family:'Orbitron','Inter',Arial,sans-serif; font-size:1.18em; font-weight:900;
-              letter-spacing:0.04em; border-radius:18px; padding:16px 38px; box-shadow:0 4px 24px #64b5f6cc;
-              text-decoration:none; margin:0 0 18px 0; transition:box-shadow 0.2s,background 0.2s;">
-              ${featuredLink.label}
-            </a>
-          `;
-        } else {
-          featuredRoot.innerHTML = '';
-        }
-      }
-    }
-
-    renderGuideContent();
-
-  // Expand/collapse categories and track user action
-  document.querySelectorAll('.category-header').forEach((header, idx) => {
-    header.addEventListener('click', function() {
-      const parent = this.parentElement;
-      parent.classList.toggle('open');
-      if (parent.classList.contains('open')) {
-        userExpandedCategories.add(idx);
-      } else {
-        userExpandedCategories.delete(idx);
-      }
-      // Save to localStorage
-      localStorage.setItem('arExpandedCats', JSON.stringify(Array.from(userExpandedCategories)));
-    });
-  });
-
-  // Simple fuzzy match: returns true if all query words are found in the text (in any order)
-  function fuzzyMatch(text, query) {
-    const words = query.split(/\s+/).filter(Boolean);
-    return words.every(word => text.includes(word));
-  }
-
-  // Live search filter (show only matching subcategories, auto-expand matching categories)
-  document.getElementById('searchInput').addEventListener('input', function() {
-    const query = this.value.trim().toLowerCase();
-    document.querySelectorAll('.category').forEach((cat, idx) => {
-      let subMatchCount = 0;
-      cat.querySelectorAll('.subcategory').forEach(sub => {
-        const subText = sub.textContent.toLowerCase();
-        if (query === "" || fuzzyMatch(subText, query)) {
-          sub.style.display = '';
-          subMatchCount++;
-        } else {
-          sub.style.display = 'none';
-        }
-      });
-      if (query) {
-        if (subMatchCount > 0) {
-          cat.style.display = '';
-          cat.classList.add('open');
-        } else {
-          cat.style.display = 'none';
-          cat.classList.remove('open');
-        }
-      } else {
-        cat.style.display = '';
-        if (userExpandedCategories.has(idx)) {
-          cat.classList.add('open');
-        } else {
-          cat.classList.remove('open');
-        }
-        cat.querySelectorAll('.subcategory').forEach(sub => {
-          sub.style.display = '';
-        });
-      }
-    });
-  });
-
-    // Info card modal logic
-    document.querySelectorAll('.subcategory-title').forEach(title => {
-      // Only attach modal logic if it's NOT a link
-      if (!title.hasAttribute('href')) {
-        title.style.cursor = 'pointer';
-        title.addEventListener('click', function(e) {
-          const modal = document.getElementById('info-modal');
-          const body = document.getElementById('info-modal-body');
-          const titleText = this.getAttribute('data-title') || this.textContent;
-          const descText = this.getAttribute('data-desc') || '';
-          const imgSrc = this.getAttribute('data-img');
-          let html = `<h2 style="font-family:'Orbitron','Inter',Arial,sans-serif;font-size:1.4em;color:#64b5f6;margin-bottom:12px;">${titleText}</h2>`;
-          html += `<div style="font-size:1.1em;margin-bottom:18px;">${descText}</div>`;
-          if (imgSrc) {
-            html += `<img src="${imgSrc}" alt="${titleText}" style="max-width:92vw;max-height:60vh;border-radius:12px;box-shadow:0 4px 24px #64b5f6cc;margin-bottom:12px;">`;
-          }
-          body.innerHTML = html;
-          modal.style.display = 'flex';
-          document.body.style.overflow = 'hidden';
-        });
-      }
-    });
-    document.getElementById('info-modal-close').onclick = function() {
-      document.getElementById('info-modal').style.display = 'none';
-      document.body.style.overflow = '';
-    };
-    document.getElementById('info-modal').onclick = function(e) {
-      if (e.target === this) {
-        this.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    };
-
-    function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-  // Restore expanded categories from localStorage on page load
-  window.addEventListener('DOMContentLoaded', function() {
-    const saved = localStorage.getItem('arExpandedCats');
-    if (saved) {
-      userExpandedCategories = new Set(JSON.parse(saved));
-      document.querySelectorAll('.category').forEach((cat, idx) => {
-        if (userExpandedCategories.has(idx)) {
-          cat.classList.add('open');
-        } else {
-          cat.classList.remove('open');
-        }
-      });
-    }
-  });
-  window.addEventListener('DOMContentLoaded', function() {
-  const scrollY = localStorage.getItem('guideARScroll');
-  if (scrollY) {
-    window.scrollTo(0, parseInt(scrollY, 10));
-    localStorage.removeItem('guideARScroll');
-  }
-});
-  </script>
-  <script src="common.js"></script>
+    <script src="guide-content.js" defer></script>
+    <script src="guide-page.js" defer></script>
+    <script src="common.js" defer></script>
 </body>
 </html>

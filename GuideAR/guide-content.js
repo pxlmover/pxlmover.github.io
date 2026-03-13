@@ -1,134 +1,147 @@
 window.GUIDE_CONTENT = {
-  featuredLink: {
-    href: "DOCS/Materials/ReactiveMaterials.html",
-    label: "AudioReactive Materials"
-  },
+  communityLinks: [
+    {
+      href: "https://discord.gg/sdVxScU4SW",
+      label: "Join The Discord",
+      className: "guide-community-btn discord",
+      external: true
+    },
+    {
+      href: "https://www.youtube.com/@AudioReactive_UE",
+      label: "YouTube Tutorials",
+      className: "guide-community-btn youtube",
+      external: true
+    }
+  ],
   categories: [
     {
-      header: "A - Core Controls",
-      items: [
+      header: "Blueprint Details Guide",
+      categories: [
         {
-          title: "Playback & Timing",
-          href: "DOCS/A/PlaybackAndDelay.html",
-          description: "Core timing controls include Playback Start Time, Post Trigger Delay Start, and Trigger Collision Cooldown so you can control when reactions begin and how often collision triggers are allowed."
+          header: "A - Core Controls",
+          items: [
+            {
+              title: "Trigger",
+              href: "DOCS/A/TriggerTypes.html",
+              description: "Trigger workflow: Trigger enum (BeginPlay, Sequencer, Collision, RapidFire), Trigger Collision Cooldown, Post Trigger Delay Start, Playback Start Time, and Refresh Rate."
+            },
+            {
+              title: "Peak Visualizer",
+              href: "DOCS/A/PeakVisualizer.html",
+              description: "Peak monitoring toggles: Peak Visualizer, then Peak Visualizer to Output Log for quick calibration and debugging."
+            },
+            {
+              title: "Rapid Fire",
+              href: "DOCS/A/RapidFire.html",
+              description: "Rapid retrigger controls: Rapid Fire toggle plus Rapid Fire Reset (seconds)."
+            },
+            {
+              title: "Proximity",
+              href: "DOCS/A/Proximity.html",
+              description: "Distance-driven response controls: Proximity Active, Player as Center, Center Actor, Radius, and Falloff Start Ratio."
+            },
+            {
+              title: "Cloners Effectors",
+              href: "DOCS/A/ClonersEffectors.html",
+              description: "Array-based effector mapping with AudioName and AudioBand per entry."
+            }
+          ]
         },
         {
-          title: "Refresh Rate Settings",
-          href: "DOCS/A/RefreshRate.html",
-          description: "Adjust the master refresh rate of the AudioReactive engine. Lower values (0.01) yield buttery smooth reactions, while higher values (0.1+) give a choppy / stop motion feel."
+          header: "B - Audio",
+          items: [
+            {
+              title: "Mode",
+              href: "DOCS/B/Mode.html",
+              description: "Select the active analysis path: Frequency Bands, Audio Tracks/Stems, or Live Input (Mic IN)."
+            },
+            {
+              title: "Multiple Audio Tracks",
+              href: "DOCS/B/TrackManagement.html",
+              description: "Per-stem array workflow with track labeling, gain staging (Peak), envelope timing (Attack/Release), and smoothing controls."
+            },
+            {
+              title: "Single Track Frequency Bands",
+              href: "DOCS/B/BandSplitting.html",
+              description: "Single-source band workflow with smoothing controls for transient handling and response contouring."
+            },
+            {
+              title: "Live Input (Mic IN)",
+              href: "DOCS/B/LiveMode.html",
+              description: "Real-time input path for microphone or loopbacked system audio."
+            }
+          ]
         },
         {
-          title: "Trigger Enum (BeginPlay / Sequencer / Collision / RapidFire)",
-          href: "DOCS/A/TriggerTypes.html",
-          description: "The Trigger dropdown currently supports BeginPlay, Sequencer, Collision, and RapidFire. Pick the mode that matches your use case, then tune cooldown/delay where needed."
+          header: "C - Mesh Reaction",
+          items: [
+            {
+              title: "Static Mesh Control",
+              href: "DOCS/C/StaticMeshControl.html",
+              description: "Unified C rollout: enable Reactive Meshes, then configure Audio Reactive Static Meshes entries. Includes Tag Mode (BETA) for reactive actors containing static mesh components via Actor Tag + Component Tags."
+            }
+          ]
         },
         {
-          title: "Rapid Fire System (Beta)",
-          href: "DOCS/A/RapidFire.html",
-          description: "Enable Rapid Fire for repeated reactions. This feature works best with short burst audio tracks of any combination and quantity. Perfect for projectile hits, impacts, and other one-shot effects.\n\nThis allows AudioReactive to be re-triggered using the 'Rapid Fire Reset' Parameter, allowing you to set a cooldown in seconds."
+          header: "D - Light Reaction",
+          items: [
+            {
+              title: "Reactive Lights",
+              href: "DOCS/D/ReactiveLights.html",
+              description: "Current rollout: Reactive Lights bool, Audio Reactive Lights array, then per index Light, Intensity, Reactive Color Control (Low/High/Contrast), Audio Track, Set Solid Color, and Solid Light Color (RGBA). High Low Contrast controls how smoothly or sharply color transitions between low/high colors as audio intensity changes."
+            }
+          ]
         },
         {
-          title: "Peak Visualizer",
-          href: "DOCS/B/PeakVisualization.html",
-          description: "Quick enable toggles in Core Controls let you visualize peak values and optionally print them to output log for tuning."
-        },
-        {
-          title: "Proximity",
-          href: "DOCS/A/Proximity.html",
-          description: "Enable Proximity Active, choose Player as Center or Center Actor, then tune Radius and Falloff Start Ratio for distance-based reaction behavior."
-        },
-        {
-          title: "Cloners Effectors",
-          href: "DOCS/A/ClonersEffectors.html",
-          description: "Cloners Effectors supports array-based entries. Each element currently exposes AudioName and AudioBand for per-item mapping."
+          header: "E - DMX",
+          items: [
+            {
+              title: "DMX Group Control",
+              href: "DOCS/E/FixtureWidgetOverview.html",
+              description: "Unreal built-in fixture workflow only (no ArtNet/output protocol). Covers Enable DMX, Light Fixture Groups, and Laser Groups in Group Control."
+            },
+            {
+              title: "DMX Individual Control",
+              href: "DOCS/E/MovingHeads.html",
+              description: "Individual Control arrays mirror the same rollouts and fields used in Group Control for both Light Fixtures and Lasers."
+            },
+            {
+              title: "Watch DMX YouTube Tutorial",
+              href: "https://www.youtube.com/watch?v=gNOzQNSr2cw",
+              className: "dmx-youtube-btn",
+              external: true
+            }
+          ]
         }
       ]
     },
     {
-      header: "B - Audio",
+      header: "Workflow Recipes & Initial Setup",
       items: [
         {
-          title: "Audio Track Management",
-          href: "DOCS/B/TrackManagement.html",
-          description: "Add your audio tracks. There is no limit to the number of tracks you can add. Sound Effects, Song Stems, etc."
+          title: "First-Time Setup Checklist",
+          href: "DOCS/Workflows/FirstTimeSetupChecklist.html",
+          description: "Complete first-run checklist: install, enable, restart, content visibility, base actor placement, and first playback verification."
         },
         {
-          title: "Peak Visualization Tools",
-          href: "DOCS/B/PeakVisualization.html",
-          description: "Visualize audio peaks for accurate audio normalization. Each Audio Track has it's own 'peak' parameter at default 0.36. The lower the value, the louder the reaction from that specific track."
+          title: "AudioReactive Materials",
+          href: "DOCS/Materials/ReactiveMaterials.html",
+          description: "Material-focused reference and walkthrough content covering emissive response, reactive parameter behavior, and audio routing setup."
         },
         {
-          title: "Band Splitting (Beta)",
-          href: "DOCS/B/BandSplitting.html",
-          description: "Split a track into frequency bands (0-3) and assign them as you would Audio Track numbers (0-3). Enabling Band Mode will disable the Audio Track system."
+          title: "How to Setup a Reactive Mesh",
+          href: "DOCS/Workflows/ReactiveMeshSetup.html",
+          description: "Practical start-to-finish workflow for building a reactive mesh setup from scratch."
         },
         {
-          title: "Smoothing Parameters (Beta)",
-          href: "DOCS/B/SmoothingParams.html",
-          description: "Fine-tune smoothing for more natural reactions. Control smoothing window, and how much small and large jumps in frequency are independently smoothed out."
+          title: "How to Setup a Reactive Light",
+          href: "DOCS/Workflows/ReactiveLightSetup.html",
+          description: "Step-by-step light setup workflow focused on usable defaults, tuning, and final polish."
         },
         {
-          title: "Live Mode (Beta)",
-          href: "DOCS/B/LiveMode.html",
-          description: "Enable live mode for real-time audio input. This feature is very new, super cool, and might still have a bug or two. You know how it is.\n\nUses an identical Metasound graph as the Band Mode but with a custom input to bring in live PC audio"
-        }
-      ]
-    },
-    {
-      header: "C - Mesh Reaction",
-      items: [
-        {
-          title: "Static Mesh Control",
-          href: "DOCS/C/StaticMeshControl.html",
-          description: "Control static mesh transforms with audio. Independently control any combination of transform reactions on any axis."
-        },
-        {
-          title: "Actors with Static Mesh Components",
-          href: "DOCS/C/ActorsWithComponents.html",
-          description: "Control Actors containing Static Mesh components with audio. Actor Tag driven workflow captures all Static Mesh components in your actor.\n\nTested using a single static mesh component, using multiple may have unexpected results (or could be really awesome)."
-        }
-      ]
-    },
-    {
-      header: "D - Light Reaction",
-      items: [
-        {
-          title: "Reactive Lights",
-          href: "DOCS/D/ReactiveLights.html",
-          description: "Point Lights, Spot Lights, Directional Lights, and Rect lights.\n\nLight Intensity Reaction and/or Magnitude Controlled Color Shifting."
-        }
-      ]
-    },
-    {
-      header: "E - DMX",
-      items: [
-        {
-          title: "DMX Fixture Setup Widget",
-          href: "DOCS/E/FixtureWidgetOverview.html",
-          description: "Prepare fixtures, assign tags, create groups, and manage large DMX setups using handy selection tools."
-        },
-        {
-          title: "Moving Head Control",
-          href: "DOCS/E/MovingHeads.html",
-          description: "Make your Moving Heads AudioReactive. Each function can be set to static or reactive values.\n\nAudio Tracks can be assigned PER FUNCTION for precise control.\n\nAvailable Reactive Functions:\nDimmer - Colorwheel - Shutter - Gobo - Zoom - Frost - Pan - Tilt."
-        },
-        {
-          title: "Static/Strobe/Wash",
-          description: "Configure statics, strobes, and washes\nDimmer - Color - Shutter.",
-          modal: {
-            title: "Static/Strobe/Wash",
-            description: "Configure static, strobe, and wash effects.",
-            image: ""
-          }
-        },
-        {
-          title: "Lasers",
-          description: "Set up lasers individually or in groups.\nSet static values or set any combination of parameters to audioreactive.\nAngle - Length - Beam Count - Beam Width",
-          modal: {
-            title: "Laser Groups (with beam parameters!)",
-            description: "Set up laser groups and beam parameters.",
-            image: ""
-          }
+          title: "How to Setup Cloner/Effector Live Audio",
+          href: "DOCS/Workflows/ClonerEffectorLiveAudio.html",
+          description: "Workflow recipe for cloner/effector audio mapping (not live-only), including AudioName + AudioBand setup. Frequency Bands use fixed indices (0=Bass, 1=Low-Mid, 2=High-Mid, 3=High), while Audio Tracks/Stems uses dynamic track array indices (0..N) that grow as tracks are added."
         }
       ]
     }
