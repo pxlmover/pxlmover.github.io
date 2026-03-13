@@ -1208,6 +1208,15 @@ body:not([data-guide-page]) .subcategory:hover .child-list {
 }
 
 body:not([data-guide-page]) .subcategory.search-hidden {
+  opacity: 0;
+  transform: translateY(-4px);
+  max-height: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-width: 0;
+  box-shadow: none;
+  pointer-events: none;
   overflow: hidden;
 }
 
