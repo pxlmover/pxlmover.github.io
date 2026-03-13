@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <title>AudioReactive for Unreal Engine Documentation</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <!-- Security & CSP -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' 'unsafe-inline';
+    script-src 'self';
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' https: data:;
@@ -25,351 +27,40 @@
 </head>
 <body>
   <div class="super-container">
-  <div class="header">
-    AudioReactive<br>
-    Primer
+  <div class="primer-title-shell" aria-label="AudioReactive Primer">
+  <div class="header primer-title">
+    <span>AudioReactive</span><br>
+    <span>Primer</span>
+  </div>
   </div>
   <!--<div class="header-sub">
     Guide & Documentation
   </div>-->
   <div class="main-container">
-        <!-- Standalone Material Category Button -->
-    <div style="width:100%;text-align:center;margin-top:0;margin-bottom:22px;">
-      <button id="theme-randomizer"
-        style="background:linear-gradient(90deg,#64b5f6,#a259f7);color:#181a2a;font-family:'Orbitron','Inter',Arial,sans-serif;
-        font-size:0.66em;font-weight:700;letter-spacing:0.04em;border-radius:8px;padding:7px 15px;box-shadow:0 2px 12px #64b5f6cc;
-        border:none;cursor:pointer;transition:box-shadow 0.2s,background 0.2s;">
-        🎲 Randomize Theme
+    <div class="search-bar search-bar-compact">
+      <input type="text" id="searchInput" placeholder="🔍 Type here to Filter">
+    </div>
+    <div id="search-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <div class="categories" id="categories"></div>
+    <div id="guide-featured-link"></div>
+    <div class="guide-utility-actions" aria-label="Page utilities">
+      <button id="theme-randomizer" class="theme-randomizer-btn" aria-label="Spectrum Shift">
+        Spectrum Shift
       </button>
     </div>
-    <div class="search-bar" style="margin-top:0;">
-      <input type="text" id="searchInput" placeholder="🔍 AudioReactive Keyword Wizard">
-    </div>
-    <div class="categories" id="categories">
-      <!-- Category A -->
-      <div class="category">
-        <div class="category-header">A - Core Controls</div>
-        <div class="category-content">
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/A/PlaybackAndDelay.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Playback & Timing
-            </a>
-            <div class="child-list">Set Track Playback Start Time (seek ahead), or set the reaction to start after a specific delay (After Trigger Delay).</div>
-          </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/A/RefreshRate.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Refresh Rate Settings
-            </a>
-            <div class="child-list">Adjust the master refresh rate of the AudioReactive engine. Lower values (0.01) yield buttery smooth reactions, while higher values (0.1+) give a choppy / stop motion feel.</div>
-          </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/A/TriggerTypes.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Trigger Types (Sequencer/Collision)
-            </a>
-            <div class="child-list">The BeginPlay Trigger is enabled by default. Enabling Sequencer or Collision Trigger will disable BeginPlay activation.<br>
-              <br>Sequencer uses an Event Trigger to start AudioReactive using Custom Event - SEQTRACKTRIGGER</div>
-          </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/A/RapidFire.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Rapid Fire System (Beta)
-            </a>
-            <div class="child-list">Enable Rapid Fire for repeated reactions. This feature works best with short burst audio tracks of any combination and quantity. Perfect for projectile hits, impacts, and other one-shot effects.<br>
-              <br>This allows AudioReactive to be re-triggered using the 'Rapid Fire Reset' Parameter, allowing you to set a cooldown in seconds.</div>
-          </div>
-        </div>
-      </div>
-      <!-- Category B -->
-      <div class="category">
-        <div class="category-header">B - Audio</div>
-        <div class="category-content">
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/B/TrackManagement.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Audio Track Management
-            </a>
-            <div class="child-list">Add your audio tracks. There is no limit to the number of tracks you can add. Sound Effects, Song Stems, etc.</div>
-          </div>
-                  <!-- Replace the Peak Visualization Tools subcategory block with this: -->
-        <div class="subcategory">
-          <a class="subcategory-title"
-            href="DOCS/B/PeakVisualization.html"
-            style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-            Peak Visualization Tools
-          </a>
-          <div class="child-list">Visualize audio peaks for accurate audio normalization. Each Audio Track has it's own 'peak' parameter at default 0.36. The lower the value, the louder the reaction from that specific track.</div>
-        </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-              href="DOCS/B/BandSplitting.html"
-              style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-            Band Splitting (Beta)
-          </a>
-          <div class="child-list">Split a track into frequency bands (0-3) and assign them as you would Audio Track numbers (0-3). Enabling Band Mode will disable the Audio Track system.</div>
-      </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/B/SmoothingParams.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Smoothing Parameters (Beta)
-            </a>
-            <div class="child-list">Fine-tune smoothing for more natural reactions. Control smoothing window, and how much small and large jumps in frequency are independently smoothed out.</div>
-          </div>
-            <!-- Replace the Live Mode (Beta) subcategory block with this: -->
-            <div class="subcategory">
-              <a class="subcategory-title"
-                href="DOCS/B/LiveMode.html"
-                style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-                Live Mode (Beta)
-              </a>
-              <div class="child-list">Enable live mode for real-time audio input. This feature is very new, super cool, and might still have a bug or two. You know how it is.<br>
-              <br>Uses an identical Metasound graph as the Band Mode but with a custom input to bring in live PC audio</div>
-            </div>
-        </div>
-      </div>
-      <!-- Category C -->
-      <div class="category">
-        <div class="category-header">C - Mesh Reaction</div>
-        <div class="category-content">
-          <div class="subcategory">
-            <a class="subcategory-title"
-              href="DOCS/C/StaticMeshControl.html"
-              style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Static Mesh Control
-            </a>
-            <div class="child-list">Control static mesh transforms with audio. Independently control any combination of transform reactions on any axis.</div>
-          </div>
-            <div class="subcategory">
-              <a class="subcategory-title"
-                href="DOCS/C/ActorsWithComponents.html"
-                style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-                Actors with Static Mesh Components
-              </a>
-              <div class="child-list">Control Actors containing Static Mesh components with audio. Actor Tag driven workflow captures all Static Mesh components in your actor.<br> 
-              <br>Tested using a single static mesh component, using multiple may have unexpected results (or could be really awesome).</div>
-            </div>
-        </div>
-      </div>
-      <!-- Category D -->
-      <div class="category">
-        <div class="category-header">D - Light Reaction</div>
-        <div class="category-content">
-          <div class="subcategory">
-            <a class="subcategory-title"
-              href="DOCS/D/ReactiveLights.html"
-              style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Reactive Lights
-            </a>
-            <div class="child-list">Point Lights, Spot Lights, Directional Lights, and Rect lights.<br><br>Light Intensity Reaction and/or Magnitude Controlled Color Shifting.</div>
-          </div>
-        </div>
-      </div>
-      <!-- Category E -->
-      <div class="category">
-        <div class="category-header">E - DMX</div>
-        <div class="category-content">
-        <div class="subcategory">
-          <a class="subcategory-title"
-            href="DOCS/E/FixtureWidgetOverview.html"
-            style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-            DMX Fixture Setup Widget
-          </a>
-          <div class="child-list">Prepare fixtures, assign tags, create groups, and manage large DMX setups using handy selection tools.</div>
-        </div>
-          <div class="subcategory">
-            <a class="subcategory-title"
-               href="DOCS/E/MovingHeads.html"
-               style="display:block; text-decoration:none; color:#64b5f6; font-size:1.08em; font-weight:700; font-family:'Orbitron','Inter',Arial,sans-serif; letter-spacing:0.02em; margin-bottom:6px; cursor:pointer;">
-              Moving Head Control
-            </a>
-            <div class="child-list">Make your Moving Heads AudioReactive. Each function can be set to static or reactive values. 
-              <br><br>Audio Tracks can be assigned PER FUNCTION for precise control.<br>
-              <br>Available Reactive Functions:<br> Dimmer - Colorwheel - Shutter - Gobo - Zoom - Frost - Pan - Tilt.</div>
-          </div>
-          <div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Static/Strobe/Wash"
-                 data-desc="Configure static, strobe, and wash effects."
-                 data-img="">
-              Static/Strobe/Wash
-            </div>
-            <div class="child-list">Configure statics, strobes, and washes<br>Dimmer - Color - Shutter.</div>
-          </div>
-          <div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Laser Groups (with beam parameters!)"
-                 data-desc="Set up laser groups and beam parameters."
-                 data-img="">
-              "Lasers"
-            </div>
-            <div class="child-list">Set up "lasers" individually or in groups.<br>Set static values or set any combination of paramaters to audioreactive.<br>Angle - Length - Beam Count - Beam Width</div>
-          </div>
-          <!--<div class="subcategory">
-            <div class="subcategory-title"
-                 data-title="Add Functions (Dimmer, etc.)"
-                 data-desc="Add extra functions like dimmer and more."
-                 data-img="">
-              Adding Functions to Fixtures
-            </div>
-            <div class="child-list">Functions are good</div>
-          </div>-->
-        </div>
-      </div>
-            <!-- Place this after the E - DMX category dropdown in your GuideAR.html: -->
-      <div style="width:100%;text-align:center;margin:32px 0 0 0;">
-        <a href="DOCS/Materials/ReactiveMaterials.html"
-           style="display:inline-block; background:linear-gradient(90deg,#a259f7,#64b5f6 70%,#fff176 100%);
-                  color:#181a2a; font-family:'Orbitron','Inter',Arial,sans-serif; font-size:1.18em; font-weight:900;
-                  letter-spacing:0.04em; border-radius:18px; padding:16px 38px; box-shadow:0 4px 24px #64b5f6cc;
-                  text-decoration:none; margin:0 0 18px 0; transition:box-shadow 0.2s,background 0.2s;">
-          AudioReactive Materials
-        </a>
-      </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
   <!-- Info Card Modal -->
-  <div id="info-modal" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100vw; height:100vh; background:rgba(10,20,40,0.92); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
-    <div id="info-modal-content" style="background:#222d; border-radius:18px; box-shadow:0 8px 48px #64b5f6cc; max-width:96vw; max-height:90vh; overflow:auto; padding:32px 24px; color:#e0e0e0; position:relative;">
-      <span id="info-modal-close" style="position:absolute;top:18px;right:28px;font-size:2.5em;color:#fff;cursor:pointer;z-index:10;">&times;</span>
+  <div id="info-modal" aria-hidden="true">
+    <div id="info-modal-content" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+      <button id="info-modal-close" type="button" aria-label="Close info card">&times;</button>
       <div id="info-modal-body"></div>
     </div>
   </div>
 
-  
-  <script>
-  // Track user-expanded categories
-  let userExpandedCategories = new Set();
-
-  // Expand/collapse categories and track user action
-  document.querySelectorAll('.category-header').forEach((header, idx) => {
-    header.addEventListener('click', function() {
-      const parent = this.parentElement;
-      parent.classList.toggle('open');
-      if (parent.classList.contains('open')) {
-        userExpandedCategories.add(idx);
-      } else {
-        userExpandedCategories.delete(idx);
-      }
-      // Save to localStorage
-      localStorage.setItem('arExpandedCats', JSON.stringify(Array.from(userExpandedCategories)));
-    });
-  });
-
-  // Simple fuzzy match: returns true if all query words are found in the text (in any order)
-  function fuzzyMatch(text, query) {
-    const words = query.split(/\s+/).filter(Boolean);
-    return words.every(word => text.includes(word));
-  }
-
-  // Live search filter (show only matching subcategories, auto-expand matching categories)
-  document.getElementById('searchInput').addEventListener('input', function() {
-    const query = this.value.trim().toLowerCase();
-    document.querySelectorAll('.category').forEach((cat, idx) => {
-      let subMatchCount = 0;
-      cat.querySelectorAll('.subcategory').forEach(sub => {
-        const subText = sub.textContent.toLowerCase();
-        if (query === "" || fuzzyMatch(subText, query)) {
-          sub.style.display = '';
-          subMatchCount++;
-        } else {
-          sub.style.display = 'none';
-        }
-      });
-      if (query) {
-        if (subMatchCount > 0) {
-          cat.style.display = '';
-          cat.classList.add('open');
-        } else {
-          cat.style.display = 'none';
-          cat.classList.remove('open');
-        }
-      } else {
-        cat.style.display = '';
-        if (userExpandedCategories.has(idx)) {
-          cat.classList.add('open');
-        } else {
-          cat.classList.remove('open');
-        }
-        cat.querySelectorAll('.subcategory').forEach(sub => {
-          sub.style.display = '';
-        });
-      }
-    });
-  });
-
-    // Info card modal logic
-    document.querySelectorAll('.subcategory-title').forEach(title => {
-      // Only attach modal logic if it's NOT a link
-      if (!title.hasAttribute('href')) {
-        title.style.cursor = 'pointer';
-        title.addEventListener('click', function(e) {
-          const modal = document.getElementById('info-modal');
-          const body = document.getElementById('info-modal-body');
-          const titleText = this.getAttribute('data-title') || this.textContent;
-          const descText = this.getAttribute('data-desc') || '';
-          const imgSrc = this.getAttribute('data-img');
-          let html = `<h2 style="font-family:'Orbitron','Inter',Arial,sans-serif;font-size:1.4em;color:#64b5f6;margin-bottom:12px;">${titleText}</h2>`;
-          html += `<div style="font-size:1.1em;margin-bottom:18px;">${descText}</div>`;
-          if (imgSrc) {
-            html += `<img src="${imgSrc}" alt="${titleText}" style="max-width:92vw;max-height:60vh;border-radius:12px;box-shadow:0 4px 24px #64b5f6cc;margin-bottom:12px;">`;
-          }
-          body.innerHTML = html;
-          modal.style.display = 'flex';
-          document.body.style.overflow = 'hidden';
-        });
-      }
-    });
-    document.getElementById('info-modal-close').onclick = function() {
-      document.getElementById('info-modal').style.display = 'none';
-      document.body.style.overflow = '';
-    };
-    document.getElementById('info-modal').onclick = function(e) {
-      if (e.target === this) {
-        this.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    };
-
-    function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-  // Restore expanded categories from localStorage on page load
-  window.addEventListener('DOMContentLoaded', function() {
-    const saved = localStorage.getItem('arExpandedCats');
-    if (saved) {
-      userExpandedCategories = new Set(JSON.parse(saved));
-      document.querySelectorAll('.category').forEach((cat, idx) => {
-        if (userExpandedCategories.has(idx)) {
-          cat.classList.add('open');
-        } else {
-          cat.classList.remove('open');
-        }
-      });
-    }
-  });
-  window.addEventListener('DOMContentLoaded', function() {
-  const scrollY = localStorage.getItem('guideARScroll');
-  if (scrollY) {
-    window.scrollTo(0, parseInt(scrollY, 10));
-    localStorage.removeItem('guideARScroll');
-  }
-});
-  </script>
-  <script src="common.js"></script>
+    <script src="guide-content.js" defer></script>
+    <script src="guide-page.js" defer></script>
+    <script src="common.js" defer></script>
 </body>
 </html>
