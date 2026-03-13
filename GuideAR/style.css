@@ -1151,11 +1151,11 @@ body:not([data-guide-page]) .subcategory-title {
 }
 
 body:not([data-guide-page]) .subcategory-title:hover {
-  color: #fbfdff;
+  color: #58f3ff;
   transform: translateY(-1px);
   border-color: rgba(224, 233, 245, 0.6);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.58), 0 0 14px rgba(163, 184, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1px 0 rgba(8, 12, 18, 0.68);
-  text-shadow: 0 0 8px rgba(240, 246, 255, 0.45), 0 1px 1px rgba(0, 0, 0, 0.72);
+  text-shadow: 0 0 10px rgba(88, 243, 255, 0.62), 0 1px 1px rgba(0, 0, 0, 0.72);
   filter: brightness(1.06) saturate(0.9);
 }
 
@@ -1169,9 +1169,10 @@ body:not([data-guide-page]) .subcategory-title.dmx-youtube-btn {
 }
 
 body:not([data-guide-page]) .subcategory-title.dmx-youtube-btn:hover {
-  color: #fff;
+  color: #58f3ff;
   border-color: rgba(255, 220, 220, 0.7);
   box-shadow: 0 10px 22px rgba(30, 6, 10, 0.72), 0 0 16px rgba(255, 102, 102, 0.42), inset 0 1px 0 rgba(255, 235, 235, 0.28), inset 0 -1px 0 rgba(44, 9, 15, 0.82);
+  text-shadow: 0 0 10px rgba(88, 243, 255, 0.62), 0 1px 1px rgba(0, 0, 0, 0.72);
   filter: brightness(1.08) saturate(1.02);
 }
 
@@ -1493,9 +1494,10 @@ body:not([data-guide-page]) .subcategory-title {
 }
 
 body:not([data-guide-page]) .subcategory-title:hover {
-  color: #fbfdff;
+  color: #58f3ff;
   border-color: rgba(224, 233, 245, 0.6);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.58), 0 0 14px rgba(163, 184, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1px 0 rgba(8, 12, 18, 0.68);
+  text-shadow: 0 0 10px rgba(88, 243, 255, 0.62), 0 1px 1px rgba(0, 0, 0, 0.72);
   filter: brightness(1.06) saturate(0.9);
 }
 
