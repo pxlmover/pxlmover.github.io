@@ -947,11 +947,11 @@ body.party-mode {
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   font-src 'self' https://fonts.gstatic.com;
   img-src 'self' https: data:;
-  frame-src https://www.youtube.com;
+  frame-src https://www.youtube.com https://www.youtube-nocookie.com;
 ">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="referrer" content="origin-when-cross-origin">
 </head>
 <body>
   <!--<div class="update-banner">
@@ -1257,7 +1257,8 @@ AudioReactive Primer
   <div id="video-lightbox">
     <div id="video-lightbox-content">
       <button id="video-lightbox-close" aria-label="Close">&times;</button>
-      <iframe id="video-lightbox-iframe" src="" frameborder="0" allowfullscreen allow="autoplay" loading="lazy"></iframe>
+      <iframe id="video-lightbox-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture; web-share" loading="lazy" referrerpolicy="origin-when-cross-origin"></iframe>
+      <a id="video-lightbox-link" href="#" target="_blank" rel="noopener noreferrer" style="position:absolute;left:12px;bottom:-44px;color:#fff176;font-weight:700;text-decoration:none;">Open on YouTube</a>
     </div>
   </div>
 
@@ -1345,6 +1346,74 @@ AudioReactive Primer
     requestAnimationFrame(animateWaves);
   }
   animateWaves();
+
+  // YouTube lightbox playback handlers
+  const videoLightbox = document.getElementById('video-lightbox');
+  const videoLightboxContent = document.getElementById('video-lightbox-content');
+  const videoLightboxClose = document.getElementById('video-lightbox-close');
+  const videoLightboxIframe = document.getElementById('video-lightbox-iframe');
+  const videoLightboxLink = document.getElementById('video-lightbox-link');
+  const playableThumbs = document.querySelectorAll('.video-thumb, .short-thumb');
+
+  function openVideoLightbox(videoId) {
+    if (!videoId || !videoLightbox || !videoLightboxIframe) return;
+    const watchUrl = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`;
+
+    // Local file mode often fails YouTube embed origin checks (Error 153).
+    if (window.location.protocol === 'file:') {
+      window.open(watchUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    const hasHttpOrigin = window.location.protocol === 'http:' || window.location.protocol === 'https:';
+    const originParam = hasHttpOrigin ? `&origin=${encodeURIComponent(window.location.origin)}` : '';
+    const referrerParam = `&widget_referrer=${encodeURIComponent(window.location.href)}`;
+    videoLightboxIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1${originParam}${referrerParam}`;
+    if (videoLightboxLink) {
+      videoLightboxLink.href = watchUrl;
+    }
+    videoLightbox.classList.add('active');
+    videoLightbox.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeVideoLightbox() {
+    if (!videoLightbox || !videoLightboxIframe) return;
+    videoLightbox.classList.remove('active');
+    videoLightbox.setAttribute('aria-hidden', 'true');
+    videoLightboxIframe.src = '';
+  }
+
+  playableThumbs.forEach((thumb) => {
+    thumb.setAttribute('role', 'button');
+    thumb.setAttribute('tabindex', '0');
+    thumb.addEventListener('click', () => {
+      openVideoLightbox(thumb.dataset.video);
+    });
+    thumb.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openVideoLightbox(thumb.dataset.video);
+      }
+    });
+  });
+
+  if (videoLightboxClose) {
+    videoLightboxClose.addEventListener('click', closeVideoLightbox);
+  }
+
+  if (videoLightboxContent) {
+    videoLightboxContent.addEventListener('click', (e) => e.stopPropagation());
+  }
+
+  if (videoLightbox) {
+    videoLightbox.addEventListener('click', closeVideoLightbox);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeVideoLightbox();
+    }
+  });
 });
   </script>
 </body>

@@ -1,6 +1,8 @@
 let userExpandedCategories = new Set();
 const EXPANDED_CATEGORIES_STORAGE_KEY = 'arExpandedCatsV2';
+const LAST_ACTIVE_CATEGORY_STORAGE_KEY = 'arLastActiveCategoryV1';
 const MIN_SEARCH_CHARS = 2;
+const navStateStorage = window.sessionStorage;
 
 function getSearchStatusElement() {
   return document.getElementById('search-status');
@@ -10,7 +12,7 @@ function getCategoryKeyFromElement(categoryEl) {
   return categoryEl ? categoryEl.getAttribute('data-cat-key') : null;
 }
 
-function renderGuideItem(item) {
+function renderGuideItem(item, parentCategoryKey) {
   const subcategoryEl = document.createElement('div');
   subcategoryEl.className = 'subcategory';
 
@@ -18,6 +20,9 @@ function renderGuideItem(item) {
     const linkEl = document.createElement('a');
     linkEl.className = `subcategory-title ${item.className || ''}`.trim();
     linkEl.href = item.href;
+    if (parentCategoryKey) {
+      linkEl.setAttribute('data-parent-cat-key', parentCategoryKey);
+    }
     if (item.external) {
       linkEl.target = '_blank';
       linkEl.rel = 'noopener noreferrer';
@@ -71,7 +76,7 @@ function renderCategory(category, keyPath, depth) {
   });
 
   (category.items || []).forEach(item => {
-    contentEl.appendChild(renderGuideItem(item));
+    contentEl.appendChild(renderGuideItem(item, keyPath));
   });
 
   categoryEl.appendChild(headerEl);
@@ -132,9 +137,51 @@ function bindCategoryToggles() {
       } else {
         userExpandedCategories.delete(key);
       }
-      localStorage.setItem(EXPANDED_CATEGORIES_STORAGE_KEY, JSON.stringify(Array.from(userExpandedCategories)));
+      persistExpandedCategories();
     });
   });
+}
+
+function persistExpandedCategories() {
+  navStateStorage.setItem(EXPANDED_CATEGORIES_STORAGE_KEY, JSON.stringify(Array.from(userExpandedCategories)));
+}
+
+function saveExpandedCategoriesFromDom() {
+  userExpandedCategories = new Set(
+    Array.from(document.querySelectorAll('.category.open'))
+      .map(getCategoryKeyFromElement)
+      .filter(Boolean)
+  );
+  persistExpandedCategories();
+}
+
+function loadExpandedCategoriesFromStorage() {
+  const raw = navStateStorage.getItem(EXPANDED_CATEGORIES_STORAGE_KEY);
+  if (!raw) {
+    userExpandedCategories = new Set();
+    return;
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) {
+      userExpandedCategories = new Set(parsed.filter(Boolean));
+      return;
+    }
+  } catch (error) {
+    // Ignore invalid storage and reset state.
+  }
+
+  userExpandedCategories = new Set();
+}
+
+function addCategoryAndAncestorsToExpanded(key) {
+  if (!key) return;
+
+  const parts = key.split('.');
+  for (let i = 1; i <= parts.length; i += 1) {
+    userExpandedCategories.add(parts.slice(0, i).join('.'));
+  }
 }
 
 function setCategoryOpen(categoryEl, isOpen) {
@@ -360,29 +407,47 @@ function bindInfoModal() {
   });
 }
 
-function initializeCollapsedCategories() {
-  // Always start with a clean collapsed state on page load.
-  userExpandedCategories = new Set();
-  localStorage.removeItem(EXPANDED_CATEGORIES_STORAGE_KEY);
+function bindNavigationStatePersistence() {
+  document.querySelectorAll('.subcategory-title[href]').forEach(link => {
+    link.addEventListener('click', function () {
+      saveExpandedCategoriesFromDom();
+
+      const parentKey = this.getAttribute('data-parent-cat-key');
+      if (parentKey) {
+        navStateStorage.setItem(LAST_ACTIVE_CATEGORY_STORAGE_KEY, parentKey);
+      }
+    });
+  });
+}
+
+function restoreCategoryExpansionState() {
+  loadExpandedCategoriesFromStorage();
+
+  const lastActiveCategoryKey = navStateStorage.getItem(LAST_ACTIVE_CATEGORY_STORAGE_KEY);
+  if (lastActiveCategoryKey) {
+    addCategoryAndAncestorsToExpanded(lastActiveCategoryKey);
+  }
 
   document.querySelectorAll('.category').forEach(cat => {
-    setCategoryOpen(cat, false);
+    const key = getCategoryKeyFromElement(cat);
+    setCategoryOpen(cat, Boolean(key && userExpandedCategories.has(key)));
   });
 }
 
 function restoreScrollPosition() {
-  const scrollY = localStorage.getItem('guideARScroll');
+  const scrollY = navStateStorage.getItem('guideARScroll');
   if (!scrollY) return;
 
   window.scrollTo(0, parseInt(scrollY, 10));
-  localStorage.removeItem('guideARScroll');
+  navStateStorage.removeItem('guideARScroll');
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   renderGuideContent();
   bindCategoryToggles();
+  bindNavigationStatePersistence();
   bindSearch();
   bindInfoModal();
-  initializeCollapsedCategories();
+  restoreCategoryExpansionState();
   restoreScrollPosition();
 });

@@ -360,7 +360,7 @@
     const backLink = document.querySelector('.back-link');
     if (backLink) {
       backLink.addEventListener('click', function () {
-        localStorage.setItem('guideARScroll', window.scrollY);
+        sessionStorage.setItem('guideARScroll', window.scrollY);
       });
     }
   }
