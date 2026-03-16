@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AudioReactive for Unreal Engine – Make Anything Move to Music</title>
   <meta name="description" content="AudioReactive for Unreal Engine – Instantly make meshes, materials, particles, lights, and more react to music or sound. Available on Fab Marketplace.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://img.youtube.com">
+  <link rel="preconnect" href="https://img.youtube.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.youtube.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <style>
@@ -965,7 +970,7 @@ body.party-mode {
   position:relative;
   overflow:hidden;
 ">
-    <img src="../images/AudioReactive_LOGO.png" alt="AudioReactive Logo"
+    <img src="../images/AudioReactive_LOGO.png" alt="AudioReactive Logo" loading="eager" decoding="async" fetchpriority="high"
       style="width:440px;max-width:160vw;margin-bottom:4px;border-radius:18px;background:#181a2a;">
     <h1 style="font-family:'Orbitron','Inter',Arial,sans-serif;font-size:2.8em;font-weight:900;letter-spacing:0.04em;
       background:linear-gradient(90deg,#00eaff 10%,#6f6fff 40%,#b36fff 70%,#00eaff 100%);
@@ -999,8 +1004,8 @@ body.party-mode {
   <span class="hero-highlight">Bring your scenes to life!<br>NO code required.</span>
   <br><br>
   <div class="hero-btn-row">
-    <a class="cta-btn" href="https://www.fab.com/listings/e0fb3145-3522-417c-887e-6007fcd24372" target="_blank">Get it on Fab</a>
-    <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank">Watch Demo Videos</a>
+    <a class="cta-btn" href="https://www.fab.com/listings/b08ed9fb-f48b-4b73-a432-70132dcf163b" target="_blank" rel="noopener noreferrer">Get it on Fab</a>
+    <a class="cta-btn" href="https://www.youtube.com/@AudioReactive_UE" target="_blank" rel="noopener noreferrer">Watch Demo Videos</a>
   </div>
   <!-- Move the hero-soundwave SVG down here, just above Full Length Examples -->
   <svg class="hero-soundwave" width="320" height="32" viewBox="0 0 320 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1252,7 +1257,7 @@ AudioReactive Primer
   <div id="video-lightbox">
     <div id="video-lightbox-content">
       <button id="video-lightbox-close" aria-label="Close">&times;</button>
-      <iframe id="video-lightbox-iframe" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+      <iframe id="video-lightbox-iframe" src="" frameborder="0" allowfullscreen allow="autoplay" loading="lazy"></iframe>
     </div>
   </div>
 
@@ -1270,6 +1275,12 @@ AudioReactive Primer
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+  const galleryImages = document.querySelectorAll('.video-thumb img, .short-thumb img, .gallery-grid img');
+  galleryImages.forEach((img) => {
+    img.loading = 'lazy';
+    img.decoding = 'async';
+  });
+
   // Party Switch functionality
   const partyBtn = document.getElementById('party-switch');
   let partyActive = false;
