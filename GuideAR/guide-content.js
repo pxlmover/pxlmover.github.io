@@ -43,7 +43,7 @@ window.GUIDE_CONTENT = {
             {
               title: "Cloners Effectors",
               href: "DOCS/A/ClonersEffectors.html",
-              description: "Array-based effector mapping with AudioName and AudioBand per entry."
+              description: "Array-based cloner/effector mapping with Animator AudioName key + AudioBand per entry."
             }
           ]
         },
