@@ -426,6 +426,8 @@ function restoreCategoryExpansionState() {
   const lastActiveCategoryKey = navStateStorage.getItem(LAST_ACTIVE_CATEGORY_STORAGE_KEY);
   if (lastActiveCategoryKey) {
     addCategoryAndAncestorsToExpanded(lastActiveCategoryKey);
+    // Consume breadcrumb once so plain refresh does not keep forcing categories open.
+    navStateStorage.removeItem(LAST_ACTIVE_CATEGORY_STORAGE_KEY);
   }
 
   document.querySelectorAll('.category').forEach(cat => {
