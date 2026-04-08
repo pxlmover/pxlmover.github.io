@@ -3,6 +3,104 @@ const EXPANDED_CATEGORIES_STORAGE_KEY = 'arExpandedCatsV2';
 const LAST_ACTIVE_CATEGORY_STORAGE_KEY = 'arLastActiveCategoryV1';
 const MIN_SEARCH_CHARS = 2;
 const navStateStorage = window.sessionStorage;
+const guideLocalization = window.GuideLocalization || null;
+
+function getGuideContentData() {
+  if (guideLocalization && typeof guideLocalization.getGuideContent === 'function') {
+    return guideLocalization.getGuideContent();
+  }
+
+  return window.GUIDE_CONTENT || { categories: [] };
+}
+
+function getGuideUiStrings() {
+  if (guideLocalization && typeof guideLocalization.getUiStrings === 'function') {
+    return guideLocalization.getUiStrings();
+  }
+
+  return {};
+}
+
+function formatGuideString(template, tokens) {
+  if (guideLocalization && typeof guideLocalization.formatTemplate === 'function') {
+    return guideLocalization.formatTemplate(template, tokens);
+  }
+
+  return String(template || '');
+}
+
+function applyGuideStaticLocalization() {
+  const ui = getGuideUiStrings();
+
+  if (guideLocalization && typeof guideLocalization.applyStaticText === 'function') {
+    guideLocalization.applyStaticText(document);
+  }
+
+  document.documentElement.lang = (guideLocalization && guideLocalization.getCurrentLanguage)
+    ? guideLocalization.getCurrentLanguage()
+    : 'en';
+
+  if (ui.siteTitle) {
+    document.title = ui.siteTitle;
+  }
+
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput && ui.searchPlaceholder) {
+    searchInput.setAttribute('placeholder', ui.searchPlaceholder);
+  }
+}
+
+function initializeLanguageSelect() {
+  const select = document.getElementById('language-select');
+  if (!select) return;
+
+  const ui = getGuideUiStrings();
+  const optionLabels = ui.languageOptions || {};
+  const languages = (guideLocalization && Array.isArray(guideLocalization.SUPPORTED_LANGUAGES))
+    ? guideLocalization.SUPPORTED_LANGUAGES
+    : ['en', 'ru'];
+  const currentLanguage = (guideLocalization && guideLocalization.getCurrentLanguage)
+    ? guideLocalization.getCurrentLanguage()
+    : 'en';
+
+  select.innerHTML = '';
+  languages.forEach(function (language) {
+    const option = document.createElement('option');
+    option.value = language;
+    option.textContent = optionLabels[language] || language.toUpperCase();
+    select.appendChild(option);
+  });
+  select.value = currentLanguage;
+
+  if (select.dataset.bound === 'true') {
+    return;
+  }
+
+  select.addEventListener('change', function () {
+    if (guideLocalization && typeof guideLocalization.setCurrentLanguage === 'function') {
+      guideLocalization.setCurrentLanguage(this.value);
+    }
+  });
+
+  select.dataset.bound = 'true';
+}
+
+function refreshGuideView() {
+  initializeLanguageSelect();
+  applyGuideStaticLocalization();
+  renderGuideContent();
+  bindCategoryToggles();
+  bindNavigationStatePersistence();
+  bindInfoModal();
+  restoreCategoryExpansionState();
+
+  const searchInput = document.getElementById('searchInput');
+  const rawQuery = searchInput ? searchInput.value.trim().toLowerCase() : '';
+  const query = rawQuery.length >= MIN_SEARCH_CHARS ? rawQuery : '';
+
+  applySearchQuery(query);
+  updateSearchStatusMessage(rawQuery);
+}
 
 function getSearchStatusElement() {
   return document.getElementById('search-status');
@@ -87,17 +185,18 @@ function renderCategory(category, keyPath, depth) {
 function renderGuideContent() {
   const categoriesRoot = document.getElementById('categories');
   const featuredRoot = document.getElementById('guide-featured-link');
-  if (!categoriesRoot || !window.GUIDE_CONTENT) return;
+  const guideContent = getGuideContentData();
+  if (!categoriesRoot || !guideContent) return;
 
   categoriesRoot.innerHTML = '';
 
-  (window.GUIDE_CONTENT.categories || []).forEach((category, idx) => {
+  (guideContent.categories || []).forEach((category, idx) => {
     categoriesRoot.appendChild(renderCategory(category, String(idx), 0));
   });
 
   if (featuredRoot) {
-    const featuredLink = window.GUIDE_CONTENT.featuredLink;
-    const communityLinks = window.GUIDE_CONTENT.communityLinks || [];
+    const featuredLink = guideContent.featuredLink;
+    const communityLinks = guideContent.communityLinks || [];
     const parts = [];
 
     if (featuredLink && featuredLink.href && featuredLink.label) {
@@ -204,6 +303,57 @@ function announceSearchStatus(message) {
   status.textContent = message;
 }
 
+function getLocalizedTopicLabel(count, ui) {
+  const currentLanguage = (guideLocalization && typeof guideLocalization.getCurrentLanguage === 'function')
+    ? guideLocalization.getCurrentLanguage()
+    : 'en';
+
+  if (currentLanguage === 'ru') {
+    const mod10 = count % 10;
+    const mod100 = count % 100;
+
+    if (mod10 === 1 && mod100 !== 11) {
+      return ui.searchTopicSingular || 'тема';
+    }
+
+    if (mod10 >= 2 && mod10 <= 4 && !(mod100 >= 12 && mod100 <= 14)) {
+      return ui.searchTopicFew || 'темы';
+    }
+
+    return ui.searchTopicPlural || 'тем';
+  }
+
+  return count === 1
+    ? (ui.searchTopicSingular || 'topic')
+    : (ui.searchTopicPlural || 'topics');
+}
+
+function updateSearchStatusMessage(rawQuery) {
+  const ui = getGuideUiStrings();
+  const hasEnoughChars = rawQuery.length >= MIN_SEARCH_CHARS;
+
+  if (rawQuery.length === 0) {
+    announceSearchStatus(ui.searchShowingAll || 'Showing all topics.');
+    return;
+  }
+
+  if (!hasEnoughChars) {
+    announceSearchStatus(formatGuideString(ui.searchTypeMore || 'Type at least {min} characters to filter topics.', {
+      min: MIN_SEARCH_CHARS
+    }));
+    return;
+  }
+
+  const resultCount = countVisibleSearchResults();
+  const topicLabel = getLocalizedTopicLabel(resultCount, ui);
+
+  announceSearchStatus(formatGuideString(ui.searchShowingResults || 'Showing {count} {topicLabel} for "{query}".', {
+    count: resultCount,
+    topicLabel: topicLabel,
+    query: rawQuery
+  }));
+}
+
 function fuzzyMatch(text, query) {
   const words = query.split(/\s+/).filter(Boolean);
   return words.every(word => text.includes(word));
@@ -262,14 +412,13 @@ function applySearchQuery(query) {
 
 function bindSearch() {
   const searchInput = document.getElementById('searchInput');
-  if (!searchInput) return;
+  if (!searchInput || searchInput.dataset.bound === 'true') return;
 
   let pendingFrame = null;
 
   searchInput.addEventListener('input', function () {
     const rawQuery = this.value.trim().toLowerCase();
-    const hasEnoughChars = rawQuery.length >= MIN_SEARCH_CHARS;
-    const query = hasEnoughChars ? rawQuery : '';
+    const query = rawQuery.length >= MIN_SEARCH_CHARS ? rawQuery : '';
 
     if (pendingFrame !== null) {
       cancelAnimationFrame(pendingFrame);
@@ -277,20 +426,12 @@ function bindSearch() {
 
     pendingFrame = requestAnimationFrame(() => {
       applySearchQuery(query);
-
-      if (rawQuery.length === 0) {
-        announceSearchStatus('Showing all topics.');
-      } else if (!hasEnoughChars) {
-        announceSearchStatus(`Type at least ${MIN_SEARCH_CHARS} characters to filter topics.`);
-      } else {
-        const resultCount = countVisibleSearchResults();
-        const resultLabel = resultCount === 1 ? 'topic' : 'topics';
-        announceSearchStatus(`Showing ${resultCount} ${resultLabel} for "${rawQuery}".`);
-      }
-
+      updateSearchStatusMessage(rawQuery);
       pendingFrame = null;
     });
   });
+
+  searchInput.dataset.bound = 'true';
 }
 
 function bindInfoModal() {
@@ -445,11 +586,11 @@ function restoreScrollPosition() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  renderGuideContent();
-  bindCategoryToggles();
-  bindNavigationStatePersistence();
   bindSearch();
-  bindInfoModal();
-  restoreCategoryExpansionState();
+  refreshGuideView();
   restoreScrollPosition();
+});
+
+window.addEventListener('guide-language-changed', function () {
+  refreshGuideView();
 });

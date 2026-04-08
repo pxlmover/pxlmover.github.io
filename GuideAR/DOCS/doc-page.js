@@ -1,9 +1,28 @@
 (function () {
+  const guideLocalization = window.GuideLocalization || null;
+
+  function getGuideUiStrings() {
+    if (guideLocalization && typeof guideLocalization.getUiStrings === 'function') {
+      return guideLocalization.getUiStrings();
+    }
+
+    return {};
+  }
+
+  function getLocalizedDocs() {
+    if (guideLocalization && typeof guideLocalization.getGuideDocs === 'function') {
+      return guideLocalization.getGuideDocs();
+    }
+
+    return window.GUIDE_DOCS || {};
+  }
+
   function resolveCategoryLabel(pageKey, pageTitle) {
     if (!pageKey) return pageTitle || 'AudioReactive Docs';
 
     const prefix = pageKey.split('.')[0];
-    const prefixMap = {
+    const ui = getGuideUiStrings();
+    const prefixMap = ui.docsPrefixMap || {
       A: 'A - Core Controls',
       B: 'B - Audio',
       C: 'C - Mesh Reaction',
@@ -189,6 +208,7 @@
   }
 
   function createImageLightbox() {
+    const ui = getGuideUiStrings();
     const overlay = document.createElement('div');
     overlay.id = 'gallery-modal';
     overlay.setAttribute('aria-hidden', 'true');
@@ -197,12 +217,12 @@
     content.id = 'gallery-modal-content';
     content.setAttribute('role', 'dialog');
     content.setAttribute('aria-modal', 'true');
-    content.setAttribute('aria-label', 'Expanded screenshot view');
+    content.setAttribute('aria-label', ui.expandedScreenshotView || 'Expanded screenshot view');
 
     const closeButton = document.createElement('button');
     closeButton.id = 'gallery-modal-close';
     closeButton.type = 'button';
-    closeButton.setAttribute('aria-label', 'Close expanded image');
+    closeButton.setAttribute('aria-label', ui.closeExpandedImage || 'Close expanded image');
     closeButton.textContent = '×';
 
     const body = document.createElement('div');
@@ -230,7 +250,7 @@
       overlay.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('gallery-modal-open');
       modalImage.src = '';
-      modalImage.alt = 'Expanded screenshot';
+      modalImage.alt = ui.expandedScreenshot || 'Expanded screenshot';
 
       if (previouslyFocusedElement && typeof previouslyFocusedElement.focus === 'function') {
         previouslyFocusedElement.focus();
@@ -301,7 +321,9 @@
 
   function renderDocPage() {
     const pageKey = document.body.getAttribute('data-guide-page');
-    const page = window.GUIDE_DOCS && window.GUIDE_DOCS[pageKey];
+    const docs = getLocalizedDocs();
+    const page = docs && docs[pageKey];
+    const ui = getGuideUiStrings();
     const headerEl = document.querySelector('.header');
     const pageTitleEl = document.getElementById('doc-page-title');
     const galleryRoot = document.getElementById('doc-gallery-grid');
@@ -310,7 +332,10 @@
       return;
     }
 
-    document.title = `${page.pageTitle} – AudioReactive Docs`;
+    document.documentElement.lang = (guideLocalization && guideLocalization.getCurrentLanguage)
+      ? guideLocalization.getCurrentLanguage()
+      : 'en';
+    document.title = `${page.pageTitle} – ${ui.docsSuffix || 'AudioReactive Docs'}`;
     if (headerEl) {
       setDocsHeader(headerEl, resolveCategoryLabel(pageKey, page.pageTitle), page.pageTitle);
     }
@@ -359,6 +384,8 @@
 
     const backLink = document.querySelector('.back-link');
     if (backLink) {
+      backLink.textContent = ui.backToGuide || '← Back to Guide';
+      backLink.setAttribute('aria-label', ui.backToGuide || '← Back to Guide');
       backLink.addEventListener('click', function () {
         sessionStorage.setItem('guideARScroll', window.scrollY);
       });
@@ -370,4 +397,6 @@
   } else {
     renderDocPage();
   }
+
+  window.addEventListener('guide-language-changed', renderDocPage);
 })();

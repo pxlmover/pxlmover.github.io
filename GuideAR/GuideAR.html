@@ -29,8 +29,8 @@
   <div class="super-container">
   <div class="primer-title-shell" aria-label="AudioReactive Primer">
   <div class="header primer-title">
-    <span>AudioReactive</span><br>
-    <span>Primer</span>
+    <span data-i18n="primerLine1">AudioReactive</span><br>
+    <span data-i18n="primerLine2">Primer</span>
   </div>
   </div>
   <!--<div class="header-sub">
@@ -38,14 +38,18 @@
   </div>-->
   <div class="main-container">
     <div class="search-bar search-bar-compact">
-      <input type="text" id="searchInput" placeholder="🔍 Type here to Filter">
+      <input type="text" id="searchInput" placeholder="🔍 Type here to Filter" data-i18n-placeholder="searchPlaceholder">
     </div>
     <div id="search-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     <div class="categories" id="categories"></div>
     <div id="guide-featured-link"></div>
-    <div class="guide-utility-actions" aria-label="Page utilities">
-      <button id="theme-randomizer" class="theme-randomizer-btn" aria-label="Spectrum Shift">
-        Spectrum Shift
+    <div class="guide-utility-actions" aria-label="Page utilities" data-i18n-aria-label="pageUtilities">
+      <label class="guide-language-control" for="language-select">
+        <span class="guide-language-label" data-i18n="languageLabel">Language</span>
+        <select id="language-select" class="guide-language-select" aria-label="Choose site language" data-i18n-aria-label="languageAriaLabel"></select>
+      </label>
+      <button id="theme-randomizer" class="theme-randomizer-btn" aria-label="Spectrum Shift" data-i18n-aria-label="themeAriaLabel">
+        <span data-i18n="themeButton">Spectrum Shift</span>
       </button>
     </div>
     </div>
@@ -54,12 +58,13 @@
   <!-- Info Card Modal -->
   <div id="info-modal" aria-hidden="true">
     <div id="info-modal-content" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
-      <button id="info-modal-close" type="button" aria-label="Close info card">&times;</button>
+      <button id="info-modal-close" type="button" aria-label="Close info card" data-i18n-aria-label="closeInfoCard">&times;</button>
       <div id="info-modal-body"></div>
     </div>
   </div>
 
     <script src="guide-content.js" defer></script>
+    <script src="localization.js" defer></script>
     <script src="guide-page.js" defer></script>
     <script src="common.js" defer></script>
 </body>

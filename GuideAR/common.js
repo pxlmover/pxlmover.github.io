@@ -164,12 +164,30 @@ function applyTheme(theme) {
 
 applyTheme(themes[currentTheme]);
 
+function getLocalizationUi() {
+  if (window.GuideLocalization && typeof window.GuideLocalization.getUiStrings === 'function') {
+    return window.GuideLocalization.getUiStrings();
+  }
+
+  return {};
+}
+
+function updateSiteSignatureText(signatureElement) {
+  if (!signatureElement) return;
+  const ui = getLocalizationUi();
+  signatureElement.textContent = ui.signature || 'Created In Unreal Engine By Daniel Jensen - 2025';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   // Signature
   const sig = document.createElement('div');
   sig.className = 'site-signature';
-  sig.textContent = 'Created In Unreal Engine By Daniel Jensen - 2025';
+  updateSiteSignatureText(sig);
   document.body.appendChild(sig);
+
+  window.addEventListener('guide-language-changed', function () {
+    updateSiteSignatureText(sig);
+  });
 
   // Theme randomizer
   const btn = document.getElementById('theme-randomizer');
