@@ -315,7 +315,7 @@ window.GUIDE_DOCS_LOCALES = {
     cards: [
       {
         title: "Workflow Overview",
-        descriptionHtml: "This page is a practical setup recipe (separate from A/B/C parameter reference).<br>Use this format for your full recording walkthrough: from scene prep to final tuning."
+        descriptionHtml: "Use this workflow to build a reactive mesh setup from scratch.<br>It walks through placing a mesh actor, assigning it in <span class=\"category-ref\">C - Mesh Reaction</span>, and dialing in the transform response."
       },
       {
         title: "1) Add a mesh actor to the level",
@@ -348,10 +348,10 @@ window.GUIDE_DOCS_LOCALES = {
     cards: [
       {
         title: "Workflow Overview",
-        descriptionHtml: "This page is for practical material setup flow (not details-panel field reference).<br>Perfect for a concise creator-facing tutorial with your new 4K + audio format."
+        descriptionHtml: "Use this workflow to get a reactive material responding to audio quickly.<br>It covers opening the material instance, wiring the AudioReactive controls, and tuning the response for the look you want."
       },
       {
-        title: "Recommended Recording Script",
+        title: "Setup Steps",
         descriptionHtml: "1) Create/open material instance with reactive features.<br>2) Connect AudioReactive material controls.<br>3) Assign source track/band mapping.<br>4) Tune response range and smoothing feel.<br>5) Show final look in-context with music."
       }
     ]
@@ -361,7 +361,7 @@ window.GUIDE_DOCS_LOCALES = {
     cards: [
       {
         title: "Workflow Overview",
-        descriptionHtml: "This page is for practical lighting setup steps (separate from D rollout reference).<br>Use this for quick-start videos focused on results and tuning workflow."
+        descriptionHtml: "Follow this setup flow to get reactive lights working quickly.<br>It covers enabling the light array, assigning tracks, and tuning color behavior for the final look you want."
       },
       {
         title: "1) Enable reactive lights and assign array entries",
@@ -466,24 +466,19 @@ window.GUIDE_DOCS_LOCALES = {
     pageTitle: "Material Overview",
     cards: [
       {
-        title: "Material Example 1",
-        videoSrc: "gifs/PATHGOESHERE.webm",
-        descriptionHtml: "Description for Material Example 1."
+        title: "Emission Response Overview",
+        videoSrc: "../../DOCS/Materials/gifs/EmissionOverview.webm",
+        descriptionHtml: "Shows how emissive material response behaves with audio input, including how <strong>Offset</strong> and <strong>Threshold</strong> shape the visible glow."
       },
       {
-        title: "Material Example 2",
-        videoSrc: "gifs/PATHGOESHERE.webm",
-        descriptionHtml: "Description for Material Example 2."
+        title: "Reactive Material Parameters",
+        videoSrc: "../../DOCS/Materials/gifs/OtherMaterialFunctions.webm",
+        descriptionHtml: "Highlights the additional reactive controls available for <strong>Base Color</strong>, <strong>Roughness</strong>, <strong>Displacement</strong>, and <strong>WPO</strong>."
       },
       {
-        title: "Material Example 3",
-        videoSrc: "gifs/PATHGOESHERE.webm",
-        descriptionHtml: "Description for Material Example 3."
-      },
-      {
-        title: "Material Example 4",
-        videoSrc: "gifs/PATHGOESHERE.webm",
-        descriptionHtml: "Description for Material Example 4."
+        title: "Audio Routing Into Materials",
+        videoSrc: "../../DOCS/Materials/gifs/AudioMasterOverview.webm",
+        descriptionHtml: "Breaks down how <strong>MF_AudioReactive_AudioMaster</strong> receives Blueprint float values and routes them into the material parameter collection."
       }
     ]
   }
@@ -804,7 +799,7 @@ window.GUIDE_DOCS_LOCALES = {
       cards: [
         {
           title: "Обзор настройки",
-          descriptionHtml: "Это практический сценарий настройки, отдельный от справки по параметрам A/B/C.<br>Используйте его как пошаговый маршрут: от подготовки сцены до финальной доводки."
+          descriptionHtml: "Следуйте этому сценарию, чтобы собрать реактивный меш с нуля.<br>Здесь показано, как разместить меш в сцене, назначить его в <span class=\"category-ref\">C - Mesh Reaction</span> и настроить поведение через <strong>Transform Response</strong>."
         },
         {
           title: "1) Добавьте актор со статическим мешем на уровень",
@@ -837,10 +832,10 @@ window.GUIDE_DOCS_LOCALES = {
       cards: [
         {
           title: "Обзор настройки",
-          descriptionHtml: "Эта страница посвящена практическому процессу настройки материала, а не справке по полям панели <strong>Details</strong>.<br>Она хорошо подходит для короткого и понятного туториала в формате 4K + audio."
+          descriptionHtml: "Следуйте этому сценарию, чтобы быстро подключить реактивный материал к аудио.<br>Он охватывает открытие <strong>Material Instance</strong>, подключение элементов управления AudioReactive и настройку характера отклика."
         },
         {
-          title: "Рекомендуемый сценарий записи",
+          title: "Этапы настройки",
           descriptionHtml: "1) Создайте или откройте <strong>Material Instance</strong> с реактивными функциями.<br>2) Подключите элементы управления материалами AudioReactive.<br>3) Назначьте источник и сопоставление по <strong>track/band</strong> (треку/полосе).<br>4) Настройте диапазон реакции и характер сглаживания.<br>5) Покажите итоговый результат в контексте музыки."
         }
       ]
@@ -850,7 +845,7 @@ window.GUIDE_DOCS_LOCALES = {
       cards: [
         {
           title: "Обзор настройки",
-          descriptionHtml: "Эта страница посвящена практическим шагам настройки света и отделена от справки по параметрам раздела D.<br>Используйте ее как сценарий быстрого старта, ориентированный на результат и удобный тюнинг."
+          descriptionHtml: "Следуйте этому сценарию, чтобы быстро настроить реактивный свет.<br>Здесь показано, как включить массив источников света, назначить треки и настроить цветовое поведение под нужный вам результат."
         },
         {
           title: "1) Включите Reactive Lights и добавьте элементы массива",
@@ -955,24 +950,19 @@ window.GUIDE_DOCS_LOCALES = {
       pageTitle: "Обзор материалов",
       cards: [
         {
-          title: "Пример материала 1",
-          videoSrc: "gifs/PATHGOESHERE.webm",
-          descriptionHtml: "Описание для примера материала 1."
+          title: "Обзор эмиссивной реакции",
+          videoSrc: "../../DOCS/Materials/gifs/EmissionOverview.webm",
+          descriptionHtml: "Показывает, как эмиссивная реакция материала ведет себя при аудиовходе и как параметры <strong>Offset</strong> и <strong>Threshold</strong> влияют на видимое свечение."
         },
         {
-          title: "Пример материала 2",
-          videoSrc: "gifs/PATHGOESHERE.webm",
-          descriptionHtml: "Описание для примера материала 2."
+          title: "Реактивные параметры материала",
+          videoSrc: "../../DOCS/Materials/gifs/OtherMaterialFunctions.webm",
+          descriptionHtml: "Показывает дополнительные реактивные настройки для <strong>Base Color</strong>, <strong>Roughness</strong>, <strong>Displacement</strong> и <strong>WPO</strong>."
         },
         {
-          title: "Пример материала 3",
-          videoSrc: "gifs/PATHGOESHERE.webm",
-          descriptionHtml: "Описание для примера материала 3."
-        },
-        {
-          title: "Пример материала 4",
-          videoSrc: "gifs/PATHGOESHERE.webm",
-          descriptionHtml: "Описание для примера материала 4."
+          title: "Маршрутизация аудио в материалы",
+          videoSrc: "../../DOCS/Materials/gifs/AudioMasterOverview.webm",
+          descriptionHtml: "Объясняет, как функция <strong>MF_AudioReactive_AudioMaster</strong> принимает float-значения из Blueprint и направляет их в коллекцию параметров материала."
         }
       ]
     }
